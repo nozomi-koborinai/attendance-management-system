@@ -4,9 +4,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>menu</title>
 </head>
 <body>
-	こんちは
+	<a>登校の場合はバーコードをかざしてください。</a>
+	<form action="/Attendance_management/Barcode_reading" method="get">
+	<button type="submit" name="action" value=1>早退</button><br>
+	<button type="submit" name="action" value=2>公欠申請</button><br>
+    <button type="submit" name="action" value=3>公欠申請状況</button><br>
+	</form>
 </body>
 </html>
