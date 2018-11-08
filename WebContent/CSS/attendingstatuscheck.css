@@ -1,0 +1,53 @@
+@charset "utf-8";
+
+header {
+	text-align: center;
+	font-size: 2.2em;
+	margin-top: 35px;
+	margin-bottom: 20px;
+}
+
+table, th, td {
+	border-collapse: collapse;
+	border: 1px solid #black;
+	line-height: 1.5;
+}
+
+.th {
+	font-weight: bold;
+	vertical-align: top;
+	background: #3f3f3f;
+	color: #ffffff;
+}
+.th1 {
+	border: 1px solid #ffffff;
+	border-bottom-style: none;
+	border-right-style: none;
+	background: #ffffff;
+}
+
+table.table td {
+	vertical-align: top;
+}
+
+table tr:nth-child(4n+7) {
+	background: #C0C0C0;
+}
+
+#bottom form input[type="submit"] {
+	position: relative;
+	width: 5%;
+	height: 40px;
+	top: 45px;
+	background: #555555;
+	border: 0;
+	border-radius: 3px;
+	color: white;
+	height: 40px;
+	cursor: pointer;
+	transition: background 0.3s ease-in-out;
+}
+
+#bottom form input[type="submit"]:hover {
+	background: #000000;
+}
