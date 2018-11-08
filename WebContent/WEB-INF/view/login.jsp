@@ -9,7 +9,8 @@
 </head>
 <body>
 	<div id="login">
-		<form name='form-login'>
+		<form name='form-login' action="/Attendance_management_system/AttendingStatusCheck"
+			method="get">
 			<span class="fontawesome-user"></span> <input type="text" id="user"
 				placeholder="Username"> <span class="fontawesome-lock"></span>
 			<input type="password" id="pass" placeholder="Password"> <input
