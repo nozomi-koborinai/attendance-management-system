@@ -51,7 +51,7 @@ public class AttendingStatusCheck extends HttpServlet {
 
 			String userId = request.getParameter("userName");
 			String pass = request.getParameter("pw");
-			String user;
+			dto.Login user;
 
 			result = AmsDAO.login(userId, pass);
 
@@ -84,9 +84,7 @@ public class AttendingStatusCheck extends HttpServlet {
 
 				session = request.getSession(true);
 
-				String view = "/WEB-INF/view/adminmenu.jsp";
-				RequestDispatcher dispatcher = request.getRequestDispatcher(view);
-				dispatcher.forward(request, response);
+				response.sendRedirect("/Attendance_management_system/AdminMenu");
 			} else {
 				//エラーアラートの表示
 				response.setContentType("text/html; charset=UTF-8");
@@ -106,9 +104,7 @@ public class AttendingStatusCheck extends HttpServlet {
 
 		} else if(Login.destination == 1){			//管理者でログインしている場合
 
-			String view = "/WEB-INF/view/adminmenu.jsp";
-			RequestDispatcher dispatcher = request.getRequestDispatcher(view);
-			dispatcher.forward(request, response);
+			response.sendRedirect("/Attendance_management_system/AdminMenu");
 		}
 
 	}
