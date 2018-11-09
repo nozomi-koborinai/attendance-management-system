@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import dto.Login;
 import util.PasswordUtil;
 
 public class AmsDAO {
@@ -83,11 +84,12 @@ public class AmsDAO {
 	}
 
 	//ユーザ名を取得
-	public static String getUserName(String name, String pw){
+	public static Login getUserName(String name, String pw){
+		Login login = null;
+
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String userName = null;		//返却用
 
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -99,7 +101,7 @@ public class AmsDAO {
 
 			String safetyPw = PasswordUtil.getSafetyPassword(name, pw);
 
-			String sql = "SELECT user_name FROM teacher_and_admin WHERE user_id = ? AND password = ?;";
+			String sql = "SELECT * FROM teacher_and_admin WHERE user_id = ? AND password = ?;";
 
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, name);
@@ -107,7 +109,12 @@ public class AmsDAO {
 
 			rs = pstmt.executeQuery();
 
-			userName = rs.getString("user_name");
+			String uId = rs.getString("user_id");
+			String uName = rs.getString("user_name");
+			String pwd = rs.getString("password");
+			int auth = rs.getInt("auth");
+
+			login = new Login(uId, uName, pwd, auth);
 
 		} catch (ClassNotFoundException e) {
 			System.out.println("JDBCドライバが見つかりません。");
@@ -141,6 +148,6 @@ public class AmsDAO {
 				e.printStackTrace();
 			}
 		}
-		return userName;
+		return login;
 	}
 }

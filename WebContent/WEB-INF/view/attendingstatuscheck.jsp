@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="dto.Login"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,8 +10,6 @@
 	rel="stylesheet" type="text/css">
 <title>attending status check</title>
 </head>
-
-<header> 生徒の出席状況 </header>
 <body onLoad="functionName()">
 	<script>
 		function functionName() {
@@ -37,6 +36,13 @@
 
 		}
 	</script>
+
+<%
+Login user = (Login) session.getAttribute("user");
+%>
+
+<header> 生徒の出席状況 </header>
+
 
 	<center>
 		<table border="1" class="table">
