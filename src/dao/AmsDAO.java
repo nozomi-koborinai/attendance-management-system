@@ -1,5 +1,146 @@
 package dao;
 
-public class AmsDAO {
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
+import util.PasswordUtil;
+
+public class AmsDAO {
+	//ログイン
+	public static int login(String name, String pw){
+		int result = 2;		//ユーザーが見つかっていない状態
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+
+			con = DriverManager.getConnection(
+					"jdbc:mysql://localhost:3306/attendance_management?useSSL=false",
+					"root",
+					"nozomiMFS06");
+
+			String safetyPw = PasswordUtil.getSafetyPassword(name, pw);
+			System.out.println(safetyPw);
+
+			String sql = "SELECT user_id, password, auth FROM teacher_and_admin WHERE user_id = ? AND password = ?;";
+
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, name);
+			pstmt.setString(2, safetyPw);
+
+			rs = pstmt.executeQuery();
+			int auth;		//権限(教員・管理者)
+
+			if(rs.next()){
+				auth = rs.getInt("auth");
+				if(auth == 0){
+					result = 0;
+				} else if(auth == 1){
+					result = 1;
+				}
+			} else {
+				result = 2;
+			}
+
+		} catch (ClassNotFoundException e) {
+			System.out.println("JDBCドライバが見つかりません。");
+			e.printStackTrace();
+		} catch (SQLException e) {
+			System.out.println("DBアクセス時にエラーが発生しました。");
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+			} catch (SQLException e) {
+				System.out.println("DBアクセス時にエラーが発生しました。");
+				e.printStackTrace();
+			}
+			try {
+				if (pstmt != null) {
+					pstmt.close();
+				}
+			} catch (SQLException e) {
+				System.out.println("DBアクセス時にエラーが発生しました。");
+				e.printStackTrace();
+			}
+			try {
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException e) {
+				System.out.println("DBアクセス時にエラーが発生しました。");
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
+
+	//ユーザ名を取得
+	public static String getUserName(String name, String pw){
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String userName = null;		//返却用
+
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+
+			con = DriverManager.getConnection(
+					"jdbc:mysql://localhost:3306/attendance_management?useSSL=false",
+					"root",
+					"nozomiMFS06");
+
+			String safetyPw = PasswordUtil.getSafetyPassword(name, pw);
+
+			String sql = "SELECT user_name FROM teacher_and_admin WHERE user_id = ? AND password = ?;";
+
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, name);
+			pstmt.setString(2, safetyPw);
+
+			rs = pstmt.executeQuery();
+
+			userName = rs.getString("user_name");
+
+		} catch (ClassNotFoundException e) {
+			System.out.println("JDBCドライバが見つかりません。");
+			e.printStackTrace();
+		} catch (SQLException e) {
+			System.out.println("DBアクセス時にエラーが発生しました。");
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+			} catch (SQLException e) {
+				System.out.println("DBアクセス時にエラーが発生しました。");
+				e.printStackTrace();
+			}
+			try {
+				if (pstmt != null) {
+					pstmt.close();
+				}
+			} catch (SQLException e) {
+				System.out.println("DBアクセス時にエラーが発生しました。");
+				e.printStackTrace();
+			}
+			try {
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException e) {
+				System.out.println("DBアクセス時にエラーが発生しました。");
+				e.printStackTrace();
+			}
+		}
+		return userName;
+	}
 }

@@ -9,12 +9,12 @@
 </head>
 <body>
 	<div id="login">
-		<form name='form-login' action="/Attendance_management_system/AttendingStatusCheck"
-			method="get">
-			<span class="fontawesome-user"></span> <input type="text" id="user"
-				placeholder="Username"> <span class="fontawesome-lock"></span>
-			<input type="password" id="pass" placeholder="Password"> <input
-				type="submit" value="Login">
+		<form name='form-login' action="/Attendance_management_system/AttendingStatusCheck" method="post">
+			<span class="fontawesome-user"></span>
+			<input type="text" id="user" name="userName" placeholder="Username">
+			<span class="fontawesome-lock"></span>
+			<input type="password" id="pass" name="pw" placeholder="Password">
+			<input type="submit" value="Login">
 		</form>
 	</div>
 </body>
