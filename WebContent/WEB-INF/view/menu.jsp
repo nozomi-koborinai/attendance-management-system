@@ -6,14 +6,13 @@
 <meta charset="UTF-8">
 <link href="${pageContext.request.contextPath}/CSS/menu.css"
 	rel="stylesheet" type="text/css">
-<title>attending status check</title>
 <title>menu</title>
 </head>
 <header>登校の場合はバーコードをかざしてください。</header>
 <body>
 <center>
 	<div id="bottom">
-		<form action="/Attendance_management/Barcode_reading" method="get">
+		<form action="/Attendance_management_system/BarcodeReading" method="get">
 			<button type="submit" name="action" value=1>早退</button>
 			<br>
 			<button type="submit" name="action" value=2>公欠申請</button>
