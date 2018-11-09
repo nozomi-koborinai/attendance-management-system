@@ -37,7 +37,6 @@ table tr:nth-child(4n+7) {
 #bottom form input[type="submit"] {
 	position: relative;
 	width: 5%;
-	height: 40px;
 	top: 45px;
 	background: #555555;
 	border: 0;
