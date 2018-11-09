@@ -1,0 +1,27 @@
+@charset "utf-8";
+
+header {
+	text-align: center;
+	font-size: 2.2em;
+	margin-top: 50px;
+	margin-bottom: 20px;
+}
+
+#bottom form button[type="submit"] {
+	position: relative;
+	font-size: 1.5em;
+	width: 30%;
+	height: 100px;
+	top: 45px;
+	background: #555555;
+	border: 0;
+	border-radius: 3px;
+	color: white;
+	margin-bottom: 5px;
+	cursor: pointer;
+	transition: background 0.3s ease-in-out;
+}
+
+#bottom form button[type="submit"]:hover {
+	background: #000000;
+}
