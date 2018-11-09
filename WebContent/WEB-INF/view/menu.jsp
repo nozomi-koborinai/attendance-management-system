@@ -12,6 +12,7 @@
 	<button type="submit" name="action" value=1>早退</button><br>
 	<button type="submit" name="action" value=2>公欠申請</button><br>
     <button type="submit" name="action" value=3>公欠申請状況</button><br>
+    <a>テスト</a>
 	</form>
 </body>
 </html>
