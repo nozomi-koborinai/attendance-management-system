@@ -83,7 +83,7 @@ public class AmsDAO {
 		return result;
 	}
 
-	//ユーザ名を取得
+	//ユーザインスタンスを取得
 	public static Login getUserName(String name, String pw){
 		Login login = null;
 
@@ -109,6 +109,7 @@ public class AmsDAO {
 
 			rs = pstmt.executeQuery();
 
+			rs.next();
 			String uId = rs.getString("user_id");
 			String uName = rs.getString("user_name");
 			String pwd = rs.getString("password");
