@@ -109,6 +109,7 @@ public class AmsDAO {
 
 			rs = pstmt.executeQuery();
 
+			rs.next();
 			String uId = rs.getString("user_id");
 			String uName = rs.getString("user_name");
 			String pwd = rs.getString("password");
