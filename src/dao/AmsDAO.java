@@ -83,7 +83,7 @@ public class AmsDAO {
 		return result;
 	}
 
-	//ユーザ名を取得
+	//ユーザインスタンスを取得
 	public static Login getUserName(String name, String pw){
 		Login login = null;
 
