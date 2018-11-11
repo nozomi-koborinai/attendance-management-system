@@ -151,4 +151,53 @@ public class AmsDAO {
 		}
 		return login;
 	}
+
+	//クラス登録
+	public static void addToClass(String className){
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try{
+
+			Class.forName("com.mysql.jdbc.Driver");
+
+			con = DriverManager.getConnection(
+					"jdbc:mysql://localhost:3306/attendance_management?useSSL=false",
+					"root",
+					"nozomiMFS06");
+
+			String sql = "INSERT INTO class(class_name) values(?);";
+
+			pstmt = con.prepareStatement(sql);
+
+			String cName = className;
+			pstmt.setString(1, cName);
+
+			pstmt.executeUpdate();
+
+		} catch (SQLException e){
+			e.printStackTrace();
+		} catch (Exception e){
+			e.printStackTrace();
+		} finally {
+
+			try {
+				if( pstmt != null){
+					pstmt.close();
+				}
+			} catch(SQLException e){
+				System.out.println("DB切断時にエラーが発生しました。");
+				e.printStackTrace();
+			}
+
+			try {
+				if( con != null){
+					con.close();
+				}
+			} catch (SQLException e){
+				System.out.println("DB切断時にエラーが発生しました。");
+				e.printStackTrace();
+			}
+		}
+	}
 }
