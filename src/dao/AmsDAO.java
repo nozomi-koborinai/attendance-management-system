@@ -22,8 +22,8 @@ public class AmsDAO {
 
 			con = DriverManager.getConnection(
 					"jdbc:mysql://localhost:3306/attendance_management?useSSL=false",
-					"root",
-					"nozomiMFS06");
+					"attendance",
+					"attendance01");
 
 			String safetyPw = PasswordUtil.getSafetyPassword(name, pw);
 			System.out.println(safetyPw);
@@ -96,8 +96,8 @@ public class AmsDAO {
 
 			con = DriverManager.getConnection(
 					"jdbc:mysql://localhost:3306/attendance_management?useSSL=false",
-					"root",
-					"nozomiMFS06");
+					"attendance",
+					"attendance01");
 
 			String safetyPw = PasswordUtil.getSafetyPassword(name, pw);
 
@@ -163,8 +163,8 @@ public class AmsDAO {
 
 			con = DriverManager.getConnection(
 					"jdbc:mysql://localhost:3306/attendance_management?useSSL=false",
-					"root",
-					"nozomiMFS06");
+					"attendance",
+					"attendance01");
 
 			String sql = "INSERT INTO class(class_name) values(?);";
 

@@ -52,6 +52,7 @@ public class AddCoursesAndClasses extends HttpServlet {
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter printWriter = response.getWriter();
 		printWriter.println("<script>");
+		printWriter.println("alert('1件のクラス情報を更新しました。');");
 		printWriter.println("history.go(-1)");					//前のページに戻る
 		printWriter.println("window.location.reload(true);");	//ページのリロード
 		printWriter.println("</script>");
