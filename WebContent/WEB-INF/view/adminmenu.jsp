@@ -1,21 +1,39 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ page import="dto.Login"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+<link href="${pageContext.request.contextPath}/CSS/adminmenu.css"
+	rel="stylesheet" type="text/css">
 <title>admin menu</title>
 </head>
 <%
-Login user = (Login)session.getAttribute("user");
+	Login user = (Login) session.getAttribute("user");
 %>
-<a><%=user.getUser_name() %>さん、ログイン中</a><br>
-						<form>　　　　　　 　　<button type="button" onClick="location.href='/Attendance_management_system/LogOut'">ログアウト</button></form>
+<header>
+	<div id="container">
+		<div id="header">
+			<ul id="nav">
+				<li class="active"><a
+					href="/Attendance_management_system/AddStudentsAndTeachers"
+					title="生徒・教員の追加">生徒・教員の追加</a></li>
+				<li><a
+					href="/Attendance_management_system/AddCoursesAndClasses"
+					title="クラス・コースの追加">クラス・コースの追加</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="login">
+		<a><%=user.getUser_name()%>さん</a>
+		<form>
+			<button type="button"
+				onClick="location.href='/Attendance_management_system/LogOut'">ログアウト</button>
+		</form>
+	</div>
+</header>
 <body>
-	<button type="submit" onClick="location.href='/Attendance_management_system/AddStudentsAndAddTeachers'">生徒・教員の追加</button>
-	<br>
-	<button type="submit" onClick="location.href='/Attendance_management_system/AddCoursesAndClasses'">クラス・コースの追加</button>
-	<br>
+
 </body>
 </html>
