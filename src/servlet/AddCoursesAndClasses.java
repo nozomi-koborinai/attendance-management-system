@@ -31,9 +31,6 @@ public class AddCoursesAndClasses extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//クラス情報を取得
-		request.setAttribute("classData", AmsDAO.getAllClassData());
-
 		String view = "/WEB-INF/view/addcoursesandclasses.jsp";
 		RequestDispatcher dispatcher = request.getRequestDispatcher(view);
 		dispatcher.forward(request, response);
