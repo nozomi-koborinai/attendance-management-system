@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import dto.ClassData;
+import dto.CourseData;
 import dto.Login;
 import util.PasswordUtil;
 
@@ -319,5 +320,135 @@ public class AmsDAO {
 
 		return classList;
 
+	}
+
+	//コース情報を取得
+	public static ArrayList<CourseData> getAllCourseData(){
+
+		ArrayList<CourseData> courseList = new ArrayList<CourseData>();
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try{
+
+			Class.forName("com.mysql.jdbc.Driver");
+
+			con = DriverManager.getConnection(
+					"jdbc:mysql://localhost:3306/attendance_management?useSSL=false",
+					"attendance",
+					"attendance01");
+
+			String sql = "SELECT * FROM course";
+
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+
+			while(rs.next() == true){
+				int courseId = rs.getInt("course_id");
+				int classId = rs.getInt("class_id");
+				String courseName = rs.getString("course_name");
+
+				courseList.add(new CourseData(courseId, classId, courseName));
+			}
+
+
+		} catch (SQLException se){
+			se.printStackTrace();
+		} catch (Exception e){
+
+		} finally {
+			try {
+				if( rs != null){
+					rs.close();
+				}
+			} catch(SQLException e){
+				System.out.println("DB切断時にエラーが発生しました。");
+				e.printStackTrace();
+			}
+			try {
+				if( pstmt != null){
+					pstmt.close();
+				}
+			} catch(SQLException e){
+				System.out.println("DB切断時にエラーが発生しました。");
+				e.printStackTrace();
+			}
+
+			try {
+				if( con != null){
+					con.close();
+				}
+			} catch (SQLException e){
+				System.out.println("DB切断時にエラーが発生しました。");
+				e.printStackTrace();
+			}
+		}
+
+		return courseList;
+
+	}
+
+	//学生登録
+	public static void addToStudent(int studentNo, String shimei, String gender, int classId, int courseId){
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try{
+
+			Class.forName("com.mysql.jdbc.Driver");
+
+			con = DriverManager.getConnection(
+					"jdbc:mysql://localhost:3306/attendance_management?useSSL=false",
+					"attendance",
+					"attendance01");
+
+			String sql = "INSERT INTO students values(?,?,?,?,?,?,?,?,?);";
+
+			pstmt = con.prepareStatement(sql);
+
+			int no = studentNo;
+			String name = shimei;
+			String gen = gender;
+			int claId = classId;
+			int couId = courseId;
+
+			pstmt.setInt(1, no);
+			pstmt.setString(2, name);
+			pstmt.setString(3, gen);
+			pstmt.setInt(4, 1);
+			pstmt.setInt(5, 0);
+			pstmt.setInt(6, 0);
+			pstmt.setInt(7, 0);
+			pstmt.setInt(8, claId);
+			pstmt.setInt(9, couId);
+
+			pstmt.executeUpdate();
+
+		} catch (SQLException e){
+			e.printStackTrace();
+		} catch (Exception e){
+			e.printStackTrace();
+		} finally {
+
+			try {
+				if( pstmt != null){
+					pstmt.close();
+				}
+			} catch(SQLException e){
+				System.out.println("DB切断時にエラーが発生しました。");
+				e.printStackTrace();
+			}
+
+			try {
+				if( con != null){
+					con.close();
+				}
+			} catch (SQLException e){
+				System.out.println("DB切断時にエラーが発生しました。");
+				e.printStackTrace();
+			}
+		}
 	}
 }

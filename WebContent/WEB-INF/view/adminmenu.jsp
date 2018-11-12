@@ -17,7 +17,7 @@
 		<div id="header">
 			<ul id="nav">
 				<li class="active"><a
-					href="/Attendance_management_system/AddStudentsAndTeachers"
+					href="/Attendance_management_system/AddStudentsAndAddTeachers"
 					title="生徒・教員の追加">生徒・教員の追加</a></li>
 				<li><a
 					href="/Attendance_management_system/AddCoursesAndClasses"
