@@ -15,7 +15,7 @@ Login user = (Login)session.getAttribute("user");
 <body>
 	<button type="submit" onClick="location.href='/Attendance_management_system/AddStudentsAndAddTeachers'">生徒・教員の追加</button>
 	<br>
-	<button type="submit" onClick="licaion.href='/Attendance_management_system/AddCoursesAndClasses'">クラス・コースの追加</button>
+	<button type="submit" onClick="location.href='/Attendance_management_system/AddCoursesAndClasses'">クラス・コースの追加</button>
 	<br>
 </body>
 </html>
