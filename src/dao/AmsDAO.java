@@ -489,6 +489,8 @@ public class AmsDAO {
 
 			pstmt.executeUpdate();
 
+		} catch(MySQLIntegrityConstraintViolationException e){
+			Login.error = 1;		//既に登録してあるユーザーIDとパスワードの組み合わせを入力した場合
 		} catch (SQLException e){
 			e.printStackTrace();
 		} catch (Exception e){
