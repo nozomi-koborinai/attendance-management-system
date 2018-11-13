@@ -7,9 +7,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
+
 import dto.ClassData;
 import dto.CourseData;
-import dto.Login;
+import dto.LoginUser;
+import servlet.Login;
 import util.PasswordUtil;
 
 public class AmsDAO {
@@ -87,8 +90,8 @@ public class AmsDAO {
 	}
 
 	//ユーザインスタンスを取得
-	public static Login getUserName(String name, String pw){
-		Login login = null;
+	public static LoginUser getUserName(String name, String pw){
+		LoginUser login = null;
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -118,7 +121,7 @@ public class AmsDAO {
 			String pwd = rs.getString("password");
 			int auth = rs.getInt("auth");
 
-			login = new Login(uId, uName, pwd, auth);
+			login = new LoginUser(uId, uName, pwd, auth);
 
 		} catch (ClassNotFoundException e) {
 			System.out.println("JDBCドライバが見つかりません。");
@@ -178,6 +181,8 @@ public class AmsDAO {
 
 			pstmt.executeUpdate();
 
+		} catch(MySQLIntegrityConstraintViolationException e){
+			Login.error = 0;
 		} catch (SQLException e){
 			e.printStackTrace();
 		} catch (Exception e){

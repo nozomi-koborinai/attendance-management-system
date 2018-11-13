@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="dto.Login"%>
+<%@ page import="dto.LoginUser"%>
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="dto.ClassData"%>
 <%@ page import="dto.CourseData"%>
@@ -15,7 +15,7 @@
 		request.setCharacterEncoding("UTF-8");
 		ArrayList<ClassData> classList = (ArrayList<ClassData>) request.getAttribute("classData");
 		ArrayList<CourseData> courseList = (ArrayList<CourseData>) request.getAttribute("courseData");
-		Login user = (Login) session.getAttribute("user");
+		LoginUser user = (LoginUser) session.getAttribute("user");
 	%>
 
 	<a><%=user.getUser_name()%>さん、ログイン中</a>

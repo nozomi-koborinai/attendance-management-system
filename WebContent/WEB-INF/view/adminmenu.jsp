@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="dto.Login"%>
+<%@ page import="dto.LoginUser"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +10,7 @@
 <title>admin menu</title>
 </head>
 <%
-	Login user = (Login) session.getAttribute("user");
+	LoginUser user = (LoginUser) session.getAttribute("user");
 %>
 <header>
 	<div id="container">

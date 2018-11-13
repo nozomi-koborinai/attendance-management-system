@@ -51,7 +51,7 @@ public class AttendingStatusCheck extends HttpServlet {
 
 			String userId = request.getParameter("userName");
 			String pass = request.getParameter("pw");
-			dto.Login user;
+			dto.LoginUser user;
 
 			result = AmsDAO.login(userId, pass);
 

@@ -1,16 +1,16 @@
 package dto;
 
-public class Login {
+public class LoginUser {
 	private String user_id;
 	private String user_name;
 	private String password;
 	private int auth;
 
-	public Login(){
+	public LoginUser(){
 
 	}
 
-	public Login(String user_id, String user_name, String password, int auth) {
+	public LoginUser(String user_id, String user_name, String password, int auth) {
 		super();
 		this.user_id = user_id;
 		this.user_name = user_name;
