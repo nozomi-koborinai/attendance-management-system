@@ -1,0 +1,145 @@
+@charset "utf-8";
+
+a {
+	color: #337693;
+}
+
+a:link, a:active, a:visited {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+#container {
+	margin: 0 auto;
+	width: 600px;
+}
+
+#header {
+	color: #ccc;
+	font-size: 22px;
+	font-weight: bold;
+	padding: 20px 0;
+}
+
+#maincontent {
+	clear: both;
+}
+
+div.content {
+	padding: 10px 0;
+}
+
+p {
+	line-height: 2;
+	margin-bottom: 5px;
+}
+
+#nav {
+	clear: both;
+	font-size: 14px;
+	list-style: none;
+	margin: 0;
+	overflow: hidden;
+	padding: 0;
+	border: 2px solid #555555;
+}
+
+#nav li {
+	border-right: 2px solid #555555;
+	display: block;
+	float: left;
+	text-align: center;
+}
+
+#nav a:hover {
+	background: #555555;
+	color: #fff;
+}
+
+#nav .light {
+	color: #8AB2C3;
+}
+
+#nav a {
+	display: block;
+	line-height: 30px;
+	text-decoration: none;
+	padding: 10px 80px;
+	color: #000000;
+}
+
+.login {
+	position: fixed;
+	top: 30px;
+	right: 9%;
+	text-align: center;
+}
+
+.tab_wrap {
+	width: 500px;
+	margin: 80px auto;
+}
+
+input[type="radio"] {
+	display: none;
+}
+
+.tab_area {
+	font-size: 0;
+	margin: 0 10px;
+}
+
+.tab_area label {
+	width: 150px;
+	margin: 0 5px;
+	display: inline-block;
+	padding: 12px 0;
+	color: #000000;
+	background: #CCCCCC;
+	text-align: center;
+	font-size: 13px;
+	cursor: pointer;
+	transition: ease 0.2s opacity;
+}
+
+.tab_area label:hover {
+	opacity: 0.5;
+}
+
+.panel_area {
+	background: #EAD9FF;
+}
+
+.tab_panel {
+	width: 100%;
+	padding: 80px 0;
+	display: none;
+}
+
+.tab_panel p {
+	font-size: 14px;
+	letter-spacing: 1px;
+	text-align: center;
+}
+
+#tab1:checked ~ .tab_area .tab1_label {
+	background: #EAD9FF;
+	color: #000;
+}
+
+#tab1:checked ~ .panel_area #panel1 {
+	display: block;
+}
+
+#tab2:checked ~ .tab_area .tab2_label {
+	background: #EAD9FF;
+	color: #000;
+}
+
+#tab2:checked ~ .panel_area #panel2 {
+	display: block;
+}
+

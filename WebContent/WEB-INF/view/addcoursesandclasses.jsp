@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="dto.Login"%>
+<%@ page import="dto.LoginUser"%>
 <%@ page import="dto.ClassData"%>
 <%@ page import="java.util.ArrayList"%>
 <!DOCTYPE html>
@@ -12,16 +12,15 @@
 	rel="stylesheet" type="text/css">
 <title>add course and classes</title>
 </head>
-</head>
 <%
-	Login user = (Login) session.getAttribute("user");
+	LoginUser user = (LoginUser) session.getAttribute("user");
 %>
 <header>
 	<div id="container">
 		<div id="header">
 			<ul id="nav">
 				<li class="active"><a
-					href="/Attendance_management_system/AddStudentsAndTeachers"
+					href="/Attendance_management_system/AddStudentsAndAddTeachers"
 					title="生徒・教員の追加">生徒・教員の追加</a></li>
 				<li><a
 					href="/Attendance_management_system/AddCoursesAndClasses"
