@@ -234,6 +234,8 @@ public class AmsDAO {
 
 			pstmt.executeUpdate();
 
+		} catch(MySQLIntegrityConstraintViolationException e){
+			Login.error = 1;		//同じクラス名を入力した場合
 		} catch (SQLException e){
 			e.printStackTrace();
 		} catch (Exception e){
@@ -358,7 +360,8 @@ public class AmsDAO {
 				courseList.add(new CourseData(courseId, classId, courseName));
 			}
 
-
+		} catch(MySQLIntegrityConstraintViolationException e){
+			Login.error = 1;		//同じコース名を入力した場合
 		} catch (SQLException se){
 			se.printStackTrace();
 		} catch (Exception e){
