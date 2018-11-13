@@ -28,7 +28,7 @@ public class AmsDAO {
 					"attendance",
 					"attendance01");
 
-			String safetyPw = PasswordUtil.getSafetyPassword(name, pw);
+			String safetyPw = PasswordUtil.getSafetyPassword(pw, name);
 			System.out.println(safetyPw);
 
 			String sql = "SELECT user_id, password, auth FROM teacher_and_admin WHERE user_id = ? AND password = ?;";
@@ -102,7 +102,7 @@ public class AmsDAO {
 					"attendance",
 					"attendance01");
 
-			String safetyPw = PasswordUtil.getSafetyPassword(name, pw);
+			String safetyPw = PasswordUtil.getSafetyPassword(pw, name);
 
 			String sql = "SELECT * FROM teacher_and_admin WHERE user_id = ? AND password = ?;";
 
@@ -423,6 +423,61 @@ public class AmsDAO {
 			pstmt.setInt(7, 0);
 			pstmt.setInt(8, claId);
 			pstmt.setInt(9, couId);
+
+			pstmt.executeUpdate();
+
+		} catch (SQLException e){
+			e.printStackTrace();
+		} catch (Exception e){
+			e.printStackTrace();
+		} finally {
+
+			try {
+				if( pstmt != null){
+					pstmt.close();
+				}
+			} catch(SQLException e){
+				System.out.println("DB切断時にエラーが発生しました。");
+				e.printStackTrace();
+			}
+
+			try {
+				if( con != null){
+					con.close();
+				}
+			} catch (SQLException e){
+				System.out.println("DB切断時にエラーが発生しました。");
+				e.printStackTrace();
+			}
+		}
+	}
+
+	//教員追加
+	public static void addToUser(String userId, String userName, String password){
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try{
+
+			Class.forName("com.mysql.jdbc.Driver");
+
+			con = DriverManager.getConnection(
+					"jdbc:mysql://localhost:3306/attendance_management?useSSL=false",
+					"attendance",
+					"attendance01");
+
+			String sql = "INSERT INTO teacher_and_admin values(?,?,?,?);";
+
+			pstmt = con.prepareStatement(sql);
+
+			String id = userId;
+			String name = userName;
+			String pass = password;
+
+			pstmt.setString(1, id);
+			pstmt.setString(2, name);
+			pstmt.setString(3, pass);
+			pstmt.setInt(4, 0);			//教員を示す"0"
 
 			pstmt.executeUpdate();
 
