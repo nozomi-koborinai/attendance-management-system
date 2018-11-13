@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="dto.Login"%>
+<%@ page import="dto.LoginUser"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,7 +38,7 @@
 	</script>
 
 <%
-Login user = (Login) session.getAttribute("user");
+LoginUser user = (LoginUser) session.getAttribute("user");
 %>
 
 <header> 生徒の出席状況 </header>
