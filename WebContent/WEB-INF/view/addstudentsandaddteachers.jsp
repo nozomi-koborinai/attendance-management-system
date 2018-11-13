@@ -85,8 +85,12 @@
 					</form>
 				</div>
 				<div id="panel2" class="tab_panel">
-					<%--ここに教員のコードをお願いいたします。 --%>
-					<%--後なぜかcssを適用するとラジオボタンが消えてしまいます。どうしましょう。 --%>
+					<p>教員追加</p>
+	<form action="/Attendance_management_system/AddTeacher" method="get">
+		 氏：<input type="text" name="shi">名：<input type="text" name="mei"><br>
+		ID:<input type="text" name="id"><br>
+		パスワード<input type="text" name="pass"><br>
+		<input type="submit" value="確定">
 				</div>
 			</div>
 		</div>
