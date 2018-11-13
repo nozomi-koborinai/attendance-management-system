@@ -52,7 +52,6 @@
 				<label class="tab1_label" for="tab1">生徒</label> <label
 					class="tab2_label" for="tab2">教員</label>
 			</div>
-
 			<div class="panel_area">
 				<div id="panel1" class="tab_panel">
 					<form
@@ -73,46 +72,25 @@
 							%>
 						</select><br>
 
-	<p>生徒追加</p>
-	<form action="/Attendance_management_system/AddStudentsAndAddTeachers" method="post">
-		学籍番号：<input type="text" name="studentsNo"><br> 氏：<input
-			type="text" name="shi">名：<input type="text" name="mei"><br>
-		性別: 男<input type="radio" name="gender" value="男"> 女<input
-			type="radio" name="gender" value="女"><br>
-		<!--選択肢①-->
-		<select name="selectName1">
-			<%
-				for (ClassData cd : classList) {
-			%>
-			<option value=<%=cd.getClass_id()%>><%=cd.getClass_name()%></option>
-			<%
-				}
-			%>
-		</select><br>
-
-		<!--選択肢②（選択肢①の項目によって変化）-->
-		<select name="selectName2">
-		<%
-			for(CourseData course : courseList) {
-		%>
-		<option value=<%=course.getCourse_id() %>><%=course.getCourse_name() %></option>
-		<%} %>
-		</select> <input type="submit" value="確定">
-	</form>
-	<br>
-	<br>
-	<br>
-
-				<div id="panel2" class="tab_panel">
-					<form action="/Attendance_management_system/AddTeacher"
-						method="get">
-						氏：<input type="text" name="shi">名：<input type="text"
-							name="mei"><br> ID:<input type="text" name="id"><br>
-						パスワード<input type="text" name="pass"><br> <input
-							type="submit" value="確定">
+						<!--選択肢②（選択肢①の項目によって変化）-->
+						<select name="selectName2">
+							<%
+								for (CourseData course : courseList) {
+							%>
+							<option value=<%=course.getCourse_id()%>><%=course.getCourse_name()%></option>
+							<%
+								}
+							%>
+						</select> <input type="submit" value="確定">
 					</form>
+				</div>
+				<div id="panel2" class="tab_panel">
+					<%--ここに教員のコードをお願いいたします。 --%>
+					<%--後なぜかcssを適用するとラジオボタンが消えてしまいます。どうしましょう。 --%>
 				</div>
 			</div>
 		</div>
+
+
 </body>
 </html>
