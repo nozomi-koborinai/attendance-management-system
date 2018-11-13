@@ -477,6 +477,7 @@ public class AmsDAO {
 			pstmt.setString(1, id);
 			pstmt.setString(2, name);
 			pstmt.setString(3, pass);
+			pstmt.setInt(4, 0);			//教員を示す"0"
 
 			pstmt.executeUpdate();
 
