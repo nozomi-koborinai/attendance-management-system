@@ -73,6 +73,7 @@
 	<p>生徒追加</p>
 	<form action="/Attendance_management_system/AddStudentsAndAddTeachers"
 		method="post">
+
 		学籍番号：<input type="text" name="studentsNo"><br> 氏：<input
 			type="text" name="shi">名：<input type="text" name="mei"><br>
 		性別: 男<input type="radio" name="gender" value="男"> 女<input

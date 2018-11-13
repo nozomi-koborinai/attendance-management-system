@@ -51,14 +51,25 @@ public class AddCoursesAndClasses extends HttpServlet {
 		//資格をデータベースへ追加
 		AmsDAO.addToClass(className);
 
-		//前のページに戻る処理
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter printWriter = response.getWriter();
+
+		//登録するクラス名が既に存在する場合
+		if(Login.error == 1){
+			printWriter.println("<script>");
+			printWriter.println("alert('入力したクラス名は既に登録されています。');");
+			printWriter.println("history.go(-1)");					//前のページに戻る
+			printWriter.println("window.location.reload(true);");	//ページのリロード
+			printWriter.println("</script>");
+			Login.error = 0;
+		} else {
+		//前のページに戻る処理
 		printWriter.println("<script>");
-		printWriter.println("alert('1件のクラス情報を更新しました。');");
+		printWriter.println("alert('1件のクラス情報を登録しました。');");
 		printWriter.println("history.go(-1)");					//前のページに戻る
 		printWriter.println("window.location.reload(true);");	//ページのリロード
 		printWriter.println("</script>");
+		}
 	}
 
 }
