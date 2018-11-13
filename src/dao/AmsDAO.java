@@ -28,7 +28,7 @@ public class AmsDAO {
 					"attendance",
 					"attendance01");
 
-			String safetyPw = PasswordUtil.getSafetyPassword(name, pw);
+			String safetyPw = PasswordUtil.getSafetyPassword(pw, name);
 			System.out.println(safetyPw);
 
 			String sql = "SELECT user_id, password, auth FROM teacher_and_admin WHERE user_id = ? AND password = ?;";
@@ -102,7 +102,7 @@ public class AmsDAO {
 					"attendance",
 					"attendance01");
 
-			String safetyPw = PasswordUtil.getSafetyPassword(name, pw);
+			String safetyPw = PasswordUtil.getSafetyPassword(pw, name);
 
 			String sql = "SELECT * FROM teacher_and_admin WHERE user_id = ? AND password = ?;";
 
