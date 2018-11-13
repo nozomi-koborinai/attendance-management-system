@@ -80,11 +80,26 @@ p {
 
 .tab_wrap {
 	width: 500px;
-	margin: 80px auto;
+	margin: 35px auto;
 }
 
 input[type="radio"] {
 	display: none;
+}
+
+input[type="text"] {
+	height: 1.5em;
+}
+
+input[type="submit"] {
+	margin-top: 5%;
+	width: 100px;
+	height: 50px;
+}
+
+select{
+	width: 50%;
+	height: 2.2em;
 }
 
 .tab_area {
@@ -98,7 +113,7 @@ input[type="radio"] {
 	display: inline-block;
 	padding: 12px 0;
 	color: #000000;
-	background: #CCCCCC;
+	background: #BBBBBB;
 	text-align: center;
 	font-size: 13px;
 	cursor: pointer;
@@ -110,7 +125,9 @@ input[type="radio"] {
 }
 
 .panel_area {
-	background: #EAD9FF;
+	background: #DDDDDD;
+	font-size: 20px;
+	line-height: 170%;
 }
 
 .tab_panel {
@@ -120,13 +137,12 @@ input[type="radio"] {
 }
 
 .tab_panel p {
-	font-size: 14px;
 	letter-spacing: 1px;
 	text-align: center;
 }
 
 #tab1:checked ~ .tab_area .tab1_label {
-	background: #EAD9FF;
+	background: #DDDDDD;
 	color: #000;
 }
 
@@ -135,11 +151,10 @@ input[type="radio"] {
 }
 
 #tab2:checked ~ .tab_area .tab2_label {
-	background: #EAD9FF;
+	background: #DDDDDD;
 	color: #000;
 }
 
 #tab2:checked ~ .panel_area #panel2 {
 	display: block;
 }
-

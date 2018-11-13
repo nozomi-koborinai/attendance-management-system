@@ -69,7 +69,7 @@
 							<%
 								}
 							%>
-						</select><br> 追加コース名<input type="text" name="courseName"> <input
+						</select><br> 追加コース名：<input type="text" name="courseName"> <input
 							type="submit" value="送信">
 
 					</form>
