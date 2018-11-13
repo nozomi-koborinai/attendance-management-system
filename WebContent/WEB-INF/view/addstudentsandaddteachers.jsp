@@ -58,11 +58,14 @@
 						action="/Attendance_management_system/AddStudentsAndAddTeachers"
 						method="post">
 						学籍番号：<input type="text" name="studentsNo"><br> 氏：<input
-							type="text" name="shi">名：<input type="text" name="mei"><br>
-						性別: 男<input type="radio" name="gender" value="男"> 女<input
-							type="radio" name="gender" value="女"><br>
+							type="text" name="shi"><br>名：<input type="text" name="mei"><br>
+							性別：<select name="gender">
+							<option value="男">男</option>
+							<option value="女">女</option>
+							</select>
+							<br>
 						<!--選択肢①-->
-						<select name="selectName1">
+						クラス：<select name="selectName1">
 							<%
 								for (ClassData cd : classList) {
 							%>
@@ -73,7 +76,7 @@
 						</select><br>
 
 						<!--選択肢②（選択肢①の項目によって変化）-->
-						<select name="selectName2">
+						コース：<select name="selectName2">
 							<%
 								for (CourseData course : courseList) {
 							%>
@@ -81,20 +84,20 @@
 							<%
 								}
 							%>
-						</select> <input type="submit" value="確定">
+						</select><br> <input type="submit" value="確定">
 					</form>
 				</div>
 				<div id="panel2" class="tab_panel">
-					<p>教員追加</p>
-	<form action="/Attendance_management_system/AddTeacher" method="get">
-		 氏：<input type="text" name="shi">名：<input type="text" name="mei"><br>
-		ID:<input type="text" name="id"><br>
-		パスワード<input type="text" name="pass"><br>
-		<input type="submit" value="確定">
+
+					<form action="/Attendance_management_system/AddTeacher"
+						method="get">
+						氏：<input type="text" name="shi"><br> 名：<input
+							type="text" name="mei"><br> ユーザID:<input type="text"
+							name="id"><br> パスワード<input type="text" name="pass"><br>
+						<input type="submit" value="確定">
+					</form>
 				</div>
 			</div>
 		</div>
-
-
 </body>
 </html>
