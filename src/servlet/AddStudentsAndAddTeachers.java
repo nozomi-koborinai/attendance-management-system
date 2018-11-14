@@ -63,15 +63,35 @@ public class AddStudentsAndAddTeachers extends HttpServlet {
 
 		//データの挿入
 		AmsDAO.addToStudent(studentNo, shimei, gender, classId, courseId);
-
-		//前のページに戻る処理
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter printWriter = response.getWriter();
-		printWriter.println("<script>");
-		printWriter.println("alert('1件の生徒情報を登録しました。');");
-		printWriter.println("history.go(-1)");					//前のページに戻る
-		printWriter.println("window.location.reload(true);");	//ページのリロード
-		printWriter.println("</script>");
+
+		//登録する学生の学籍番号が既に存在する場合
+		if(Login.error == 1){
+			printWriter.println("<script>");
+			printWriter.println("alert('入力した学生(学籍番号)は既に登録されています。');");
+			printWriter.println("history.go(-1)");					//前のページに戻る
+			printWriter.println("window.location.reload(true);");	//ページのリロード
+			printWriter.println("</script>");
+			Login.error = 0;
+
+		//入力した学籍番号が7桁ではない場合
+		}else if(Login.error == 2){
+			printWriter.println("<script>");
+			printWriter.println("alert('学籍番号は7桁で登録してください。');");
+			printWriter.println("history.go(-1)");					//前のページに戻る
+			printWriter.println("window.location.reload(true);");	//ページのリロード
+			printWriter.println("</script>");
+			Login.error = 0;
+
+		} else {
+			//前のページに戻る処理
+			printWriter.println("<script>");
+			printWriter.println("alert('1件の学生情報を登録しました。');");
+			printWriter.println("history.go(-1)");					//前のページに戻る
+			printWriter.println("window.location.reload(true);");	//ページのリロード
+			printWriter.println("</script>");
+		}
 	}
 
 }
