@@ -47,10 +47,19 @@ public class AddTeacher extends HttpServlet {
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter printWriter = response.getWriter();
 
-		//登録するクラス名が既に存在する場合
+		//登録する教員のユーザーIDが既に存在する場合
 		if(Login.error == 1){
 			printWriter.println("<script>");
 			printWriter.println("alert('入力したユーザーIDは既に登録されています。別の文字列で再度登録をお願いします。');");
+			printWriter.println("history.go(-1)");					//前のページに戻る
+			printWriter.println("window.location.reload(true);");	//ページのリロード
+			printWriter.println("</script>");
+			Login.error = 0;
+
+		//入力されていない項目があった場合
+		}else if(Login.error == 2){
+			printWriter.println("<script>");
+			printWriter.println("alert('入力されていない項目があります。');");
 			printWriter.println("history.go(-1)");					//前のページに戻る
 			printWriter.println("window.location.reload(true);");	//ページのリロード
 			printWriter.println("</script>");

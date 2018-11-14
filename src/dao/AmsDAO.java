@@ -485,16 +485,20 @@ public class AmsDAO {
 
 			pstmt = con.prepareStatement(sql);
 
-			String id = userId;
-			String name = userName;
-			String pass = password;
+			if(userId.length() == 0 || userName.length() == 0 || password.length() == 0){
+				Login.error = 2;			//引数の文字列に0文字のものがあった場合
+			} else {
+				String id = userId;
+				String name = userName;
+				String pass = password;
 
-			pstmt.setString(1, id);
-			pstmt.setString(2, name);
-			pstmt.setString(3, pass);
-			pstmt.setInt(4, 0);			//教員を示す"0"
+				pstmt.setString(1, id);
+				pstmt.setString(2, name);
+				pstmt.setString(3, pass);
+				pstmt.setInt(4, 0);			//教員を示す"0"
 
-			pstmt.executeUpdate();
+				pstmt.executeUpdate();
+			}
 
 		} catch(MySQLIntegrityConstraintViolationException e){
 			Login.error = 1;		//既に登録してあるユーザーIDとパスワードの組み合わせを入力した場合
