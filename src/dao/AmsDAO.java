@@ -434,6 +434,8 @@ public class AmsDAO {
 
 			pstmt.executeUpdate();
 
+		} catch(MySQLIntegrityConstraintViolationException e){
+			Login.error = 1;		//既に登録してある学籍番号を入力した場合
 		} catch (SQLException e){
 			e.printStackTrace();
 		} catch (Exception e){
