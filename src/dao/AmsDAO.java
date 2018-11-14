@@ -6,12 +6,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
 import dto.ClassData;
 import dto.CourseData;
 import dto.LoginUser;
+import dto.Student;
 import servlet.Login;
 import util.PasswordUtil;
 
@@ -156,6 +158,88 @@ public class AmsDAO {
 			}
 		}
 		return login;
+	}
+
+	//生徒インスタンスを取得
+	public static ArrayList<Student> getStudent(int sNumber){
+		ArrayList<Student> studentList = new ArrayList<Student>();
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try{
+
+			Class.forName("com.mysql.jdbc.Driver");
+
+			con = DriverManager.getConnection(
+					"jdbc:mysql://localhost:3306/attendance_management?useSSL=false",
+					"attendance",
+					"attendance01");
+
+			String sql = "SELECT s.s_number, s.s_name, s.sex, s.year, s.absence, s.late"
+					+ " s.public_flag, cla.class_name, cou.course_name"
+					+ " FROM students s INNER JOIN class cla"
+					+ " ON s.s_class_id = cla.class_id"
+					+ " INNER JOIN course cou"
+					+ "ON s.s_course_id = cou.course_id;"
+					+ "WHERE s.s_number = ?";
+
+			pstmt = con.prepareStatement(sql);
+			int no = sNumber;
+			pstmt.setInt(1, no);
+			rs = pstmt.executeQuery();
+
+			while(rs.next() == true){
+				int sNo  = rs.getInt("s.s_number");
+				String sName = rs.getString("s.s_name");
+				String gen = rs.getString("s.sex");
+				int year = rs.getInt("s.year");
+				int absence = rs.getInt("s.absence");
+				int late = rs.getInt("s.late");
+				int flg = rs.getInt("s.public_flag");
+				String className = rs.getString("cla.class_name");
+				String courseName = rs.getString("cou.course_name");
+
+
+				studentList.add(new Student(sNo, sName, gen, year, absence, late, flg, className, courseName));
+			}
+
+
+		} catch (SQLException se){
+			se.printStackTrace();
+		} catch (Exception e){
+
+		} finally {
+			try {
+				if( rs != null){
+					rs.close();
+				}
+			} catch(SQLException e){
+				System.out.println("DB切断時にエラーが発生しました。");
+				e.printStackTrace();
+			}
+			try {
+				if( pstmt != null){
+					pstmt.close();
+				}
+			} catch(SQLException e){
+				System.out.println("DB切断時にエラーが発生しました。");
+				e.printStackTrace();
+			}
+
+			try {
+				if( con != null){
+					con.close();
+				}
+			} catch (SQLException e){
+				System.out.println("DB切断時にエラーが発生しました。");
+				e.printStackTrace();
+			}
+		}
+
+		return studentList;
+
 	}
 
 	//クラス登録
@@ -533,5 +617,61 @@ public class AmsDAO {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	//出席情報登録
+	public static void addToAttendance(int barcodeData, Date date) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try{
+
+			Class.forName("com.mysql.jdbc.Driver");
+
+			con = DriverManager.getConnection(
+					"jdbc:mysql://localhost:3306/attendance_management?useSSL=false",
+					"attendance",
+					"attendance01");
+
+			String sql = "INSERT INTO attendance_information(s_number, date, time) values(?,?,?);";
+
+			pstmt = con.prepareStatement(sql);
+
+			int bData = barcodeData;
+			String dt = String.valueOf(date);
+
+			pstmt.setInt(1, bData);
+			pstmt.setString(2, dt);
+			pstmt.setInt(3, 1);
+
+			pstmt.executeUpdate();
+
+		} catch(MySQLIntegrityConstraintViolationException e){
+			Login.error = 1;
+		} catch (SQLException e){
+			e.printStackTrace();
+		} catch (Exception e){
+			e.printStackTrace();
+		} finally {
+
+			try {
+				if( pstmt != null){
+					pstmt.close();
+				}
+			} catch(SQLException e){
+				System.out.println("DB切断時にエラーが発生しました。");
+				e.printStackTrace();
+			}
+
+			try {
+				if( con != null){
+					con.close();
+				}
+			} catch (SQLException e){
+				System.out.println("DB切断時にエラーが発生しました。");
+				e.printStackTrace();
+			}
+		}
+
 	}
 }

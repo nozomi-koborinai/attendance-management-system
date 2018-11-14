@@ -21,5 +21,8 @@
 			<br>
 		</form>
 	</div>
+	<form action="/Attendance_management_system/AttendingSchool" method="get">
+			<input type="text" name="barcodeData">
+		</form>
 </body>
 </html>

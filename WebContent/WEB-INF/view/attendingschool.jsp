@@ -8,7 +8,9 @@
 	rel="stylesheet" type="text/css">
 <title>attending school</title>
 </head>
-<%--headerの部分はデータベースからデータを取得　実装したら消してください。 --%>
+<%
+request.getAttribute("s_number");
+%>
 <body>
 	<center>
 
