@@ -42,7 +42,6 @@ public class AttendingSchool extends HttpServlet {
 		AmsDAO.addToAttendance(barcodeData, date);
 		request.setAttribute("studentData", AmsDAO.getStudent(barcodeData));
 
-
 		String view = "/WEB-INF/view/attendingschool.jsp";
 		RequestDispatcher dispatcher = request.getRequestDispatcher(view);
 		dispatcher.forward(request, response);

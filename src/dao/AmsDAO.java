@@ -240,13 +240,13 @@ public class AmsDAO {
 					"attendance",
 					"attendance01");
 
-			String sql = "SELECT s.s_number, s.s_name, s.sex, s.year, s.absence, s.late"
+			String sql = "SELECT s.s_number, s.s_name, s.sex, s.year, s.absence, s.late,"
 					+ " s.public_flag, cla.class_name, cou.course_name"
 					+ " FROM students s INNER JOIN class cla"
 					+ " ON s.s_class_id = cla.class_id"
 					+ " INNER JOIN course cou"
-					+ "ON s.s_course_id = cou.course_id;"
-					+ "WHERE s.s_number = ?";
+					+ " ON s.s_course_id = cou.course_id"
+					+ " WHERE s.s_number = ?";
 
 			pstmt = con.prepareStatement(sql);
 			int no = sNumber;

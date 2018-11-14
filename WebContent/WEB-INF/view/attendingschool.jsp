@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="java.util.ArrayList"%>
 <%@ page import="dto.Student"%>
 <!DOCTYPE html>
 <html>
@@ -10,16 +9,16 @@
 	rel="stylesheet" type="text/css">
 <title>attending school</title>
 </head>
-<%
-request.setCharacterEncoding("UTF-8");
-Student student = (Student) session.getAttribute("studentData");
-%>
+
 <body>
+	<%
+		request.setCharacterEncoding("UTF-8");
+		Student sdt = (Student) request.getAttribute("studentData");
+	%>
 	<center>
 
 		<header>
-			<%=student.getS_number() %>><br>
-			<%=student.getS_name() %>
+			<a><%=sdt.getS_number()%></a><br><a><%=sdt.getS_name()%></a>
 		</header>
 
 		<div class="a">
