@@ -181,9 +181,8 @@ public class AmsDAO {
 			} else {
 				String cName = className;
 				pstmt.setString(1, cName);
+				pstmt.executeUpdate();
 			}
-
-			pstmt.executeUpdate();
 
 		} catch(MySQLIntegrityConstraintViolationException e){
 			Login.error = 1;		//同じクラス名を入力した場合
