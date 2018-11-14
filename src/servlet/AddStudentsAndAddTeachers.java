@@ -74,6 +74,16 @@ public class AddStudentsAndAddTeachers extends HttpServlet {
 			printWriter.println("window.location.reload(true);");	//ページのリロード
 			printWriter.println("</script>");
 			Login.error = 0;
+
+		//入力した学籍番号が7桁ではない場合
+		}else if(Login.error == 2){
+			printWriter.println("<script>");
+			printWriter.println("alert('学籍番号は7桁で登録してください。');");
+			printWriter.println("history.go(-1)");					//前のページに戻る
+			printWriter.println("window.location.reload(true);");	//ページのリロード
+			printWriter.println("</script>");
+			Login.error = 0;
+
 		} else {
 			//前のページに戻る処理
 			printWriter.println("<script>");

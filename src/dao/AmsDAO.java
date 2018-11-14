@@ -399,6 +399,7 @@ public class AmsDAO {
 	}
 
 	//学生登録
+	@SuppressWarnings("unused")
 	public static void addToStudent(int studentNo, String shimei, String gender, int classId, int courseId){
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -416,23 +417,27 @@ public class AmsDAO {
 
 			pstmt = con.prepareStatement(sql);
 
-			int no = studentNo;
-			String name = shimei;
-			String gen = gender;
-			int claId = classId;
-			int couId = courseId;
+			Integer no = studentNo;
+			if(Integer.SIZE == 7){
+				String name = shimei;
+				String gen = gender;
+				int claId = classId;
+				int couId = courseId;
 
-			pstmt.setInt(1, no);
-			pstmt.setString(2, name);
-			pstmt.setString(3, gen);
-			pstmt.setInt(4, 1);
-			pstmt.setInt(5, 0);
-			pstmt.setInt(6, 0);
-			pstmt.setInt(7, 0);
-			pstmt.setInt(8, claId);
-			pstmt.setInt(9, couId);
+				pstmt.setInt(1, no);
+				pstmt.setString(2, name);
+				pstmt.setString(3, gen);
+				pstmt.setInt(4, 1);
+				pstmt.setInt(5, 0);
+				pstmt.setInt(6, 0);
+				pstmt.setInt(7, 0);
+				pstmt.setInt(8, claId);
+				pstmt.setInt(9, couId);
 
-			pstmt.executeUpdate();
+				pstmt.executeUpdate();
+			} else {
+				Login.error = 2;		//入力した学籍番号が7桁ではない場合
+			}
 
 		} catch(MySQLIntegrityConstraintViolationException e){
 			Login.error = 1;		//既に登録してある学籍番号を入力した場合
