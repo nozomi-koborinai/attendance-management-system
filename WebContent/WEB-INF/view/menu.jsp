@@ -11,6 +11,10 @@
 <header>登校の場合はバーコードをかざしてください。</header>
 <body>
 <center>
+
+	<form action="/Attendance_management_system/AttendingSchool" method="get">
+			<input type="text" name="barcodeData">
+		</form>
 	<div id="bottom">
 		<form action="/Attendance_management_system/BarcodeReading" method="get">
 			<button type="submit" name="action" value=1>早退</button>
@@ -21,5 +25,6 @@
 			<br>
 		</form>
 	</div>
+
 </body>
 </html>

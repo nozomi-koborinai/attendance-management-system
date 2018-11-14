@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="dto.Student"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,12 +9,16 @@
 	rel="stylesheet" type="text/css">
 <title>attending school</title>
 </head>
-<%--headerの部分はデータベースからデータを取得　実装したら消してください。 --%>
+
 <body>
+	<%
+		request.setCharacterEncoding("UTF-8");
+		Student sdt = (Student) request.getAttribute("studentData");
+	%>
 	<center>
 
 		<header>
-			学籍番号：4171113<br> 小堀内志さん
+			<a><%=sdt.getS_number()%></a><br><a><%=sdt.getS_name()%></a>
 		</header>
 
 		<div class="a">
