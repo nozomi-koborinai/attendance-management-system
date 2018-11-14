@@ -231,12 +231,17 @@ public class AmsDAO {
 
 			pstmt = con.prepareStatement(sql);
 
-			int cId = classId;
-			String cName = courseName;
-			pstmt.setInt(1, cId);
-			pstmt.setString(2, cName);
+			if(courseName.length() == 0){
+				Login.error = 2;			//courseNameが空の場合
+			} else {
+				int cId = classId;
+				String cName = courseName;
+				pstmt.setInt(1, cId);
+				pstmt.setString(2, cName);
 
-			pstmt.executeUpdate();
+				pstmt.executeUpdate();
+			}
+
 
 		} catch(MySQLIntegrityConstraintViolationException e){
 			Login.error = 1;		//同じクラス名を入力した場合
