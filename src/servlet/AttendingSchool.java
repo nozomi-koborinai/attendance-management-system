@@ -36,6 +36,7 @@ public class AttendingSchool extends HttpServlet {
 
 		//バーコードから学籍番号を取得
 		int barcodeData = Integer.parseInt(request.getParameter("barcodeData"));
+		System.out.println(barcodeData);
 		//時刻取得
 		Date date = new Date();
 		//学籍番号を基に出席情報をデータベースへ追加

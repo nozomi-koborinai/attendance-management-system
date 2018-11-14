@@ -9,11 +9,16 @@
 <title>menu</title>
 </head>
 <header>登校の場合はバーコードをかざしてください。</header>
-<body>
+<body onLoad="focusText()">
 <center>
+<script>
+	function focusText() {
+		document.getElementById('focus').focus();
+	}
+</script>
 
 	<form action="/Attendance_management_system/AttendingSchool" method="get">
-			<input type="text" name="barcodeData">
+			<input type="text" name="barcodeData" id="focus">
 		</form>
 	<div id="bottom">
 		<form action="/Attendance_management_system/BarcodeReading" method="get">
