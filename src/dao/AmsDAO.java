@@ -176,8 +176,12 @@ public class AmsDAO {
 
 			pstmt = con.prepareStatement(sql);
 
-			String cName = className;
-			pstmt.setString(1, cName);
+			if(className.length() == 0){
+				Login.error = 2;
+			} else {
+				String cName = className;
+				pstmt.setString(1, cName);
+			}
 
 			pstmt.executeUpdate();
 
@@ -227,12 +231,17 @@ public class AmsDAO {
 
 			pstmt = con.prepareStatement(sql);
 
-			int cId = classId;
-			String cName = courseName;
-			pstmt.setInt(1, cId);
-			pstmt.setString(2, cName);
+			if(courseName.length() == 0){
+				Login.error = 2;			//courseNameが空の場合
+			} else {
+				int cId = classId;
+				String cName = courseName;
+				pstmt.setInt(1, cId);
+				pstmt.setString(2, cName);
 
-			pstmt.executeUpdate();
+				pstmt.executeUpdate();
+			}
+
 
 		} catch(MySQLIntegrityConstraintViolationException e){
 			Login.error = 1;		//同じクラス名を入力した場合
@@ -485,16 +494,20 @@ public class AmsDAO {
 
 			pstmt = con.prepareStatement(sql);
 
-			String id = userId;
-			String name = userName;
-			String pass = password;
+			if(userId.length() == 0 || userName.length() == 0 || password.length() == 0){
+				Login.error = 2;			//引数の文字列に0文字のものがあった場合
+			} else {
+				String id = userId;
+				String name = userName;
+				String pass = password;
 
-			pstmt.setString(1, id);
-			pstmt.setString(2, name);
-			pstmt.setString(3, pass);
-			pstmt.setInt(4, 0);			//教員を示す"0"
+				pstmt.setString(1, id);
+				pstmt.setString(2, name);
+				pstmt.setString(3, pass);
+				pstmt.setInt(4, 0);			//教員を示す"0"
 
-			pstmt.executeUpdate();
+				pstmt.executeUpdate();
+			}
 
 		} catch(MySQLIntegrityConstraintViolationException e){
 			Login.error = 1;		//既に登録してあるユーザーIDとパスワードの組み合わせを入力した場合

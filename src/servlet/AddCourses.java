@@ -48,6 +48,15 @@ public class AddCourses extends HttpServlet {
 			printWriter.println("window.location.reload(true);");	//ページのリロード
 			printWriter.println("</script>");
 			Login.error = 0;
+
+		//コース名が入力されていない場合
+		}else if(Login.error == 2){
+			printWriter.println("<script>");
+			printWriter.println("alert('コース名が入力されていません');");
+			printWriter.println("history.go(-1)");					//前のページに戻る
+			printWriter.println("window.location.reload(true);");	//ページのリロード
+			printWriter.println("</script>");
+			Login.error = 0;
 		} else {
 			//前のページに戻る処理
 			printWriter.println("<script>");
