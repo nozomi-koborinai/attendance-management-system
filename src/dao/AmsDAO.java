@@ -224,8 +224,8 @@ public class AmsDAO {
 	}
 
 	//生徒インスタンスを取得
-	public static ArrayList<Student> getStudent(int sNumber){
-		ArrayList<Student> studentList = new ArrayList<Student>();
+	public static Student getStudent(int sNumber){
+		Student student = null;
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -253,20 +253,19 @@ public class AmsDAO {
 			pstmt.setInt(1, no);
 			rs = pstmt.executeQuery();
 
-			while(rs.next() == true){
-				int sNo  = rs.getInt("s.s_number");
-				String sName = rs.getString("s.s_name");
-				String gen = rs.getString("s.sex");
-				int year = rs.getInt("s.year");
-				int absence = rs.getInt("s.absence");
-				int late = rs.getInt("s.late");
-				int flg = rs.getInt("s.public_flag");
-				String className = rs.getString("cla.class_name");
-				String courseName = rs.getString("cou.course_name");
+			rs.next();
 
-				studentList.add(new Student(sNo, sName, gen, year, absence, late, flg, className, courseName));
-			}
+			int sNo  = rs.getInt("s.s_number");
+			String sName = rs.getString("s.s_name");
+			String gen = rs.getString("s.sex");
+			int year = rs.getInt("s.year");
+			int absence = rs.getInt("s.absence");
+			int late = rs.getInt("s.late");
+			int flg = rs.getInt("s.public_flag");
+			String className = rs.getString("cla.class_name");
+			String courseName = rs.getString("cou.course_name");
 
+			student = new Student(sNo, sName, gen, year, absence, late, flg, className, courseName);
 
 		} catch (SQLException se){
 			se.printStackTrace();
@@ -300,7 +299,7 @@ public class AmsDAO {
 			}
 		}
 
-		return studentList;
+		return student;
 
 	}
 

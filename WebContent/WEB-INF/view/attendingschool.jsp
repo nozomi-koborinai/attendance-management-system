@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList"%>
+<%@ page import="dto.Student"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,13 +11,15 @@
 <title>attending school</title>
 </head>
 <%
-request.getAttribute("s_number");
+request.setCharacterEncoding("UTF-8");
+Student student = (Student) session.getAttribute("studentData");
 %>
 <body>
 	<center>
 
 		<header>
-			学籍番号：4171113<br> 小堀内志さん
+			<%=student.getS_number() %>><br>
+			<%=student.getS_name() %>
 		</header>
 
 		<div class="a">
