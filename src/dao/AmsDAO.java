@@ -176,8 +176,12 @@ public class AmsDAO {
 
 			pstmt = con.prepareStatement(sql);
 
-			String cName = className;
-			pstmt.setString(1, cName);
+			if(className.length() == 0){
+				Login.error = 2;
+			} else {
+				String cName = className;
+				pstmt.setString(1, cName);
+			}
 
 			pstmt.executeUpdate();
 
