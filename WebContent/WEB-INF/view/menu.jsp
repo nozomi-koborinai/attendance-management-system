@@ -22,7 +22,7 @@
 		</form>
 	</div>
 	<form action="/Attendance_management_system/AttendingSchool" method="get">
-			<input type="text" name="barcodeData">
+			<p style="display:none;"><input type="text" name="barcodeData"></p>>
 		</form>
 </body>
 </html>

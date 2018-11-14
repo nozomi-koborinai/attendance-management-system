@@ -40,6 +40,8 @@ public class AttendingSchool extends HttpServlet {
 		Date date = new Date();
 		//学籍番号を基に出席情報をデータベースへ追加
 		AmsDAO.addToAttendance(barcodeData, date);
+		request.setAttribute("studentData", AmsDAO.getStudent(barcodeData));
+
 
 		String view = "/WEB-INF/view/attendingschool.jsp";
 		RequestDispatcher dispatcher = request.getRequestDispatcher(view);

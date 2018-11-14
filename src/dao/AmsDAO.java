@@ -91,6 +91,69 @@ public class AmsDAO {
 		return result;
 	}
 
+	//生徒氏名を取得
+	public static String getStudentName(int sNumber){
+
+		String sName = null;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try{
+
+			Class.forName("com.mysql.jdbc.Driver");
+
+			con = DriverManager.getConnection(
+					"jdbc:mysql://localhost:3306/attendance_management?useSSL=false",
+					"attendance",
+					"attendance01");
+
+			String sql = "SELECT s_name FROM students WHERE s_number = ?";
+
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, sNumber);
+			rs = pstmt.executeQuery();
+
+			rs.next();
+			sName = rs.getString("s_name");
+
+		} catch (SQLException se){
+			se.printStackTrace();
+		} catch (Exception e){
+
+		} finally {
+			try {
+				if( rs != null){
+					rs.close();
+				}
+			} catch(SQLException e){
+				System.out.println("DB切断時にエラーが発生しました。");
+				e.printStackTrace();
+			}
+			try {
+				if( pstmt != null){
+					pstmt.close();
+				}
+			} catch(SQLException e){
+				System.out.println("DB切断時にエラーが発生しました。");
+				e.printStackTrace();
+			}
+
+			try {
+				if( con != null){
+					con.close();
+				}
+			} catch (SQLException e){
+				System.out.println("DB切断時にエラーが発生しました。");
+				e.printStackTrace();
+			}
+		}
+
+		return sName;
+
+	}
+
 	//ユーザインスタンスを取得
 	public static LoginUser getUserName(String name, String pw){
 		LoginUser login = null;
@@ -200,7 +263,6 @@ public class AmsDAO {
 				int flg = rs.getInt("s.public_flag");
 				String className = rs.getString("cla.class_name");
 				String courseName = rs.getString("cou.course_name");
-
 
 				studentList.add(new Student(sNo, sName, gen, year, absence, late, flg, className, courseName));
 			}
