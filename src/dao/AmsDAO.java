@@ -181,9 +181,8 @@ public class AmsDAO {
 			} else {
 				String cName = className;
 				pstmt.setString(1, cName);
+				pstmt.executeUpdate();
 			}
-
-			pstmt.executeUpdate();
 
 		} catch(MySQLIntegrityConstraintViolationException e){
 			Login.error = 1;		//同じクラス名を入力した場合
@@ -408,7 +407,6 @@ public class AmsDAO {
 	}
 
 	//学生登録
-	@SuppressWarnings("unused")
 	public static void addToStudent(int studentNo, String shimei, String gender, int classId, int courseId){
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -426,8 +424,8 @@ public class AmsDAO {
 
 			pstmt = con.prepareStatement(sql);
 
-			Integer no = studentNo;
-			if(Integer.SIZE == 7){
+			if(String.valueOf(studentNo).length() == 7){
+				int no = studentNo;
 				String name = shimei;
 				String gen = gender;
 				int claId = classId;
