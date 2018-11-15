@@ -1,6 +1,8 @@
 package servlet;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,6 +10,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import dao.AmsDAO;
+import dto.AttendanceStatus;
 
 /**
  * Servlet implementation class BarcodeReading
@@ -60,8 +65,25 @@ public class BarcodeReading extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		//早退処理
+		request.setCharacterEncoding("UTF-8");
+
+		//バーコードから学籍番号を取得
+		int barcodeData = Integer.parseInt(request.getParameter("barcodeData"));
+		//日付取得
+		Date date = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy'年'MM'月'dd'日'E'曜日'k'時'mm'分'");
+		//出席状況
+		AttendanceStatus as = new AttendanceStatus();
+		//学籍番号を基に出席情報をデータベースへ追加
+		AmsDAO.addToAttendance(barcodeData, sdf.format(date), as.getEarly());
+		request.setAttribute("studentData", AmsDAO.getStudent(barcodeData));
+		//フォワード先で早退時間を表示するための処理
+		request.setAttribute("ealryData", sdf.format(date));
+
+		String view = "/WEB-INF/view/leaveEarly.jsp";
+		RequestDispatcher dispatcher = request.getRequestDispatcher(view);
+		dispatcher.forward(request, response);
 	}
 
 }
