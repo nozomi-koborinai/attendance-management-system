@@ -6,7 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
@@ -681,7 +680,7 @@ public class AmsDAO {
 	}
 
 	//出席情報登録
-	public static void addToAttendance(int barcodeData, Date date) {
+	public static void addToAttendance(int barcodeData, String date, String info) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 
@@ -694,7 +693,7 @@ public class AmsDAO {
 					"attendance",
 					"attendance01");
 
-			String sql = "INSERT INTO attendance_information(s_number, date, time) values(?,?,?);";
+			String sql = "INSERT INTO attendance_information(s_number, date, time, info) values(?,?,?,?);";
 
 			pstmt = con.prepareStatement(sql);
 
@@ -704,6 +703,7 @@ public class AmsDAO {
 			pstmt.setInt(1, bData);
 			pstmt.setString(2, dt);
 			pstmt.setInt(3, 1);
+			pstmt.setString(4, info);
 
 			pstmt.executeUpdate();
 
