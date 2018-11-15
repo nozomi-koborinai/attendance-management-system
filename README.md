@@ -1,2 +1,2 @@
-# Attendance_management_system
-出席管理システム
+# 出席管理システム
+Attendance_management_system
