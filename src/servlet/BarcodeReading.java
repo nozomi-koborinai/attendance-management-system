@@ -16,21 +16,44 @@ import javax.servlet.http.HttpServletResponse;
 public class BarcodeReading extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public BarcodeReading() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public BarcodeReading() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String view = "/WEB-INF/view/barcodereading.jsp";
-		RequestDispatcher dispatcher = request.getRequestDispatcher(view);
-		dispatcher.forward(request, response);
+		request.setCharacterEncoding("UTF-8");
+
+		//バーコードから学籍番号を取得
+		int barcodeStatus = Integer.parseInt(request.getParameter("action"));
+
+		//早退
+		if(barcodeStatus == 1){
+			String view = "/WEB-INF/view/barcodereading.jsp";
+			RequestDispatcher dispatcher = request.getRequestDispatcher(view);
+			dispatcher.forward(request, response);
+		}
+
+		//公欠申請
+		else if(barcodeStatus == 2){
+			String view = "/WEB-INF/view/barcodereading2.jsp";
+			RequestDispatcher dispatcher = request.getRequestDispatcher(view);
+			dispatcher.forward(request, response);
+		}
+
+		//公欠申請状況
+		else if(barcodeStatus == 3){
+			String view = "/WEB-INF/view/barcodereading3.jsp";
+			RequestDispatcher dispatcher = request.getRequestDispatcher(view);
+			dispatcher.forward(request, response);
+		}
+
 	}
 
 	/**
