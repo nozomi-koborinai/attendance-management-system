@@ -16,9 +16,12 @@
 				document.getElementById('focus').focus();
 			}
 		</script>
-		<form action="/Attendance_management_system/BarcodeReading" method="post">
+		<div class="display-none">
+			<form action="/Attendance_management_system/BarcodeReading"
+				method="post">
 				<input type="text" name="barcodeData" id="focus">
 			</form>
+		</div>
 		<div id="bottom">
 			<form action="/Attendance_management_system/Menu" method="get">
 				<button type="submit" name="action" value="menu">メニューへ</button>

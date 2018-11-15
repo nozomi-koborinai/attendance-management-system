@@ -5,9 +5,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link href="${pageContext.request.contextPath}/CSS/attendingschool.css"
+<link href="${pageContext.request.contextPath}/CSS/leaveEarly.css"
 	rel="stylesheet" type="text/css">
-<title>attending school</title>
+<title>leave early</title>
 </head>
 
 <body onLoad="timeOut()">
@@ -20,7 +20,7 @@
 		function timeOut() {
 			setTimeout(function() {
 				window.location.href = '/Attendance_management_system/Menu';
-			}, 5 * 1000);
+			}, 3 * 1000);
 		}
 	</script>
 	<center>
@@ -36,7 +36,7 @@
 		</div>
 
 		<div class="b">
-			<p>※この画面は5秒後にメニューに戻ります</p>
+			<p>※この画面は3秒後にメニューに戻ります</p>
 		</div>
 </body>
 </html>

@@ -19,7 +19,7 @@
 		function timeOut() {
 			setTimeout(function() {
 				window.location.href = '/Attendance_management_system/Menu';
-			}, 5 * 1000);
+			}, 3 * 1000);
 		}
 	</script>
 	<center>
@@ -34,7 +34,7 @@
 		</div>
 
 		<div class="b">
-			<p>※この画面は5秒後にメニューに戻ります</p>
+			<p>※この画面は3秒後にメニューに戻ります</p>
 		</div>
 </body>
 </html>

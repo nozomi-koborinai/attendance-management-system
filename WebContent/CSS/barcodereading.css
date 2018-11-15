@@ -7,6 +7,13 @@ header {
 	margin-bottom: 20px;
 }
 
+/*テキストフィールドの非表示*/
+.display-none {
+	position: absolute;
+	top: -9999px;
+	left: -9999px;
+}
+
 #bottom form button[type="submit"] {
 	position: relative;
 	font-size: 1.5em;

@@ -8,11 +8,11 @@ header {
 }
 
 /*テキストフィールドの非表示*/
-.display-none{
+.display-none {
 	position: absolute;
-    top: -9999px;
-    left: -9999px;
-   }
+	top: -9999px;
+	left: -9999px;
+}
 
 #bottom form button[type="submit"] {
 	position: relative;
