@@ -10,15 +10,23 @@
 <title>attending school</title>
 </head>
 
-<body>
+<body onLoad="timeOut()">
 	<%
 		request.setCharacterEncoding("UTF-8");
 		Student sdt = (Student) request.getAttribute("studentData");
 	%>
+	<script>
+		function timeOut() {
+			setTimeout(function() {
+				window.location.href = '/Attendance_management_system/Menu';
+			}, 5 * 1000);
+		}
+	</script>
 	<center>
 
 		<header>
-			<a><%=sdt.getS_number()%></a><br><a><%=sdt.getS_name()%></a>
+			<a><%=sdt.getS_number()%></a><br>
+			<a><%=sdt.getS_name()%></a>
 		</header>
 
 		<div class="a">
