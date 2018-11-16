@@ -797,4 +797,64 @@ public class AmsDAO {
 		}
 
 	}
+
+	//早退後の欠席処理
+	public static void updateLateData(int barcodeData, String date, int time) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try{
+
+			Class.forName("com.mysql.jdbc.Driver");
+
+			con = DriverManager.getConnection(
+					"jdbc:mysql://localhost:3306/attendance_management?useSSL=false",
+					"attendance",
+					"attendance01");
+
+			String sql = "UPDATE attendance_information"
+					+ " SET info = '遅' AND date = ?"
+					+ " WHERE s_number = ? AND date LIKE ?% AND time = ?";
+
+			pstmt = con.prepareStatement(sql);
+
+			int bData = barcodeData;
+			String dt = String.valueOf(date);
+			int tm = time;
+
+			pstmt.setString(1, dt);
+			pstmt.setInt(2, bData);
+			pstmt.setString(3, dt);
+			pstmt.setInt(4, tm);
+
+			pstmt.executeUpdate();
+
+		} catch(MySQLIntegrityConstraintViolationException e){
+			Login.error = 1;
+		} catch (SQLException e){
+			e.printStackTrace();
+		} catch (Exception e){
+			e.printStackTrace();
+		} finally {
+
+			try {
+				if( pstmt != null){
+					pstmt.close();
+				}
+			} catch(SQLException e){
+				System.out.println("DB切断時にエラーが発生しました。");
+				e.printStackTrace();
+			}
+
+			try {
+				if( con != null){
+					con.close();
+				}
+			} catch (SQLException e){
+				System.out.println("DB切断時にエラーが発生しました。");
+				e.printStackTrace();
+			}
+		}
+
+	}
 }
