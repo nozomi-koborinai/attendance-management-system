@@ -680,7 +680,7 @@ public class AmsDAO {
 	}
 
 	//出席情報登録
-	public static void addToAttendance(int barcodeData, String date, String info) {
+	public static void addToAttendance(int barcodeData, String date, int time, String info) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 
@@ -699,11 +699,13 @@ public class AmsDAO {
 
 			int bData = barcodeData;
 			String dt = String.valueOf(date);
+			int tm = time;
+			String information = info;
 
 			pstmt.setInt(1, bData);
 			pstmt.setString(2, dt);
-			pstmt.setInt(3, 1);
-			pstmt.setString(4, info);
+			pstmt.setInt(3, tm);
+			pstmt.setString(4, information);
 
 			pstmt.executeUpdate();
 
