@@ -813,7 +813,7 @@ public class AmsDAO {
 					"attendance01");
 
 			String sql = "UPDATE attendance_information"
-					+ " SET info = '遅' AND date = ?"
+					+ " SET info = '欠' AND date = ?"
 					+ " WHERE s_number = ? AND date LIKE ?% AND time = ?";
 
 			pstmt = con.prepareStatement(sql);
