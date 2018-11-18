@@ -38,6 +38,10 @@ public class AttendingSchool extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		request.setCharacterEncoding("UTF-8");
+
+		//フォワードするか否かを表すフラグ
+		int fFlag = 1;			//0・・・フォワードしない、1・・・フォワードする
+
 		//バーコードから学籍番号を取得
 		int barcodeData = Integer.parseInt(request.getParameter("barcodeData"));
 
@@ -64,12 +68,16 @@ public class AttendingSchool extends HttpServlet {
 			if(nowTime.compareTo(sdf.format(sdf.parse(jikan.getStartTimeReading()))) < 0){
 				System.out.println("読取時間外");
 
+				response.setContentType("text/html; charset=UTF-8");
 				PrintWriter printWriter = response.getWriter();
 				printWriter.println("<script>");
 				printWriter.println("alert('時間外読取、読取開始時刻は08:30～です。');");
 				printWriter.println("history.go(-1)");					//前のページに戻る
 				printWriter.println("window.location.reload(true);");	//ページのリロード
 				printWriter.println("</script>");
+
+				//フラグにフォワードなしを設定
+				fFlag = 0;
 
 			} else if(nowTime.compareTo(sdf.format(sdf.parse(jikan.getStartTime1()))) < 0){
 				System.out.println("1時間目から出席です。\n1時間目～3時間目を〇とします。");
@@ -122,12 +130,16 @@ public class AttendingSchool extends HttpServlet {
 			} else if(nowTime.compareTo(sdf.format(sdf.parse(jikan.getStartTimeReading2()))) < 0){
 				System.out.println("読取時間外");
 
+				response.setContentType("text/html; charset=UTF-8");
 				PrintWriter printWriter = response.getWriter();
 				printWriter.println("<script>");
 				printWriter.println("alert('時間外読取、読取開始時刻は12:50～です。');");
 				printWriter.println("history.go(-1)");					//前のページに戻る
 				printWriter.println("window.location.reload(true);");	//ページのリロード
 				printWriter.println("</script>");
+
+				//フラグにフォワードなしを設定
+				fFlag = 0;
 
 			} else if(nowTime.compareTo(sdf.format(sdf.parse(jikan.getStartTime4()))) < 0){
 				System.out.println("4時間目出席です。\n4時間目～6時間目を〇にします。");
@@ -179,21 +191,26 @@ public class AttendingSchool extends HttpServlet {
 			} else {
 				System.out.println("読取時間外");
 
+				response.setContentType("text/html; charset=UTF-8");
 				PrintWriter printWriter = response.getWriter();
 				printWriter.println("<script>");
 				printWriter.println("alert('時間外読取');");
 				printWriter.println("history.go(-1)");					//前のページに戻る
 				printWriter.println("window.location.reload(true);");	//ページのリロード
 				printWriter.println("</script>");
+
+				//フラグにフォワードなしを設定
+				fFlag = 0;
 			}
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
 
-
-		String view = "/WEB-INF/view/attendingschool.jsp";
-		RequestDispatcher dispatcher = request.getRequestDispatcher(view);
-		dispatcher.forward(request, response);
+		if(fFlag == 1){
+			String view = "/WEB-INF/view/attendingschool.jsp";
+			RequestDispatcher dispatcher = request.getRequestDispatcher(view);
+			dispatcher.forward(request, response);
+		}
 	}
 
 	/**
