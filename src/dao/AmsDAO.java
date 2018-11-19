@@ -805,7 +805,7 @@ public class AmsDAO {
 	}
 
 	//早退後の欠席処理
-	public static void updateAbsenceData(int barcodeData, String date, int time) {
+	public static void deleteAttendanceData(int barcodeData, String date, int time) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 
@@ -821,8 +821,7 @@ public class AmsDAO {
 					"attendance",
 					"attendance01");
 
-			String sql = "UPDATE attendance_information"
-					+ " SET info = '欠' , date = ?"
+			String sql = "DELETE FROM attendance_information"
 					+ " WHERE s_number = ?"
 					+ " AND date LIKE ?"
 					+ " AND time = ?";
@@ -833,10 +832,9 @@ public class AmsDAO {
 			String dt = String.valueOf(date);
 			int tm = time;
 
-			pstmt.setString(1, dt);
-			pstmt.setInt(2, bData);
-			pstmt.setString(3, sdf.format(sdf.parse(dt)) + "%");
-			pstmt.setInt(4, tm);
+			pstmt.setInt(1, bData);
+			pstmt.setString(2, sdf.format(sdf.parse(dt)) + "%");
+			pstmt.setInt(3, tm);
 
 			pstmt.executeUpdate();
 
