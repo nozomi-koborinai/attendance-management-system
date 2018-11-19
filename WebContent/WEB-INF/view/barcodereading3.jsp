@@ -17,7 +17,7 @@
 			}
 		</script>
 		<div class="display-none">
-			<form action="/Attendance_management_system/BarcodeReading"
+			<form action="/Attendance_management_system/PublicApplicationStatus"
 				method="post">
 				<input type="text" name="barcodeData" id="focus">
 			</form>
