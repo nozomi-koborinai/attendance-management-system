@@ -143,7 +143,7 @@ public class BarcodeReading extends HttpServlet {
 				System.out.println("2時間目早退です。\n2時間目を遅、3時間目～6時間目を欠とします。");
 				//学籍番号を基に出席情報をデータベースへ追加
 				AmsDAO.updateEarlyData(barcodeData, sdf2.format(date), 2);
-				AmsDAO.addToAttendance(barcodeData, sdf2.format(date), 3, as.getAbsence());
+				AmsDAO.updateAbsenceData(barcodeData, sdf2.format(date), 3);
 				AmsDAO.addToAttendance(barcodeData, sdf2.format(date), 4, as.getAbsence());
 				AmsDAO.addToAttendance(barcodeData, sdf2.format(date), 5, as.getAbsence());
 				AmsDAO.addToAttendance(barcodeData, sdf2.format(date), 6, as.getAbsence());
