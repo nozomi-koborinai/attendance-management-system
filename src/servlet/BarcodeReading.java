@@ -116,11 +116,8 @@ public class BarcodeReading extends HttpServlet {
 				System.out.println("1時間目早退です。\n1時間目を早、2時間目～6時間目を欠とします。");
 				//学籍番号を基に出席情報をデータベースへ追加
 				AmsDAO.updateEarlyData(barcodeData, sdf2.format(date), 1);
-				AmsDAO.updateAbsenceData(barcodeData, sdf2.format(date), 2);
-				AmsDAO.updateAbsenceData(barcodeData, sdf2.format(date), 3);
-				AmsDAO.addToAttendance(barcodeData, sdf2.format(date), 4, as.getAbsence());
-				AmsDAO.addToAttendance(barcodeData, sdf2.format(date), 5, as.getAbsence());
-				AmsDAO.addToAttendance(barcodeData, sdf2.format(date), 6, as.getAbsence());
+				AmsDAO.deleteAttendanceData(barcodeData, sdf2.format(date), 2);
+				AmsDAO.deleteAttendanceData(barcodeData, sdf2.format(date), 3);
 
 				request.setAttribute("studentData", AmsDAO.getStudent(barcodeData));
 				//フォワード先で早退時間を表示するための処理
@@ -129,11 +126,8 @@ public class BarcodeReading extends HttpServlet {
 			} else if(nowTime.compareTo(sdf.format(sdf.parse(jikan.getStartTime2()))) < 0){
 				System.out.println("2時間目から欠席です。\n2時間目～6時間目を欠とします。");
 				//学籍番号を基に出席情報をデータベースへ追加
-				AmsDAO.updateAbsenceData(barcodeData, sdf2.format(date), 2);
-				AmsDAO.updateAbsenceData(barcodeData, sdf2.format(date), 3);
-				AmsDAO.addToAttendance(barcodeData, sdf2.format(date), 4, as.getAbsence());
-				AmsDAO.addToAttendance(barcodeData, sdf2.format(date), 5, as.getAbsence());
-				AmsDAO.addToAttendance(barcodeData, sdf2.format(date), 6, as.getAbsence());
+				AmsDAO.deleteAttendanceData(barcodeData, sdf2.format(date), 2);
+				AmsDAO.deleteAttendanceData(barcodeData, sdf2.format(date), 3);
 
 				request.setAttribute("studentData", AmsDAO.getStudent(barcodeData));
 				//フォワード先で早退時間を表示するための処理
@@ -143,10 +137,7 @@ public class BarcodeReading extends HttpServlet {
 				System.out.println("2時間目早退です。\n2時間目を遅、3時間目～6時間目を欠とします。");
 				//学籍番号を基に出席情報をデータベースへ追加
 				AmsDAO.updateEarlyData(barcodeData, sdf2.format(date), 2);
-				AmsDAO.updateAbsenceData(barcodeData, sdf2.format(date), 3);
-				AmsDAO.addToAttendance(barcodeData, sdf2.format(date), 4, as.getAbsence());
-				AmsDAO.addToAttendance(barcodeData, sdf2.format(date), 5, as.getAbsence());
-				AmsDAO.addToAttendance(barcodeData, sdf2.format(date), 6, as.getAbsence());
+				AmsDAO.deleteAttendanceData(barcodeData, sdf2.format(date), 3);
 
 				request.setAttribute("studentData", AmsDAO.getStudent(barcodeData));
 				//フォワード先で早退時間を表示するための処理
@@ -155,10 +146,7 @@ public class BarcodeReading extends HttpServlet {
 			} else if(nowTime.compareTo(sdf.format(sdf.parse(jikan.getStartTime3()))) < 0){
 				System.out.println("3時間目から欠席です。\n3時間目～6時間目を欠とします。");
 				//学籍番号を基に出席情報をデータベースへ追加
-				AmsDAO.updateAbsenceData(barcodeData, sdf2.format(date), 3);
-				AmsDAO.addToAttendance(barcodeData, sdf2.format(date), 4, as.getAbsence());
-				AmsDAO.addToAttendance(barcodeData, sdf2.format(date), 5, as.getAbsence());
-				AmsDAO.addToAttendance(barcodeData, sdf2.format(date), 6, as.getAbsence());
+				AmsDAO.deleteAttendanceData(barcodeData, sdf2.format(date), 3);
 
 				request.setAttribute("studentData", AmsDAO.getStudent(barcodeData));
 				//フォワード先で早退時間を表示するための処理
@@ -168,9 +156,6 @@ public class BarcodeReading extends HttpServlet {
 				System.out.println("3時間目早退です。\n3時間目を早、4時間目～6時間目を欠とします。");
 				//学籍番号を基に出席情報をデータベースへ追加
 				AmsDAO.updateEarlyData(barcodeData, sdf2.format(date), 3);
-				AmsDAO.addToAttendance(barcodeData, sdf2.format(date), 4, as.getAbsence());
-				AmsDAO.addToAttendance(barcodeData, sdf2.format(date), 5, as.getAbsence());
-				AmsDAO.addToAttendance(barcodeData, sdf2.format(date), 6, as.getAbsence());
 
 				request.setAttribute("studentData", AmsDAO.getStudent(barcodeData));
 				//フォワード先で早退時間を表示するための処理
@@ -178,10 +163,6 @@ public class BarcodeReading extends HttpServlet {
 
 			} else if(nowTime.compareTo(sdf.format(sdf.parse(jikan.getStartTime4()))) < 0){
 				System.out.println("4時間目から欠席です。\n4時間目～6時間目を欠とします。");
-				//学籍番号を基に出席情報をデータベースへ追加
-				AmsDAO.addToAttendance(barcodeData, sdf2.format(date), 4, as.getAbsence());
-				AmsDAO.addToAttendance(barcodeData, sdf2.format(date), 5, as.getAbsence());
-				AmsDAO.addToAttendance(barcodeData, sdf2.format(date), 6, as.getAbsence());
 
 				request.setAttribute("studentData", AmsDAO.getStudent(barcodeData));
 				//フォワード先で早退時間を表示するための処理
@@ -191,8 +172,8 @@ public class BarcodeReading extends HttpServlet {
 				System.out.println("4時間目早退です。。\n4時間目を早、5時間目～6時間目を欠とします。");
 				//学籍番号を基に出席情報をデータベースへ追加
 				AmsDAO.updateEarlyData(barcodeData, sdf2.format(date), 4);
-				AmsDAO.updateAbsenceData(barcodeData, sdf2.format(date), 5);
-				AmsDAO.updateAbsenceData(barcodeData, sdf2.format(date), 6);
+				AmsDAO.deleteAttendanceData(barcodeData, sdf2.format(date), 5);
+				AmsDAO.deleteAttendanceData(barcodeData, sdf2.format(date), 6);
 
 				request.setAttribute("studentData", AmsDAO.getStudent(barcodeData));
 				//フォワード先で早退時間を表示するための処理
@@ -201,8 +182,8 @@ public class BarcodeReading extends HttpServlet {
 			} else if(nowTime.compareTo(sdf.format(sdf.parse(jikan.getStartTime5()))) < 0){
 				System.out.println("5時間目からの欠席です。\n5時間目～6時間目を欠とします。");
 				//学籍番号を基に出席情報をデータベースへ追加
-				AmsDAO.updateAbsenceData(barcodeData, sdf2.format(date), 5);
-				AmsDAO.updateAbsenceData(barcodeData, sdf2.format(date), 6);
+				AmsDAO.deleteAttendanceData(barcodeData, sdf2.format(date), 5);
+				AmsDAO.deleteAttendanceData(barcodeData, sdf2.format(date), 6);
 
 				request.setAttribute("studentData", AmsDAO.getStudent(barcodeData));
 				//フォワード先で早退時間を表示するための処理
@@ -212,7 +193,7 @@ public class BarcodeReading extends HttpServlet {
 				System.out.println("5時間目早退です。。\n5時間目を早、6時間目を欠とします。");
 				//学籍番号を基に出席情報をデータベースへ追加
 				AmsDAO.updateEarlyData(barcodeData, sdf2.format(date), 5);
-				AmsDAO.updateAbsenceData(barcodeData, sdf2.format(date), 6);
+				AmsDAO.deleteAttendanceData(barcodeData, sdf2.format(date), 6);
 
 				request.setAttribute("studentData", AmsDAO.getStudent(barcodeData));
 				//フォワード先で早退時間を表示するための処理
@@ -221,7 +202,7 @@ public class BarcodeReading extends HttpServlet {
 			} else if(nowTime.compareTo(sdf.format(sdf.parse(jikan.getStartTime6()))) < 0){
 				System.out.println("6時間目欠席です。\n6時間目を欠とします。");
 				//学籍番号を基に出席情報をデータベースへ追加
-				AmsDAO.updateAbsenceData(barcodeData, sdf2.format(date), 6);
+				AmsDAO.deleteAttendanceData(barcodeData, sdf2.format(date), 6);
 
 				request.setAttribute("studentData", AmsDAO.getStudent(barcodeData));
 				//フォワード先で早退時間を表示するための処理
