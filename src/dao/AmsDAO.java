@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
@@ -743,6 +744,9 @@ public class AmsDAO {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 
+		//set用
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy'年'MM'月'dd'日'");
+
 		try{
 
 			Class.forName("com.mysql.jdbc.Driver");
@@ -753,8 +757,10 @@ public class AmsDAO {
 					"attendance01");
 
 			String sql = "UPDATE attendance_information"
-					+ " SET info = '早' AND date = ?"
-					+ " WHERE s_number = ? AND date LIKE ?% AND time = ?";
+					+ " SET info = '早' , date = ?"
+					+ " WHERE s_number = ?"
+					+ " AND date LIKE ?"
+					+ " AND time = ?";
 
 			pstmt = con.prepareStatement(sql);
 
@@ -764,7 +770,7 @@ public class AmsDAO {
 
 			pstmt.setString(1, dt);
 			pstmt.setInt(2, bData);
-			pstmt.setString(3, dt);
+			pstmt.setString(3, sdf.format(sdf.parse(dt)) + "%");
 			pstmt.setInt(4, tm);
 
 			pstmt.executeUpdate();
@@ -799,9 +805,12 @@ public class AmsDAO {
 	}
 
 	//早退後の欠席処理
-	public static void updateLateData(int barcodeData, String date, int time) {
+	public static void updateAbsenceData(int barcodeData, String date, int time) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
+
+		//set用
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy'年'MM'月'dd'日'");
 
 		try{
 
@@ -813,8 +822,11 @@ public class AmsDAO {
 					"attendance01");
 
 			String sql = "UPDATE attendance_information"
-					+ " SET info = '遅' AND date = ?"
-					+ " WHERE s_number = ? AND date LIKE ?% AND time = ?";
+					+ " SET info = '欠'"
+					+ " AND date = ?"
+					+ " WHERE s_number = ?"
+					+ " AND date LIKE ?%"
+					+ " AND time = ?";
 
 			pstmt = con.prepareStatement(sql);
 
@@ -824,7 +836,7 @@ public class AmsDAO {
 
 			pstmt.setString(1, dt);
 			pstmt.setInt(2, bData);
-			pstmt.setString(3, dt);
+			pstmt.setString(3, sdf.format(sdf.parse(dt)) + "%");
 			pstmt.setInt(4, tm);
 
 			pstmt.executeUpdate();
