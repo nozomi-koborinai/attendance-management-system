@@ -15,6 +15,12 @@ public class Student {
 
 	}
 
+	public Student(int s_number, String s_name){
+		super();
+		this.s_number = s_number;
+		this.s_name = s_name;
+	}
+
 	public Student(int s_number, String s_name, String sex, int year, int absence, int late, int public_flag,
 			String s_class_name, String s_course_name) {
 		super();

@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="dto.LoginUser"%>
+<%@ page import="dto.AttendanceInfo" %>
+<%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,6 +41,7 @@
 
 <%
 LoginUser user = (LoginUser) session.getAttribute("user");
+ArrayList<AttendanceInfo> attendanceList = (ArrayList<AttendanceInfo>) request.getAttribute("attendanceList");
 %>
 
 <header> 生徒の出席状況 </header>
@@ -49,7 +52,7 @@ LoginUser user = (LoginUser) session.getAttribute("user");
 
 			<tr>
 				<th class="th1"></th>
-				<th colspan="6" class="th">11月5日</th>
+				<th colspan="6" class="th">11月20日</th>
 				<th colspan="6" class="th">11月6日</th>
 				<th colspan="6" class="th">11月7日</th>
 				<th colspan="6" class="th">11月8日</th>
@@ -57,7 +60,7 @@ LoginUser user = (LoginUser) session.getAttribute("user");
 			</tr>
 			<tr>
 			<tr align="center">
-				<td>名前</td>
+				<td>氏名</td>
 				<td>1</td>
 				<td>2</td>
 				<td>3</td>
@@ -97,8 +100,11 @@ LoginUser user = (LoginUser) session.getAttribute("user");
 			<%-- ココから下は見栄え用 --%>
 			<tr>
 			<tr align="center">
-				<td>大須賀雅希</td>
-				<td>〇</td>
+				<td><%=attendanceList.get(0).getName()%></td>
+				<%if(<%=attendanceList.get(0).getTime() != 1) {
+
+				}
+				%>
 				<td>〇</td>
 				<td>〇</td>
 				<td>〇</td>
