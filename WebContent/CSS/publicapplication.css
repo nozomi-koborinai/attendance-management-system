@@ -1,0 +1,44 @@
+@charset "utf-8";
+
+header {
+	text-align: center;
+	font-size: 2.2em;
+	margin-top: 35px;
+	margin-bottom: 20px;
+}
+
+#bottom1 form input[type="submit"] {
+	position: absolute;
+	width: 10%;
+	top: 70%;
+	left: 20%;
+	background: #555555;
+	border: 0;
+	border-radius: 3px;
+	color: white;
+	height: 40px;
+	cursor: pointer;
+	transition: background 0.3s ease-in-out;
+}
+
+#bottom1 form input[type="submit"]:hover {
+	background: #000000;
+}
+
+#bottom2 form input[type="submit"] {
+	position: absolute;
+	width: 10%;
+	top: 70%;
+	right: 20%;
+	background: #555555;
+	border: 0;
+	border-radius: 3px;
+	color: white;
+	height: 40px;
+	cursor: pointer;
+	transition: background 0.3s ease-in-out;
+}
+
+#bottom2 form input[type="submit"]:hover {
+	background: #000000;
+}
