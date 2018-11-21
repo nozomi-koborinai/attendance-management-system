@@ -7,6 +7,13 @@ header {
 	margin-bottom: 20px;
 }
 
+#pa form input[type="text"] {
+	font-size: 1.0em;
+	width: 50%;
+	height: 30px;
+	margin-bottom: 20px;
+}
+
 #bottom1 form input[type="submit"] {
 	position: absolute;
 	width: 10%;

@@ -23,7 +23,8 @@
 </body>
 <footer>
 	<div id="bottom">
-		<form name='form-back'>
+		<form action="/Attendance_management_system/Menu"
+			method="get" name='form-back'>
 			<input type="submit" value="メニューへ">
 		</form>
 	</div>
