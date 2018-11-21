@@ -52,11 +52,11 @@ ArrayList<AttendanceInfo> attendanceList = (ArrayList<AttendanceInfo>) request.g
 
 			<tr>
 				<th class="th1"></th>
-				<th colspan="6" class="th">11月5</th>
-				<th colspan="6" class="th">11月6日</th>
-				<th colspan="6" class="th">11月7日</th>
-				<th colspan="6" class="th">11月8日</th>
-				<th colspan="6" class="th">11月9日</th>
+				<th colspan="6" class="th">11月20</th>
+				<th colspan="6" class="th"></th>
+				<th colspan="6" class="th"></th>
+				<th colspan="6" class="th"></th>
+				<th colspan="6" class="th"></th>
 			</tr>
 			<tr>
 			<tr align="center">
@@ -98,49 +98,109 @@ ArrayList<AttendanceInfo> attendanceList = (ArrayList<AttendanceInfo>) request.g
 			</tr>
 			<%--ココから下の列は拡張for文で情報を格納して表示  --%>
 			<%-- ココから下は見栄え用 --%>
-			<%for(AttendanceInfo ai : attendanceList){ %>
+			<%for(int i = 0; i < attendanceList.size(); i++){ %>
 			<tr>
 			<tr align="center">
-				<td><%=ai.getName()%></td>
+				<td><%=attendanceList.get(i).getName()%></td>
 
-				<%if(ai.getDate() == null){%>
-				<%for(int i = 1; i <= 6; i++){ %>
+				<%if(attendanceList.get(i).getDate() == null){%>
+				<%for(int j = 1; j <= 6; j++){ %>
 				<td>欠</td>
 				<% }%>
 				<% }else { %>
 
-				<% if(ai.getTime() == 1){%>
-				<td><%=ai.getInfo() %></td>
+				<% if(attendanceList.get(i).getTime() == 1){%>
+				<td><%=attendanceList.get(i).getInfo() %></td>
+				<% if(attendanceList.get(i + 1).getTime() == 2){ %>
+				<td><%=attendanceList.get(i + 1).getInfo() %></td>
+				<%i++; %>
+				<% if(attendanceList.get(i + 1).getTime() == 3) {%>
+				<td><%=attendanceList.get(i + 1).getInfo() %></td>
+				<%i++; %>
+				<% if(attendanceList.get(i + 1).getTime() == 4) {%>
+				<td><%=attendanceList.get(i + 1).getInfo() %></td>
+				<%i++; %>
+				<% if(attendanceList.get(i + 1).getTime() == 5) {%>
+				<td><%=attendanceList.get(i + 1).getInfo() %></td>
+				<%i++; %>
+				<% if(attendanceList.get(i + 1).getTime() == 6) {%>
+				<td><%=attendanceList.get(i + 1).getInfo() %></td>
+				<%i++; %>
+				<%} %>
+				<%} %>
+				<%} %>
+				<%} %>
+				<%} %>
 				<%} else {%>
 				<td>欠</td>
 				<%} %>
 
-				<% if(ai.getTime() == 2){%>
-				<td><%=ai.getInfo() %></td>
+				<% if(attendanceList.get(i).getTime() == 2){ %>
+				<td><%=attendanceList.get(i).getInfo() %></td>
+				<% if(attendanceList.get(i + 1).getTime() == 3) {%>
+				<td><%=attendanceList.get(i + 1).getInfo() %></td>
+				<%i++; %>
+				<% if(attendanceList.get(i + 1).getTime() == 4) {%>
+				<td><%=attendanceList.get(i + 1).getInfo() %></td>
+				<%i++; %>
+				<% if(attendanceList.get(i + 1).getTime() == 5) {%>
+				<td><%=attendanceList.get(i + 1).getInfo() %></td>
+				<%i++; %>
+				<% if(attendanceList.get(i + 1).getTime() == 6) {%>
+				<td><%=attendanceList.get(i + 1).getInfo() %></td>
+				<%i++; %>
+				<%} %>
+				<%} %>
+				<%} %>
+				<%} %>
 				<%} else {%>
 				<td>欠</td>
 				<%} %>
 
-				<% if(ai.getTime() == 3){%>
-				<td><%=ai.getInfo() %></td>
+				<% if(attendanceList.get(i).getTime() == 3) {%>
+				<td><%=attendanceList.get(i).getInfo() %></td>
+				<% if(attendanceList.get(i + 1).getTime() == 4) {%>
+				<td><%=attendanceList.get(i + 1).getInfo() %></td>
+				<%i++; %>
+				<% if(attendanceList.get(i + 1).getTime() == 5) {%>
+				<td><%=attendanceList.get(i + 1).getInfo() %></td>
+				<%i++; %>
+				<% if(attendanceList.get(i + 1).getTime() == 6) {%>
+				<td><%=attendanceList.get(i + 1).getInfo() %></td>
+				<%i++; %>
+				<%} %>
+				<%} %>
+				<%} %>
 				<%} else {%>
 				<td>欠</td>
 				<%} %>
 
-				<% if(ai.getTime() == 4){%>
-				<td><%=ai.getInfo() %></td>
+				<% if(attendanceList.get(i).getTime() == 4) {%>
+				<td><%=attendanceList.get(i).getInfo() %></td>
+				<% if(attendanceList.get(i + 1).getTime() == 5) {%>
+				<td><%=attendanceList.get(i + 1).getInfo() %></td>
+				<%i++; %>
+				<% if(attendanceList.get(i + 1).getTime() == 6) {%>
+				<td><%=attendanceList.get(i + 1).getInfo() %></td>
+				<%i++; %>
+				<%} %>
+				<%} %>
 				<%} else {%>
 				<td>欠</td>
 				<%} %>
 
-				<% if(ai.getTime() == 5){%>
-				<td><%=ai.getInfo() %></td>
+				<% if(attendanceList.get(i).getTime() == 5) {%>
+				<td><%=attendanceList.get(i).getInfo() %></td>
+				<% if(attendanceList.get(i + 1).getTime() == 6) {%>
+				<td><%=attendanceList.get(i + 1).getInfo() %></td>
+				<%i++; %>
+				<%} %>
 				<%} else {%>
 				<td>欠</td>
 				<%} %>
 
-				<% if(ai.getTime() == 6){%>
-				<td><%=ai.getInfo() %></td>
+				<% if(attendanceList.get(i).getTime() == 6){%>
+				<td><%=attendanceList.get(i).getInfo() %></td>
 				<%} else {%>
 				<td>欠</td>
 				<%} %>
