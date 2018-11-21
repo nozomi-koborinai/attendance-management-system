@@ -888,9 +888,9 @@ public class AmsDAO {
 
 			String sql = "SELECT s.s_name, ai.date, ai.time, ai.info, s.absence, s.late, s.public_flag"
 					+ " FROM students s"
-					+ " INNER JOIN attendance_information ai"
+					+ " LEFT JOIN attendance_information ai"
 					+ " ON s.s_number = ai.s_number"
-					+ " WHERE ai.date LIKE '2018年11月20日%'";
+					+ " AND ai.date LIKE '2018年11月20日%'";
 
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();

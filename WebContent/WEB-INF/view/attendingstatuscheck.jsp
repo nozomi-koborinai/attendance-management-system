@@ -52,7 +52,7 @@ ArrayList<AttendanceInfo> attendanceList = (ArrayList<AttendanceInfo>) request.g
 
 			<tr>
 				<th class="th1"></th>
-				<th colspan="6" class="th">11月20日</th>
+				<th colspan="6" class="th">11月5</th>
 				<th colspan="6" class="th">11月6日</th>
 				<th colspan="6" class="th">11月7日</th>
 				<th colspan="6" class="th">11月8日</th>
@@ -98,19 +98,53 @@ ArrayList<AttendanceInfo> attendanceList = (ArrayList<AttendanceInfo>) request.g
 			</tr>
 			<%--ココから下の列は拡張for文で情報を格納して表示  --%>
 			<%-- ココから下は見栄え用 --%>
+			<%for(AttendanceInfo ai : attendanceList){ %>
 			<tr>
 			<tr align="center">
-				<td><%=attendanceList.get(0).getName()%></td>
-				<%if(<%=attendanceList.get(0).getTime() != 1) {
+				<td><%=ai.getName()%></td>
 
-				}
-				%>
-				<td>〇</td>
-				<td>〇</td>
-				<td>〇</td>
-				<td>〇</td>
-				<td>〇</td>
-				<td>〇</td>
+				<%if(ai.getDate() == null){%>
+				<%for(int i = 1; i <= 6; i++){ %>
+				<td>欠</td>
+				<% }%>
+				<% }else { %>
+
+				<% if(ai.getTime() == 1){%>
+				<td><%=ai.getInfo() %></td>
+				<%} else {%>
+				<td>欠</td>
+				<%} %>
+
+				<% if(ai.getTime() == 2){%>
+				<td><%=ai.getInfo() %></td>
+				<%} else {%>
+				<td>欠</td>
+				<%} %>
+
+				<% if(ai.getTime() == 3){%>
+				<td><%=ai.getInfo() %></td>
+				<%} else {%>
+				<td>欠</td>
+				<%} %>
+
+				<% if(ai.getTime() == 4){%>
+				<td><%=ai.getInfo() %></td>
+				<%} else {%>
+				<td>欠</td>
+				<%} %>
+
+				<% if(ai.getTime() == 5){%>
+				<td><%=ai.getInfo() %></td>
+				<%} else {%>
+				<td>欠</td>
+				<%} %>
+
+				<% if(ai.getTime() == 6){%>
+				<td><%=ai.getInfo() %></td>
+				<%} else {%>
+				<td>欠</td>
+				<%} %>
+
 				<td>〇</td>
 				<td>〇</td>
 				<td>〇</td>
@@ -140,119 +174,9 @@ ArrayList<AttendanceInfo> attendanceList = (ArrayList<AttendanceInfo>) request.g
 				<td>公欠申請なし</td>
 			</tr>
 			<tr>
-			<tr align="center">
-				<td>小堀内志</td>
-				<td>〇</td>
-				<td>欠</td>
-				<td>欠</td>
-				<td>欠</td>
-				<td>欠</td>
-				<td>欠</td>
-				<td>欠</td>
-				<td>欠</td>
-				<td>欠</td>
-				<td>欠</td>
-				<td>欠</td>
-				<td>欠</td>
-				<td>〇</td>
-				<td>〇</td>
-				<td>〇</td>
-				<td>〇</td>
-				<td>〇</td>
-				<td>〇</td>
-				<td>欠</td>
-				<td>欠</td>
-				<td>欠</td>
-				<td>欠</td>
-				<td>欠</td>
-				<td>〇</td>
-				<td>〇</td>
-				<td>〇</td>
-				<td>〇</td>
-				<td>〇</td>
-				<td>〇</td>
-				<td>〇</td>
-				<td>16</td>
-				<td>0</td>
-				<td>66.66%</td>
-				<td>公欠申請あり</td>
-			</tr>
-			<tr>
-			<tr align="center">
-				<td>小成楓斗</td>
-				<td>遅</td>
-				<td>欠</td>
-				<td>欠</td>
-				<td>欠</td>
-				<td>遅</td>
-				<td>欠</td>
-				<td>欠</td>
-				<td>欠</td>
-				<td>欠</td>
-				<td>欠</td>
-				<td>遅</td>
-				<td>欠</td>
-				<td>〇</td>
-				<td>〇</td>
-				<td>遅</td>
-				<td>〇</td>
-				<td>遅</td>
-				<td>〇</td>
-				<td>欠</td>
-				<td>欠</td>
-				<td>欠</td>
-				<td>欠</td>
-				<td>欠</td>
-				<td>遅</td>
-				<td>〇</td>
-				<td>〇</td>
-				<td>〇</td>
-				<td>遅</td>
-				<td>〇</td>
-				<td>遅</td>
-				<td>14</td>
-				<td>8</td>
-				<td>??.??%</td>
-				<td>公欠申請あり</td>
-			</tr>
-			<tr>
-			<tr align="center">
-				<td>杉山くん</td>
-				<td>遅</td>
-				<td>遅</td>
-				<td>遅</td>
-				<td>遅</td>
-				<td>遅</td>
-				<td>遅</td>
-				<td>遅</td>
-				<td>遅</td>
-				<td>遅</td>
-				<td>遅</td>
-				<td>遅</td>
-				<td>遅</td>
-				<td>遅</td>
-				<td>遅</td>
-				<td>遅</td>
-				<td>遅</td>
-				<td>遅</td>
-				<td>遅</td>
-				<td>遅</td>
-				<td>遅</td>
-				<td>遅</td>
-				<td>遅</td>
-				<td>遅</td>
-				<td>遅</td>
-				<td>遅</td>
-				<td>遅</td>
-				<td>遅</td>
-				<td>遅</td>
-				<td>遅</td>
-				<td>遅</td>
-				<td>0</td>
-				<td>30</td>
-				<td>??.??%</td>
-				<td>公欠申請なし</td>
-			</tr>
+			<%} %>
+			<%} %>
+
 		</table>
 		<br> <br> <br>
 		<form name="formName" action="/aaa/aaa" method="post">
