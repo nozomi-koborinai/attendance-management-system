@@ -3,6 +3,7 @@
 <%@ page import="dto.LoginUser"%>
 <%@ page import="dto.AttendanceInfo" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="dto.Student" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,6 +43,7 @@
 <%
 LoginUser user = (LoginUser) session.getAttribute("user");
 ArrayList<AttendanceInfo> attendanceList = (ArrayList<AttendanceInfo>) request.getAttribute("attendanceList");
+ArrayList<Student> studentList = (ArrayList<Student>)request.getAttribute("studentList");
 %>
 
 <header> 生徒の出席状況 </header>
@@ -101,7 +103,7 @@ ArrayList<AttendanceInfo> attendanceList = (ArrayList<AttendanceInfo>) request.g
 			<tr>
 			<tr align="center">
 				<td><%=attendanceList.get(0).getName()%></td>
-				<%if(<%=attendanceList.get(0).getTime() != 1) {
+				<%if(attendanceList.get(0).getTime() != 1) {
 
 				}
 				%>

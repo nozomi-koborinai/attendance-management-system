@@ -67,6 +67,7 @@ public class AttendingStatusCheck extends HttpServlet {
 				Login.destination = 0;		//フラグをログイン状態にする。
 
 				session = request.getSession(true);
+				request.setAttribute("studentList", AmsDAO.getStudentInfo());
 				request.setAttribute("attendanceList", AmsDAO.getAttendanceInformation());
 
 				String view = "/WEB-INF/view/attendingstatuscheck.jsp";
