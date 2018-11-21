@@ -14,11 +14,11 @@
 	<center>
 		<table border="1" class="table">
 			<tr>
-				<th class="th">申請日</th>
-				<th class="th">理由</th>
-				<th class="th">場所</th>
-				<th class="th">期間</th>
-				<th class="th">削除</th>
+				<th class="th1">申請日</th>
+				<th class="th2">理由</th>
+				<th class="th3">場所</th>
+				<th class="th4">期間</th>
+				<th class="th5">削除</th>
 		</table>
 </body>
 <footer>

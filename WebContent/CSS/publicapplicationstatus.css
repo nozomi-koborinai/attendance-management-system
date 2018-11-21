@@ -7,11 +7,45 @@ header {
 	margin-bottom: 20px;
 }
 
-.th {
+
+.th1 {
 	font-weight: bold;
 	vertical-align: top;
 	background: #3f3f3f;
 	color: #ffffff;
+	width: 80px;
+}
+
+.th2 {
+	font-weight: bold;
+	vertical-align: top;
+	background: #3f3f3f;
+	color: #ffffff;
+	width: 450px;
+}
+
+.th3 {
+	font-weight: bold;
+	vertical-align: top;
+	background: #3f3f3f;
+	color: #ffffff;
+	width: 275px;
+}
+
+.th4 {
+	font-weight: bold;
+	vertical-align: top;
+	background: #3f3f3f;
+	color: #ffffff;
+	width: 200px;
+}
+
+.th5 {
+	font-weight: bold;
+	vertical-align: top;
+	background: #3f3f3f;
+	color: #ffffff;
+	width: 50px;
 }
 
 table tr:nth-child(even) {
