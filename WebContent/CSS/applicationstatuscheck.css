@@ -7,11 +7,44 @@ header {
 	margin-bottom: 20px;
 }
 
-.th {
+.th1 {
 	font-weight: bold;
 	vertical-align: middle;
 	background: #3f3f3f;
 	color: #ffffff;
+	width: 50px;
+}
+
+.th2 {
+	font-weight: bold;
+	vertical-align: middle;
+	background: #3f3f3f;
+	color: #ffffff;
+	width: 250px;
+}
+
+.th3 {
+	font-weight: bold;
+	vertical-align: middle;
+	background: #3f3f3f;
+	color: #ffffff;
+	width: 300px;
+}
+
+.th4 {
+	font-weight: bold;
+	vertical-align: middle;
+	background: #3f3f3f;
+	color: #ffffff;
+	width: 250px;
+}
+
+.th5 {
+	font-weight: bold;
+	vertical-align: middle;
+	background: #3f3f3f;
+	color: #ffffff;
+	width: 30px;
 }
 
 table, th, td {
@@ -22,7 +55,7 @@ table, th, td {
 
 table.table th {
 	font-weight: bold;
-	vertical-align: top;
+	vertical-align: middle;
 }
 
 table.table td {
@@ -40,10 +73,10 @@ tr:nth-child(2n+3) {
 }
 
 #bottom-back form input[type="submit"] {
-	position: relative;
-	width: 5%;
-	right: 35%;
-	top: 70px;
+	position: absolute;
+	width: 10%;
+	top: 70%;
+	left: 20%;
 	background: #555555;
 	border: 0;
 	border-radius: 3px;
@@ -58,15 +91,15 @@ tr:nth-child(2n+3) {
 }
 
 #bottom-p form input[type="submit"] {
-	position: relative;
-	width: 5%;
-	height: 40px;
-	left: 35%;
-	top: 30px;
+	position: absolute;
+	width: 10%;
+	top: 70%;
+	right: 20%;
 	background: #555555;
 	border: 0;
 	border-radius: 3px;
 	color: white;
+	height: 40px;
 	cursor: pointer;
 	transition: background 0.3s ease-in-out;
 }
