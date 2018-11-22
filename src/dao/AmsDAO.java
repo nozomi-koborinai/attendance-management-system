@@ -868,14 +868,17 @@ public class AmsDAO {
 
 	}
 
-	//出席情報取得(テスト段階)
-	public static ArrayList<AttendanceInfo> getAttendanceInformation(){
+	//出席情報取得
+	public static ArrayList<AttendanceInfo> getAttendanceInformation(String date){
 
 		ArrayList<AttendanceInfo> attendanceInfoList = new ArrayList<AttendanceInfo>();
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+
+		//set用
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy'年'MM'月'dd'日'");
 
 		try{
 
@@ -890,25 +893,25 @@ public class AmsDAO {
 					+ " FROM students s"
 					+ " LEFT JOIN attendance_information ai"
 					+ " ON s.s_number = ai.s_number"
-					+ " AND ai.date LIKE '2018年11月20日%'";
+					+ " AND ai.date LIKE ?";
 
 			pstmt = con.prepareStatement(sql);
+			String dt = date;
+			pstmt.setString(1, sdf.format(sdf.parse(dt)) + "%");
 			rs = pstmt.executeQuery();
 
 			while(rs.next() == true){
 				String name = rs.getString("s.s_name");
-				String date = rs.getString("ai.date");
+				String daTe = rs.getString("ai.date");
 				int time = rs.getInt("ai.time");
 				String info = rs.getString("ai.info");
 				int absence = rs.getInt("s.absence");
 				int late = rs.getInt("s.late");
 				int flag = rs.getInt("s.public_flag");
 
-				attendanceInfoList.add(new AttendanceInfo(name, date, time, info, absence, late, 100, flag));
+				attendanceInfoList.add(new AttendanceInfo(name, daTe, time, info, absence, late, 100, flag));
 			}
 
-		} catch(MySQLIntegrityConstraintViolationException e){
-			Login.error = 1;		//同じコース名を入力した場合
 		} catch (SQLException se){
 			se.printStackTrace();
 		} catch (Exception e){
