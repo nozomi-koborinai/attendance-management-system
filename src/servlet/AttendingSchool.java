@@ -79,7 +79,7 @@ public class AttendingSchool extends HttpServlet {
 				//フラグにフォワードなしを設定
 				fFlag = 0;
 
-			} else if(nowTime.compareTo(sdf.format(sdf.parse(jikan.getStartTime1()))) < 0){
+			} else if(nowTime.compareTo(sdf.format(sdf.parse(jikan.getStartLateTime1()))) < 0){
 				System.out.println("1時間目から出席です。\n1時間目～3時間目を〇とします。");
 				//学籍番号を基に出席情報をデータベースへ追加
 				AmsDAO.addToAttendance(barcodeData, sdf2.format(date), 1, as.getAttendance());
@@ -95,7 +95,7 @@ public class AttendingSchool extends HttpServlet {
 				AmsDAO.addToAttendance(barcodeData, sdf2.format(date), 3, as.getAttendance());
 				request.setAttribute("studentData", AmsDAO.getStudent(barcodeData));
 
-			} else if(nowTime.compareTo(sdf.format(sdf.parse(jikan.getStartTime2()))) < 0){
+			} else if(nowTime.compareTo(sdf.format(sdf.parse(jikan.getStartLateTime2()))) < 0){
 				System.out.println("2時間目からの出席です。\n1時間目を欠、2時間目～3時間目を〇とします。");
 				//学籍番号を基に出席情報をデータベースへ追加
 				AmsDAO.addToAttendance(barcodeData, sdf2.format(date), 2, as.getAttendance());
@@ -109,7 +109,7 @@ public class AttendingSchool extends HttpServlet {
 				AmsDAO.addToAttendance(barcodeData, sdf2.format(date), 3, as.getAttendance());
 				request.setAttribute("studentData", AmsDAO.getStudent(barcodeData));
 
-			} else if(nowTime.compareTo(sdf.format(sdf.parse(jikan.getStartTime3()))) < 0){
+			} else if(nowTime.compareTo(sdf.format(sdf.parse(jikan.getStartLateTime3()))) < 0){
 				System.out.println("3時間目からの出席です。\n1時間目～2時間目を欠、3時間目を〇とします。");
 				//学籍番号を基に出席情報をデータベースへ追加
 				AmsDAO.addToAttendance(barcodeData, sdf2.format(date), 3, as.getAttendance());
@@ -135,7 +135,7 @@ public class AttendingSchool extends HttpServlet {
 				//フラグにフォワードなしを設定
 				fFlag = 0;
 
-			} else if(nowTime.compareTo(sdf.format(sdf.parse(jikan.getStartTime4()))) < 0){
+			} else if(nowTime.compareTo(sdf.format(sdf.parse(jikan.getStartLateTime4()))) < 0){
 				System.out.println("4時間目出席です。\n1時間目から3時間目を欠、4時間目～6時間目を〇にします。");
 				//学籍番号を基に出席情報をデータベースへ追加
 				AmsDAO.addToAttendance(barcodeData, sdf2.format(date), 4, as.getAttendance());
@@ -151,7 +151,7 @@ public class AttendingSchool extends HttpServlet {
 				AmsDAO.addToAttendance(barcodeData, sdf2.format(date), 6, as.getAttendance());
 				request.setAttribute("studentData", AmsDAO.getStudent(barcodeData));
 
-			} else if(nowTime.compareTo(sdf.format(sdf.parse(jikan.getStartTime5()))) < 0){
+			} else if(nowTime.compareTo(sdf.format(sdf.parse(jikan.getStartLateTime5()))) < 0){
 				System.out.println("5時間目からの出席です。\n1時間目から3時間目を欠、4時間目を欠、5時間目～6時間目を〇とします。");
 				//学籍番号を基に出席情報をデータベースへ追加
 				AmsDAO.addToAttendance(barcodeData, sdf2.format(date), 5, as.getAttendance());
@@ -165,7 +165,7 @@ public class AttendingSchool extends HttpServlet {
 				AmsDAO.addToAttendance(barcodeData, sdf2.format(date), 6, as.getAttendance());
 				request.setAttribute("studentData", AmsDAO.getStudent(barcodeData));
 
-			} else if(nowTime.compareTo(sdf.format(sdf.parse(jikan.getStartTime6()))) < 0){
+			} else if(nowTime.compareTo(sdf.format(sdf.parse(jikan.getStartLateTime6()))) < 0){
 				System.out.println("6時間目から出席です。\n1時間目～5時間目を欠、6時間目を〇とします。");
 				//学籍番号を基に出席情報をデータベースへ追加
 				AmsDAO.addToAttendance(barcodeData, sdf2.format(date), 6, as.getAttendance());
