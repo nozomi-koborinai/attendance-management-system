@@ -78,6 +78,8 @@ if(day == 1){
 Calendar cl = Calendar.getInstance();
 //日付フォーマットの定義
 SimpleDateFormat sdf = new SimpleDateFormat("MM'月'dd'日'");
+//ユーザの出席情報を表示したかのフラグ
+int flag = 0;
 
 cl.setTime(date);
 %>
@@ -244,627 +246,9 @@ cl.setTime(date);
 				<td>出席率</td>
 				<td>公欠申請</td>
 			</tr>
-			<%-- ココから下は見栄え用 --%>
-			<%if(day == 1){%>
-			<%for(int i = 0; i < attendanceList.size(); i++){ %>
-			<tr>
-			<tr align="center">
-				<td><%=attendanceList.get(i).getName()%></td>
-
-				<%if(attendanceList.get(i).getDate() == null){%>
-				<%for(int j = 1; j <= 6; j++){ %>
-				<td>欠</td>
-				<% }%>
-				<% }else { %>
-
-				<% if(attendanceList.get(i).getTime() == 1){%>
-				<td><%=attendanceList.get(i).getInfo() %></td>
-				<% if(attendanceList.get(i + 1).getTime() == 2){ %>
-				<td><%=attendanceList.get(i + 1).getInfo() %></td>
-				<%i++; %>
-				<% if(attendanceList.get(i + 1).getTime() == 3) {%>
-				<td><%=attendanceList.get(i + 1).getInfo() %></td>
-				<%i++; %>
-				<% if(attendanceList.get(i + 1).getTime() == 4) {%>
-				<td><%=attendanceList.get(i + 1).getInfo() %></td>
-				<%i++; %>
-				<% if(attendanceList.get(i + 1).getTime() == 5) {%>
-				<td><%=attendanceList.get(i + 1).getInfo() %></td>
-				<%i++; %>
-				<% if(attendanceList.get(i + 1).getTime() == 6) {%>
-				<td><%=attendanceList.get(i + 1).getInfo() %></td>
-				<%i++; %>
-				<%} %>
-				<%} %>
-				<%} %>
-				<%} %>
-				<%} %>
-				<%} else {%>
-				<td>欠</td>
-				<%} %>
-
-				<% if(attendanceList.get(i).getTime() == 2){ %>
-				<td><%=attendanceList.get(i).getInfo() %></td>
-				<% if(attendanceList.get(i + 1).getTime() == 3) {%>
-				<td><%=attendanceList.get(i + 1).getInfo() %></td>
-				<%i++; %>
-				<% if(attendanceList.get(i + 1).getTime() == 4) {%>
-				<td><%=attendanceList.get(i + 1).getInfo() %></td>
-				<%i++; %>
-				<% if(attendanceList.get(i + 1).getTime() == 5) {%>
-				<td><%=attendanceList.get(i + 1).getInfo() %></td>
-				<%i++; %>
-				<% if(attendanceList.get(i + 1).getTime() == 6) {%>
-				<td><%=attendanceList.get(i + 1).getInfo() %></td>
-				<%i++; %>
-				<%} %>
-				<%} %>
-				<%} %>
-				<%} %>
-				<%} else {%>
-				<td>欠</td>
-				<%} %>
-
-				<% if(attendanceList.get(i).getTime() == 3) {%>
-				<td><%=attendanceList.get(i).getInfo() %></td>
-				<% if(attendanceList.get(i + 1).getTime() == 4) {%>
-				<td><%=attendanceList.get(i + 1).getInfo() %></td>
-				<%i++; %>
-				<% if(attendanceList.get(i + 1).getTime() == 5) {%>
-				<td><%=attendanceList.get(i + 1).getInfo() %></td>
-				<%i++; %>
-				<% if(attendanceList.get(i + 1).getTime() == 6) {%>
-				<td><%=attendanceList.get(i + 1).getInfo() %></td>
-				<%i++; %>
-				<%} %>
-				<%} %>
-				<%} %>
-				<%} else {%>
-				<td>欠</td>
-				<%} %>
-
-				<% if(attendanceList.get(i).getTime() == 4) {%>
-				<td><%=attendanceList.get(i).getInfo() %></td>
-				<% if(attendanceList.get(i + 1).getTime() == 5) {%>
-				<td><%=attendanceList.get(i + 1).getInfo() %></td>
-				<%i++; %>
-				<% if(attendanceList.get(i + 1).getTime() == 6) {%>
-				<td><%=attendanceList.get(i + 1).getInfo() %></td>
-				<%i++; %>
-				<%} %>
-				<%} %>
-				<%} else {%>
-				<td>欠</td>
-				<%} %>
-
-				<% if(attendanceList.get(i).getTime() == 5) {%>
-				<td><%=attendanceList.get(i).getInfo() %></td>
-				<% if(attendanceList.get(i + 1).getTime() == 6) {%>
-				<td><%=attendanceList.get(i + 1).getInfo() %></td>
-				<%i++; %>
-				<%} %>
-				<%} else {%>
-				<td>欠</td>
-				<%} %>
-
-				<% if(attendanceList.get(i).getTime() == 6){%>
-				<td><%=attendanceList.get(i).getInfo() %></td>
-				<%} else {%>
-				<td>欠</td>
-				<%} %>
-
-				<td>/</td>
-				<td>/</td>
-				<td>/</td>
-				<td>/</td>
-				<td>/</td>
-				<td>/</td>
-				<td>/</td>
-				<td>/</td>
-				<td>/</td>
-				<td>/</td>
-				<td>/</td>
-				<td>/</td>
-				<td>/</td>
-				<td>/</td>
-				<td>/</td>
-				<td>/</td>
-				<td>/</td>
-				<td>/</td>
-				<td>/</td>
-				<td>/</td>
-				<td>/</td>
-				<td>/</td>
-				<td>/</td>
-				<td>0</td>
-				<td>0</td>
-				<td>100%</td>
-				<td>公欠申請なし</td>
-			</tr>
-			<tr>
-				<%} %>
-				<%} %>
-
-
-
-				<%} else if(day == 2){%>
+			<%-- ココから下はログイン時刻によってどの曜日を取得するか決定 --%>
+			<%if(day == 1){ %>
 				<%for(int i = 0; i < attendanceList.size(); i++){ %>
-
-			<tr>
-			<tr align="center">
-				<td><%=attendanceList.get(i).getName()%></td>
-
-				<%if(attendanceList.get(i).getDate() == null){%>
-				<%for(int j = 1; j <= 6; j++){ %>
-				<td>欠</td>
-				<% }%>
-				<% }else { %>
-
-				<% if(attendanceList.get(i).getTime() == 1){%>
-				<td><%=attendanceList.get(i).getInfo() %></td>
-				<% if(attendanceList.get(i + 1).getTime() == 2){ %>
-				<td><%=attendanceList.get(i + 1).getInfo() %></td>
-				<%i++; %>
-				<% if(attendanceList.get(i + 1).getTime() == 3) {%>
-				<td><%=attendanceList.get(i + 1).getInfo() %></td>
-				<%i++; %>
-				<% if(attendanceList.get(i + 1).getTime() == 4) {%>
-				<td><%=attendanceList.get(i + 1).getInfo() %></td>
-				<%i++; %>
-				<% if(attendanceList.get(i + 1).getTime() == 5) {%>
-				<td><%=attendanceList.get(i + 1).getInfo() %></td>
-				<%i++; %>
-				<% if(attendanceList.get(i + 1).getTime() == 6) {%>
-				<td><%=attendanceList.get(i + 1).getInfo() %></td>
-				<%i++; %>
-				<%} %>
-				<%} %>
-				<%} %>
-				<%} %>
-				<%} %>
-				<%} else {%>
-				<td>欠</td>
-				<%} %>
-
-				<% if(attendanceList.get(i).getTime() == 2){ %>
-				<td><%=attendanceList.get(i).getInfo() %></td>
-				<% if(attendanceList.get(i + 1).getTime() == 3) {%>
-				<td><%=attendanceList.get(i + 1).getInfo() %></td>
-				<%i++; %>
-				<% if(attendanceList.get(i + 1).getTime() == 4) {%>
-				<td><%=attendanceList.get(i + 1).getInfo() %></td>
-				<%i++; %>
-				<% if(attendanceList.get(i + 1).getTime() == 5) {%>
-				<td><%=attendanceList.get(i + 1).getInfo() %></td>
-				<%i++; %>
-				<% if(attendanceList.get(i + 1).getTime() == 6) {%>
-				<td><%=attendanceList.get(i + 1).getInfo() %></td>
-				<%i++; %>
-				<%} %>
-				<%} %>
-				<%} %>
-				<%} %>
-				<%} else {%>
-				<td>欠</td>
-				<%} %>
-
-				<% if(attendanceList.get(i).getTime() == 3) {%>
-				<td><%=attendanceList.get(i).getInfo() %></td>
-				<% if(attendanceList.get(i + 1).getTime() == 4) {%>
-				<td><%=attendanceList.get(i + 1).getInfo() %></td>
-				<%i++; %>
-				<% if(attendanceList.get(i + 1).getTime() == 5) {%>
-				<td><%=attendanceList.get(i + 1).getInfo() %></td>
-				<%i++; %>
-				<% if(attendanceList.get(i + 1).getTime() == 6) {%>
-				<td><%=attendanceList.get(i + 1).getInfo() %></td>
-				<%i++; %>
-				<%} %>
-				<%} %>
-				<%} %>
-				<%} else {%>
-				<td>欠</td>
-				<%} %>
-
-				<% if(attendanceList.get(i).getTime() == 4) {%>
-				<td><%=attendanceList.get(i).getInfo() %></td>
-				<% if(attendanceList.get(i + 1).getTime() == 5) {%>
-				<td><%=attendanceList.get(i + 1).getInfo() %></td>
-				<%i++; %>
-				<% if(attendanceList.get(i + 1).getTime() == 6) {%>
-				<td><%=attendanceList.get(i + 1).getInfo() %></td>
-				<%i++; %>
-				<%} %>
-				<%} %>
-				<%} else {%>
-				<td>欠</td>
-				<%} %>
-
-				<% if(attendanceList.get(i).getTime() == 5) {%>
-				<td><%=attendanceList.get(i).getInfo() %></td>
-				<% if(attendanceList.get(i + 1).getTime() == 6) {%>
-				<td><%=attendanceList.get(i + 1).getInfo() %></td>
-				<%i++; %>
-				<%} %>
-				<%} else {%>
-				<td>欠</td>
-				<%} %>
-
-				<% if(attendanceList.get(i).getTime() == 6){%>
-				<td><%=attendanceList.get(i).getInfo() %></td>
-				<%} else {%>
-				<td>欠</td>
-				<%} %>
-
-
-				<%if(attendanceList2.get(i).getDate() == null){%>
-				<%for(int j = 1; j <= 6; j++){ %>
-				<td>欠</td>
-				<% }%>
-				<% }else { %>
-
-				<% if(attendanceList2.get(i).getTime() == 1){%>
-				<td><%=attendanceList2.get(i).getInfo() %></td>
-				<% if(attendanceList2.get(i + 1).getTime() == 2){ %>
-				<td><%=attendanceList2.get(i + 1).getInfo() %></td>
-				<%i++; %>
-				<% if(attendanceList2.get(i + 1).getTime() == 3) {%>
-				<td><%=attendanceList2.get(i + 1).getInfo() %></td>
-				<%i++; %>
-				<% if(attendanceList2.get(i + 1).getTime() == 4) {%>
-				<td><%=attendanceList2.get(i + 1).getInfo() %></td>
-				<%i++; %>
-				<% if(attendanceList2.get(i + 1).getTime() == 5) {%>
-				<td><%=attendanceList2.get(i + 1).getInfo() %></td>
-				<%i++; %>
-				<% if(attendanceList2.get(i + 1).getTime() == 6) {%>
-				<td><%=attendanceList2.get(i + 1).getInfo() %></td>
-				<%i++; %>
-				<%} %>
-				<%} %>
-				<%} %>
-				<%} %>
-				<%} %>
-				<%} else {%>
-				<td>欠</td>
-				<%} %>
-
-				<% if(attendanceList2.get(i).getTime() == 2){ %>
-				<td><%=attendanceList2.get(i).getInfo() %></td>
-				<% if(attendanceList2.get(i + 1).getTime() == 3) {%>
-				<td><%=attendanceList2.get(i + 1).getInfo() %></td>
-				<%i++; %>
-				<% if(attendanceList2.get(i + 1).getTime() == 4) {%>
-				<td><%=attendanceList2.get(i + 1).getInfo() %></td>
-				<%i++; %>
-				<% if(attendanceList2.get(i + 1).getTime() == 5) {%>
-				<td><%=attendanceList2.get(i + 1).getInfo() %></td>
-				<%i++; %>
-				<% if(attendanceList2.get(i + 1).getTime() == 6) {%>
-				<td><%=attendanceList2.get(i + 1).getInfo() %></td>
-				<%i++; %>
-				<%} %>
-				<%} %>
-				<%} %>
-				<%} %>
-				<%} else {%>
-				<td>欠</td>
-				<%} %>
-
-				<% if(attendanceList2.get(i).getTime() == 3) {%>
-				<td><%=attendanceList2.get(i).getInfo() %></td>
-				<% if(attendanceList2.get(i + 1).getTime() == 4) {%>
-				<td><%=attendanceList2.get(i + 1).getInfo() %></td>
-				<%i++; %>
-				<% if(attendanceList2.get(i + 1).getTime() == 5) {%>
-				<td><%=attendanceList2.get(i + 1).getInfo() %></td>
-				<%i++; %>
-				<% if(attendanceList2.get(i + 1).getTime() == 6) {%>
-				<td><%=attendanceList2.get(i + 1).getInfo() %></td>
-				<%i++; %>
-				<%} %>
-				<%} %>
-				<%} %>
-				<%} else {%>
-				<td>欠</td>
-				<%} %>
-
-				<% if(attendanceList2.get(i).getTime() == 4) {%>
-				<td><%=attendanceList2.get(i).getInfo() %></td>
-				<% if(attendanceList2.get(i + 1).getTime() == 5) {%>
-				<td><%=attendanceList2.get(i + 1).getInfo() %></td>
-				<%i++; %>
-				<% if(attendanceList2.get(i + 1).getTime() == 6) {%>
-				<td><%=attendanceList2.get(i + 1).getInfo() %></td>
-				<%i++; %>
-				<%} %>
-				<%} %>
-				<%} else {%>
-				<td>欠</td>
-				<%} %>
-
-				<% if(attendanceList2.get(i).getTime() == 5) {%>
-				<td><%=attendanceList2.get(i).getInfo() %></td>
-				<% if(attendanceList2.get(i + 1).getTime() == 6) {%>
-				<td><%=attendanceList2.get(i + 1).getInfo() %></td>
-				<%i++; %>
-				<%} %>
-				<%} else {%>
-				<td>欠</td>
-				<%} %>
-
-				<% if(attendanceList2.get(i).getTime() == 6){%>
-				<td><%=attendanceList2.get(i).getInfo() %></td>
-				<%} else {%>
-				<td>欠</td>
-				<%} %>
-
-				<td>/</td>
-				<td>/</td>
-				<td>/</td>
-				<td>/</td>
-				<td>/</td>
-				<td>/</td>
-				<td>/</td>
-				<td>/</td>
-				<td>/</td>
-				<td>/</td>
-				<td>/</td>
-				<td>/</td>
-				<td>/</td>
-				<td>/</td>
-				<td>/</td>
-				<td>/</td>
-				<td>/</td>
-				<td>0</td>
-				<td>0</td>
-				<td>100%</td>
-				<td>公欠申請なし</td>
-			</tr>
-			<tr>
-				<%} %>
-				<%} %>
-				<%} %>
-
-				<%} else if(day == 3){ %>
-				<%for(int i = 0; i < attendanceList.size(); i++){ %>
-
-			<tr>
-			<tr align="center">
-				<td><%=attendanceList.get(i).getName()%></td>
-
-				<%if(attendanceList.get(i).getDate() == null){%>
-				<%for(int j = 1; j <= 6; j++){ %>
-				<td>欠</td>
-				<% }%>
-				<% }else { %>
-
-				<% if(attendanceList.get(i).getTime() == 1){%>
-				<td><%=attendanceList.get(i).getInfo() %></td>
-				<% if(attendanceList.get(i + 1).getTime() == 2){ %>
-				<td><%=attendanceList.get(i + 1).getInfo() %></td>
-				<%i++; %>
-				<% if(attendanceList.get(i + 1).getTime() == 3) {%>
-				<td><%=attendanceList.get(i + 1).getInfo() %></td>
-				<%i++; %>
-				<% if(attendanceList.get(i + 1).getTime() == 4) {%>
-				<td><%=attendanceList.get(i + 1).getInfo() %></td>
-				<%i++; %>
-				<% if(attendanceList.get(i + 1).getTime() == 5) {%>
-				<td><%=attendanceList.get(i + 1).getInfo() %></td>
-				<%i++; %>
-				<% if(attendanceList.get(i + 1).getTime() == 6) {%>
-				<td><%=attendanceList.get(i + 1).getInfo() %></td>
-				<%i++; %>
-				<%} %>
-				<%} %>
-				<%} %>
-				<%} %>
-				<%} %>
-				<%} else {%>
-				<td>欠</td>
-				<%} %>
-
-				<% if(attendanceList.get(i).getTime() == 2){ %>
-				<td><%=attendanceList.get(i).getInfo() %></td>
-				<% if(attendanceList.get(i + 1).getTime() == 3) {%>
-				<td><%=attendanceList.get(i + 1).getInfo() %></td>
-				<%i++; %>
-				<% if(attendanceList.get(i + 1).getTime() == 4) {%>
-				<td><%=attendanceList.get(i + 1).getInfo() %></td>
-				<%i++; %>
-				<% if(attendanceList.get(i + 1).getTime() == 5) {%>
-				<td><%=attendanceList.get(i + 1).getInfo() %></td>
-				<%i++; %>
-				<% if(attendanceList.get(i + 1).getTime() == 6) {%>
-				<td><%=attendanceList.get(i + 1).getInfo() %></td>
-				<%i++; %>
-				<%} %>
-				<%} %>
-				<%} %>
-				<%} %>
-				<%} else {%>
-				<td>欠</td>
-				<%} %>
-
-				<% if(attendanceList.get(i).getTime() == 3) {%>
-				<td><%=attendanceList.get(i).getInfo() %></td>
-				<% if(attendanceList.get(i + 1).getTime() == 4) {%>
-				<td><%=attendanceList.get(i + 1).getInfo() %></td>
-				<%i++; %>
-				<% if(attendanceList.get(i + 1).getTime() == 5) {%>
-				<td><%=attendanceList.get(i + 1).getInfo() %></td>
-				<%i++; %>
-				<% if(attendanceList.get(i + 1).getTime() == 6) {%>
-				<td><%=attendanceList.get(i + 1).getInfo() %></td>
-				<%i++; %>
-				<%} %>
-				<%} %>
-				<%} %>
-				<%} else {%>
-				<td>欠</td>
-				<%} %>
-
-				<% if(attendanceList.get(i).getTime() == 4) {%>
-				<td><%=attendanceList.get(i).getInfo() %></td>
-				<% if(attendanceList.get(i + 1).getTime() == 5) {%>
-				<td><%=attendanceList.get(i + 1).getInfo() %></td>
-				<%i++; %>
-				<% if(attendanceList.get(i + 1).getTime() == 6) {%>
-				<td><%=attendanceList.get(i + 1).getInfo() %></td>
-				<%i++; %>
-				<%} %>
-				<%} %>
-				<%} else {%>
-				<td>欠</td>
-				<%} %>
-
-				<% if(attendanceList.get(i).getTime() == 5) {%>
-				<td><%=attendanceList.get(i).getInfo() %></td>
-				<% if(attendanceList.get(i + 1).getTime() == 6) {%>
-				<td><%=attendanceList.get(i + 1).getInfo() %></td>
-				<%i++; %>
-				<%} %>
-				<%} else {%>
-				<td>欠</td>
-				<%} %>
-
-				<% if(attendanceList.get(i).getTime() == 6){%>
-				<td><%=attendanceList.get(i).getInfo() %></td>
-				<%} else {%>
-				<td>欠</td>
-				<%} %>
-
-
-				<%if(attendanceList2.get(i).getDate() == null){%>
-				<%for(int j = 1; j <= 6; j++){ %>
-				<td>欠</td>
-				<% }%>
-				<% }else { %>
-
-				<% if(attendanceList2.get(i).getTime() == 1){%>
-				<td><%=attendanceList2.get(i).getInfo() %></td>
-				<% if(attendanceList2.get(i + 1).getTime() == 2){ %>
-				<td><%=attendanceList2.get(i + 1).getInfo() %></td>
-				<%i++; %>
-				<% if(attendanceList2.get(i + 1).getTime() == 3) {%>
-				<td><%=attendanceList2.get(i + 1).getInfo() %></td>
-				<%i++; %>
-				<% if(attendanceList2.get(i + 1).getTime() == 4) {%>
-				<td><%=attendanceList2.get(i + 1).getInfo() %></td>
-				<%i++; %>
-				<% if(attendanceList2.get(i + 1).getTime() == 5) {%>
-				<td><%=attendanceList2.get(i + 1).getInfo() %></td>
-				<%i++; %>
-				<% if(attendanceList2.get(i + 1).getTime() == 6) {%>
-				<td><%=attendanceList2.get(i + 1).getInfo() %></td>
-				<%i++; %>
-				<%} %>
-				<%} %>
-				<%} %>
-				<%} %>
-				<%} %>
-				<%} else {%>
-				<td>欠</td>
-				<%} %>
-
-				<% if(attendanceList2.get(i).getTime() == 2){ %>
-				<td><%=attendanceList2.get(i).getInfo() %></td>
-				<% if(attendanceList2.get(i + 1).getTime() == 3) {%>
-				<td><%=attendanceList2.get(i + 1).getInfo() %></td>
-				<%i++; %>
-				<% if(attendanceList2.get(i + 1).getTime() == 4) {%>
-				<td><%=attendanceList2.get(i + 1).getInfo() %></td>
-				<%i++; %>
-				<% if(attendanceList2.get(i + 1).getTime() == 5) {%>
-				<td><%=attendanceList2.get(i + 1).getInfo() %></td>
-				<%i++; %>
-				<% if(attendanceList2.get(i + 1).getTime() == 6) {%>
-				<td><%=attendanceList2.get(i + 1).getInfo() %></td>
-				<%i++; %>
-				<%} %>
-				<%} %>
-				<%} %>
-				<%} %>
-				<%} else {%>
-				<td>欠</td>
-				<%} %>
-
-				<% if(attendanceList2.get(i).getTime() == 3) {%>
-				<td><%=attendanceList2.get(i).getInfo() %></td>
-				<% if(attendanceList2.get(i + 1).getTime() == 4) {%>
-				<td><%=attendanceList2.get(i + 1).getInfo() %></td>
-				<%i++; %>
-				<% if(attendanceList2.get(i + 1).getTime() == 5) {%>
-				<td><%=attendanceList2.get(i + 1).getInfo() %></td>
-				<%i++; %>
-				<% if(attendanceList2.get(i + 1).getTime() == 6) {%>
-				<td><%=attendanceList2.get(i + 1).getInfo() %></td>
-				<%i++; %>
-				<%} %>
-				<%} %>
-				<%} %>
-				<%} else {%>
-				<td>欠</td>
-				<%} %>
-
-				<% if(attendanceList2.get(i).getTime() == 4) {%>
-				<td><%=attendanceList2.get(i).getInfo() %></td>
-				<% if(attendanceList2.get(i + 1).getTime() == 5) {%>
-				<td><%=attendanceList2.get(i + 1).getInfo() %></td>
-				<%i++; %>
-				<% if(attendanceList2.get(i + 1).getTime() == 6) {%>
-				<td><%=attendanceList2.get(i + 1).getInfo() %></td>
-				<%i++; %>
-				<%} %>
-				<%} %>
-				<%} else {%>
-				<td>欠</td>
-				<%} %>
-
-				<% if(attendanceList2.get(i).getTime() == 5) {%>
-				<td><%=attendanceList2.get(i).getInfo() %></td>
-				<% if(attendanceList2.get(i + 1).getTime() == 6) {%>
-				<td><%=attendanceList2.get(i + 1).getInfo() %></td>
-				<%i++; %>
-				<%} %>
-				<%} else {%>
-				<td>欠</td>
-				<%} %>
-
-				<% if(attendanceList2.get(i).getTime() == 6){%>
-				<td><%=attendanceList2.get(i).getInfo() %></td>
-				<%} else {%>
-				<td>欠</td>
-				<%} %>
-
-
-
-
-
-				<td>/</td>
-				<td>/</td>
-				<td>/</td>
-				<td>/</td>
-				<td>/</td>
-				<td>/</td>
-				<td>/</td>
-				<td>/</td>
-				<td>/</td>
-				<td>/</td>
-				<td>/</td>
-				<td>0</td>
-				<td>0</td>
-				<td>100%</td>
-				<td>公欠申請なし</td>
-			</tr>
-			<tr>
-				<%} %>
-				<%} %>
-				<%} %>
-
-				<%} else if(day == 4){ %>
-				<%for(int i = 0, k = 0, l = 0, m = 0; i < 20; ){ %>
 
 			<tr>
 			<tr align="center">
@@ -875,345 +259,2964 @@ cl.setTime(date);
 				<%if(attendanceList.get(i).getDate() == null){%>
 				<%for(int j = 1; j <= 6; j++){ %>
 				<td>欠</td>
+				<%flag = 10; %>
 				<% }%>
 				<% }else { %>
 
 				<% if(attendanceList.get(i).getTime() == 1){%>
 				<td><%=attendanceList.get(i).getInfo() %></td>
+				<%flag = 1; %>
+
+				<% if(i < attendanceList.size() -1){ %>
 				<% if(attendanceList.get(i + 1).getTime() == 2){ %>
 				<td><%=attendanceList.get(i + 1).getInfo() %></td>
-				<%i++; %>
+				<%i++;%>
+				<%flag = 2; %>
+				<%} %>
+
 				<% if(attendanceList.get(i + 1).getTime() == 3) {%>
 				<td><%=attendanceList.get(i + 1).getInfo() %></td>
 				<%i++; %>
+				<%flag = 3; %>
+
 				<% if(attendanceList.get(i + 1).getTime() == 4) {%>
 				<td><%=attendanceList.get(i + 1).getInfo() %></td>
 				<%i++; %>
+				<%flag = 4; %>
+
 				<% if(attendanceList.get(i + 1).getTime() == 5) {%>
 				<td><%=attendanceList.get(i + 1).getInfo() %></td>
 				<%i++; %>
+				<%flag = 5; %>
+
 				<% if(attendanceList.get(i + 1).getTime() == 6) {%>
 				<td><%=attendanceList.get(i + 1).getInfo() %></td>
 				<%i++; %>
+				<%flag = 6; %>
+
 				<%} %>
 				<%} %>
 				<%} %>
 				<%} %>
-				<%} else { %>
-				<td>欠</td>
-				<td>欠</td>
-				<td>欠</td>
-				<td>欠</td>
-				<td>欠</td>
 				<%} %>
 				<%} else {%>
 				<td>欠</td>
+				<%flag = 10; %>
+
 				<%} %>
 
+				<% if(flag == 0 || flag == 1 || flag == 10){ {%>
 				<% if(attendanceList.get(i).getTime() == 2){ %>
 				<td><%=attendanceList.get(i).getInfo() %></td>
+				<%flag = 2; %>
+
+				<% if(i < attendanceList.size() -1){ %>
 				<% if(attendanceList.get(i + 1).getTime() == 3) {%>
 				<td><%=attendanceList.get(i + 1).getInfo() %></td>
 				<%i++; %>
+				<%flag = 3; %>
+				<%} %>
+
 				<% if(attendanceList.get(i + 1).getTime() == 4) {%>
 				<td><%=attendanceList.get(i + 1).getInfo() %></td>
 				<%i++; %>
+				<%flag = 4; %>
+
 				<% if(attendanceList.get(i + 1).getTime() == 5) {%>
 				<td><%=attendanceList.get(i + 1).getInfo() %></td>
 				<%i++; %>
+				<%flag = 5; %>
+
 				<% if(attendanceList.get(i + 1).getTime() == 6) {%>
 				<td><%=attendanceList.get(i + 1).getInfo() %></td>
 				<%i++; %>
+				<%flag = 6; %>
+
 				<%} %>
 				<%} %>
 				<%} %>
 				<%} %>
 				<%} else {%>
 				<td>欠</td>
+				<%flag = 10; %>
+
+				<%} %>
+				<%} %>
 				<%} %>
 
+				<%if(flag == 0 || flag == 2 || flag == 10){ %>
 				<% if(attendanceList.get(i).getTime() == 3) {%>
 				<td><%=attendanceList.get(i).getInfo() %></td>
+				<%flag = 3; %>
+
+				<% if(i < attendanceList.size() -1){ %>
 				<% if(attendanceList.get(i + 1).getTime() == 4) {%>
 				<td><%=attendanceList.get(i + 1).getInfo() %></td>
 				<%i++; %>
+				<%flag = 4; %>
+				<%} %>
+
 				<% if(attendanceList.get(i + 1).getTime() == 5) {%>
 				<td><%=attendanceList.get(i + 1).getInfo() %></td>
 				<%i++; %>
+				<%flag = 5; %>
+
 				<% if(attendanceList.get(i + 1).getTime() == 6) {%>
 				<td><%=attendanceList.get(i + 1).getInfo() %></td>
 				<%i++; %>
+				<%flag = 6; %>
+
 				<%} %>
 				<%} %>
 				<%} %>
 				<%} else {%>
 				<td>欠</td>
+				<%flag = 10; %>
+
+				<%} %>
 				<%} %>
 
+				<%if(flag == 0 || flag == 3 || flag == 10){ %>
 				<% if(attendanceList.get(i).getTime() == 4) {%>
 				<td><%=attendanceList.get(i).getInfo() %></td>
+				<%flag = 4; %>
+
+
+				<% if(i < attendanceList.size() -1){ %>
 				<% if(attendanceList.get(i + 1).getTime() == 5) {%>
 				<td><%=attendanceList.get(i + 1).getInfo() %></td>
 				<%i++; %>
+				<%flag = 5; %>
+				<%} %>
+
 				<% if(attendanceList.get(i + 1).getTime() == 6) {%>
 				<td><%=attendanceList.get(i + 1).getInfo() %></td>
 				<%i++; %>
+				<%flag = 6; %>
+
 				<%} %>
 				<%} %>
 				<%} else {%>
 				<td>欠</td>
+				<%flag = 10; %>
+
+				<%} %>
 				<%} %>
 
+				<%if(flag == 0 || flag == 4 || flag == 10){ %>
 				<% if(attendanceList.get(i).getTime() == 5) {%>
 				<td><%=attendanceList.get(i).getInfo() %></td>
+				<%flag = 5; %>
+
+				<% if(i < attendanceList.size() -1){ %>
 				<% if(attendanceList.get(i + 1).getTime() == 6) {%>
 				<td><%=attendanceList.get(i + 1).getInfo() %></td>
 				<%i++; %>
+				<%flag = 6; %>
+				<%} %>
+
 				<%} %>
 				<%} else {%>
 				<td>欠</td>
+				<%flag = 10; %>
+
+				<%} %>
 				<%} %>
 
+
+				<%if(flag == 0 || flag == 5 || flag == 10){ %>
 				<% if(attendanceList.get(i).getTime() == 6){%>
 				<td><%=attendanceList.get(i).getInfo() %></td>
+				<%flag = 6; %>
+
 				<%} else {%>
 				<td>欠</td>
+				<%flag = 10; %>
+
 				<%} %>
 
 				<%} %>
 				<%} %>
+				<%} %>
+				<%flag = 0; %>
+
+
+				<td>　</td>
+				<td>　</td>
+				<td>　</td>
+				<td>　</td>
+				<td>　</td>
+				<td>　</td>
+
+				<td>　</td>
+				<td>　</td>
+				<td>　</td>
+				<td>　</td>
+				<td>　</td>
+				<td>　</td>
+
+				<td>　</td>
+				<td>　</td>
+				<td>　</td>
+				<td>　</td>
+				<td>　</td>
+				<td>　</td>
+
+				<td>　</td>
+				<td>　</td>
+				<td>　</td>
+				<td>　</td>
+				<td>　</td>
+				<td>　</td>
+
+				<td>0</td>
+				<td>0</td>
+				<td>％</td>
+				<td>あり</td>
+
+
+
+			</tr>
+			<tr>
+				<% }%>
+
+
+
+				<%} else if(day == 2){ %>
+				<%for(int i = 0, k = 0; i < attendanceList.size(); i++, k++){ %>
+
+			<tr>
+			<tr align="center">
+
+				<%if(i < attendanceList.size()){ %>
+				<td><%=attendanceList.get(i).getName()%></td>
+
+				<%if(attendanceList.get(i).getDate() == null){%>
+				<%for(int j = 1; j <= 6; j++){ %>
+				<td>欠</td>
+				<%flag = 10; %>
+				<% }%>
+				<% }else { %>
+
+				<% if(attendanceList.get(i).getTime() == 1){%>
+				<td><%=attendanceList.get(i).getInfo() %></td>
+				<%flag = 1; %>
+
+				<% if(i < attendanceList.size() -1){ %>
+				<% if(attendanceList.get(i + 1).getTime() == 2){ %>
+				<td><%=attendanceList.get(i + 1).getInfo() %></td>
+				<%i++;%>
+				<%flag = 2; %>
+				<%} %>
+
+				<% if(attendanceList.get(i + 1).getTime() == 3) {%>
+				<td><%=attendanceList.get(i + 1).getInfo() %></td>
+				<%i++; %>
+				<%flag = 3; %>
+
+				<% if(attendanceList.get(i + 1).getTime() == 4) {%>
+				<td><%=attendanceList.get(i + 1).getInfo() %></td>
+				<%i++; %>
+				<%flag = 4; %>
+
+				<% if(attendanceList.get(i + 1).getTime() == 5) {%>
+				<td><%=attendanceList.get(i + 1).getInfo() %></td>
+				<%i++; %>
+				<%flag = 5; %>
+
+				<% if(attendanceList.get(i + 1).getTime() == 6) {%>
+				<td><%=attendanceList.get(i + 1).getInfo() %></td>
+				<%i++; %>
+				<%flag = 6; %>
+
+				<%} %>
+				<%} %>
+				<%} %>
+				<%} %>
+				<%} %>
+				<%} else {%>
+				<td>欠</td>
+				<%flag = 10; %>
+
+				<%} %>
+
+				<% if(flag == 0 || flag == 1 || flag == 10){ {%>
+				<% if(attendanceList.get(i).getTime() == 2){ %>
+				<td><%=attendanceList.get(i).getInfo() %></td>
+				<%flag = 2; %>
+
+				<% if(i < attendanceList.size() -1){ %>
+				<% if(attendanceList.get(i + 1).getTime() == 3) {%>
+				<td><%=attendanceList.get(i + 1).getInfo() %></td>
+				<%i++; %>
+				<%flag = 3; %>
+				<%} %>
+
+				<% if(attendanceList.get(i + 1).getTime() == 4) {%>
+				<td><%=attendanceList.get(i + 1).getInfo() %></td>
+				<%i++; %>
+				<%flag = 4; %>
+
+				<% if(attendanceList.get(i + 1).getTime() == 5) {%>
+				<td><%=attendanceList.get(i + 1).getInfo() %></td>
+				<%i++; %>
+				<%flag = 5; %>
+
+				<% if(attendanceList.get(i + 1).getTime() == 6) {%>
+				<td><%=attendanceList.get(i + 1).getInfo() %></td>
+				<%i++; %>
+				<%flag = 6; %>
+
+				<%} %>
+				<%} %>
+				<%} %>
+				<%} %>
+				<%} else {%>
+				<td>欠</td>
+				<%flag = 10; %>
+
+				<%} %>
+				<%} %>
+				<%} %>
+
+				<%if(flag == 0 || flag == 2 || flag == 10){ %>
+				<% if(attendanceList.get(i).getTime() == 3) {%>
+				<td><%=attendanceList.get(i).getInfo() %></td>
+				<%flag = 3; %>
+
+				<% if(i < attendanceList.size() -1){ %>
+				<% if(attendanceList.get(i + 1).getTime() == 4) {%>
+				<td><%=attendanceList.get(i + 1).getInfo() %></td>
+				<%i++; %>
+				<%flag = 4; %>
+				<%} %>
+
+				<% if(attendanceList.get(i + 1).getTime() == 5) {%>
+				<td><%=attendanceList.get(i + 1).getInfo() %></td>
+				<%i++; %>
+				<%flag = 5; %>
+
+				<% if(attendanceList.get(i + 1).getTime() == 6) {%>
+				<td><%=attendanceList.get(i + 1).getInfo() %></td>
+				<%i++; %>
+				<%flag = 6; %>
+
+				<%} %>
+				<%} %>
+				<%} %>
+				<%} else {%>
+				<td>欠</td>
+				<%flag = 10; %>
+
+				<%} %>
+				<%} %>
+
+				<%if(flag == 0 || flag == 3 || flag == 10){ %>
+				<% if(attendanceList.get(i).getTime() == 4) {%>
+				<td><%=attendanceList.get(i).getInfo() %></td>
+				<%flag = 4; %>
+
+
+				<% if(i < attendanceList.size() -1){ %>
+				<% if(attendanceList.get(i + 1).getTime() == 5) {%>
+				<td><%=attendanceList.get(i + 1).getInfo() %></td>
+				<%i++; %>
+				<%flag = 5; %>
+				<%} %>
+
+				<% if(attendanceList.get(i + 1).getTime() == 6) {%>
+				<td><%=attendanceList.get(i + 1).getInfo() %></td>
+				<%i++; %>
+				<%flag = 6; %>
+
+				<%} %>
+				<%} %>
+				<%} else {%>
+				<td>欠</td>
+				<%flag = 10; %>
+
+				<%} %>
+				<%} %>
+
+				<%if(flag == 0 || flag == 4 || flag == 10){ %>
+				<% if(attendanceList.get(i).getTime() == 5) {%>
+				<td><%=attendanceList.get(i).getInfo() %></td>
+				<%flag = 5; %>
+
+				<% if(i < attendanceList.size() -1){ %>
+				<% if(attendanceList.get(i + 1).getTime() == 6) {%>
+				<td><%=attendanceList.get(i + 1).getInfo() %></td>
+				<%i++; %>
+				<%flag = 6; %>
+				<%} %>
+
+				<%} %>
+				<%} else {%>
+				<td>欠</td>
+				<%flag = 10; %>
+
+				<%} %>
+				<%} %>
+
+
+				<%if(flag == 0 || flag == 5 || flag == 10){ %>
+				<% if(attendanceList.get(i).getTime() == 6){%>
+				<td><%=attendanceList.get(i).getInfo() %></td>
+				<%flag = 6; %>
+
+				<%} else {%>
+				<td>欠</td>
+				<%flag = 10; %>
+
+				<%} %>
+
+				<%} %>
+				<%} %>
+				<%} %>
+				<%flag = 0; %>
+
 
 
 				<%if(k < attendanceList2.size()){ %>
 				<%if(attendanceList2.get(k).getDate() == null){%>
 				<%for(int j = 1; j <= 6; j++){ %>
 				<td>欠</td>
+				<%flag = 10; %>
+
 				<% }%>
 				<% }else { %>
 
 				<% if(attendanceList2.get(k).getTime() == 1){%>
 				<td><%=attendanceList2.get(k).getInfo() %></td>
+				<%flag = 1; %>
+
+				<% if(k < attendanceList2.size() -1){ %>
 				<% if(attendanceList2.get(k + 1).getTime() == 2){ %>
 				<td><%=attendanceList2.get(k + 1).getInfo() %></td>
 				<%k++; %>
+				<%flag = 2; %>
+				<%} %>
+				<%} %>
+
 				<% if(attendanceList2.get(k + 1).getTime() == 3) {%>
 				<td><%=attendanceList2.get(k + 1).getInfo() %></td>
 				<%k++; %>
+				<%flag = 3; %>
+
 				<% if(attendanceList2.get(k + 1).getTime() == 4) {%>
 				<td><%=attendanceList2.get(k + 1).getInfo() %></td>
 				<%k++; %>
+				<%flag = 4; %>
+
 				<% if(attendanceList2.get(k + 1).getTime() == 5) {%>
 				<td><%=attendanceList2.get(k + 1).getInfo() %></td>
 				<%k++; %>
+				<%flag = 5; %>
+
 				<% if(attendanceList2.get(k + 1).getTime() == 6) {%>
 				<td><%=attendanceList2.get(k + 1).getInfo() %></td>
 				<%k++; %>
-				<%} %>
+				<%flag = 6; %>
+
 				<%} %>
 				<%} %>
 				<%} %>
 				<%} %>
 				<%} else {%>
 				<td>欠</td>
+				<%flag = 10; %>
+
 				<%} %>
 
+				<%if(flag == 0 || flag == 1 || flag == 10){ %>
 				<% if(attendanceList2.get(k).getTime() == 2){ %>
 				<td><%=attendanceList2.get(k).getInfo() %></td>
+				<%flag = 2; %>
+
+
+				<% if(k < attendanceList2.size() -1){ %>
 				<% if(attendanceList2.get(k + 1).getTime() == 3) {%>
 				<td><%=attendanceList2.get(k + 1).getInfo() %></td>
 				<%k++; %>
+				<%flag = 3; %>
+				<%} %>
+				<%} %>
+
 				<% if(attendanceList2.get(k + 1).getTime() == 4) {%>
 				<td><%=attendanceList2.get(k + 1).getInfo() %></td>
 				<%k++; %>
+				<%flag = 4; %>
+
 				<% if(attendanceList2.get(k + 1).getTime() == 5) {%>
 				<td><%=attendanceList2.get(k + 1).getInfo() %></td>
 				<%k++; %>
+				<%flag = 5; %>
+
 				<% if(attendanceList2.get(k + 1).getTime() == 6) {%>
 				<td><%=attendanceList2.get(k + 1).getInfo() %></td>
 				<%k++; %>
-				<%} %>
+				<%flag = 6; %>
+
 				<%} %>
 				<%} %>
 				<%} %>
 				<%} else {%>
 				<td>欠</td>
+				<%flag = 10; %>
+
+				<%} %>
 				<%} %>
 
+
+				<%if(flag == 0 || flag == 2 || flag == 10){ %>
 				<% if(attendanceList2.get(k).getTime() == 3) {%>
+				<%flag = 3; %>
+
 				<td><%=attendanceList2.get(k).getInfo() %></td>
+
+				<% if(k < attendanceList2.size() -1){ %>
 				<% if(attendanceList2.get(k + 1).getTime() == 4) {%>
 				<td><%=attendanceList2.get(k + 1).getInfo() %></td>
 				<%k++; %>
+				<%flag = 4; %>
+				<%} %>
+
 				<% if(attendanceList2.get(k + 1).getTime() == 5) {%>
 				<td><%=attendanceList2.get(k + 1).getInfo() %></td>
 				<%k++; %>
+				<%flag = 5; %>
+
 				<% if(attendanceList2.get(k + 1).getTime() == 6) {%>
 				<td><%=attendanceList2.get(k + 1).getInfo() %></td>
 				<%k++; %>
+				<%flag = 6; %>
+
 				<%} %>
 				<%} %>
 				<%} %>
 				<%} else {%>
 				<td>欠</td>
+				<%flag = 10; %>
+
+				<%} %>
 				<%} %>
 
+
+				<%if(flag == 0 || flag == 3 || flag == 10){ %>
 				<% if(attendanceList2.get(k).getTime() == 4) {%>
 				<td><%=attendanceList2.get(k).getInfo() %></td>
+				<%flag = 4; %>
+
+				<% if(k < attendanceList2.size() -1){ %>
 				<% if(attendanceList2.get(k + 1).getTime() == 5) {%>
 				<td><%=attendanceList2.get(k + 1).getInfo() %></td>
 				<%k++; %>
+				<%flag = 5; %>
+				<%} %>
+
 				<% if(attendanceList2.get(k + 1).getTime() == 6) {%>
 				<td><%=attendanceList2.get(k + 1).getInfo() %></td>
 				<%k++; %>
+				<%flag = 6; %>
+
 				<%} %>
 				<%} %>
 				<%} else {%>
 				<td>欠</td>
+				<%flag = 10; %>
+
+				<%} %>
 				<%} %>
 
+
+				<%if(flag == 0 || flag == 4 || flag == 10){ %>
 				<% if(attendanceList2.get(k).getTime() == 5) {%>
 				<td><%=attendanceList2.get(k).getInfo() %></td>
+				<%flag = 5; %>
+
+
+				<% if(k < attendanceList2.size() -1){ %>
 				<% if(attendanceList2.get(k + 1).getTime() == 6) {%>
 				<td><%=attendanceList2.get(k + 1).getInfo() %></td>
 				<%k++; %>
-				<%} %>
-				<%} else {%>
-				<td>欠</td>
+				<%flag = 6; %>
 				<%} %>
 
-				<% if(attendanceList2.get(k).getTime() == 6){%>
-				<td><%=attendanceList2.get(k).getInfo() %></td>
+				<%} %>
 				<%} else {%>
 				<td>欠</td>
+				<%flag = 10; %>
+
+				<%} %>
+				<%} %>
+
+				<%if(flag == 0 || flag == 5 || flag == 10){ %>
+				<% if(attendanceList2.get(k).getTime() == 6){%>
+				<td><%=attendanceList2.get(k).getInfo() %></td>
+				<%flag = 6; %>
+
+				<%} else {%>
+				<td>欠</td>
+				<%flag = 10; %>
+
 				<%} %>
 				<%} %>
 				<%} %>
+				<%} %>
+				<%flag = 0; %>
+
+				<td>　</td>
+				<td>　</td>
+				<td>　</td>
+				<td>　</td>
+				<td>　</td>
+				<td>　</td>
+
+				<td>　</td>
+				<td>　</td>
+				<td>　</td>
+				<td>　</td>
+				<td>　</td>
+				<td>　</td>
+
+				<td>　</td>
+				<td>　</td>
+				<td>　</td>
+				<td>　</td>
+				<td>　</td>
+				<td>　</td>
+
+				<td>0</td>
+				<td>0</td>
+				<td>％</td>
+				<td>あり</td>
+
+
+
+			</tr>
+			<tr>
+				<% }%>
+
+				<%} else if(day == 3){ %>
+				<%for(int i = 0, k = 0, l = 0; i < attendanceList.size(); i++, k++, l++){ %>
+
+			<tr>
+			<tr align="center">
+
+				<%if(i < attendanceList.size()){ %>
+				<td><%=attendanceList.get(i).getName()%></td>
+
+				<%if(attendanceList.get(i).getDate() == null){%>
+				<%for(int j = 1; j <= 6; j++){ %>
+				<td>欠</td>
+				<%flag = 10; %>
+				<% }%>
+				<% }else { %>
+
+				<% if(attendanceList.get(i).getTime() == 1){%>
+				<td><%=attendanceList.get(i).getInfo() %></td>
+				<%flag = 1; %>
+
+				<% if(i < attendanceList.size() -1){ %>
+				<% if(attendanceList.get(i + 1).getTime() == 2){ %>
+				<td><%=attendanceList.get(i + 1).getInfo() %></td>
+				<%i++;%>
+				<%flag = 2; %>
+				<%} %>
+
+				<% if(attendanceList.get(i + 1).getTime() == 3) {%>
+				<td><%=attendanceList.get(i + 1).getInfo() %></td>
+				<%i++; %>
+				<%flag = 3; %>
+
+				<% if(attendanceList.get(i + 1).getTime() == 4) {%>
+				<td><%=attendanceList.get(i + 1).getInfo() %></td>
+				<%i++; %>
+				<%flag = 4; %>
+
+				<% if(attendanceList.get(i + 1).getTime() == 5) {%>
+				<td><%=attendanceList.get(i + 1).getInfo() %></td>
+				<%i++; %>
+				<%flag = 5; %>
+
+				<% if(attendanceList.get(i + 1).getTime() == 6) {%>
+				<td><%=attendanceList.get(i + 1).getInfo() %></td>
+				<%i++; %>
+				<%flag = 6; %>
+
+				<%} %>
+				<%} %>
+				<%} %>
+				<%} %>
+				<%} %>
+				<%} else {%>
+				<td>欠</td>
+				<%flag = 10; %>
+
+				<%} %>
+
+				<% if(flag == 0 || flag == 1 || flag == 10){ {%>
+				<% if(attendanceList.get(i).getTime() == 2){ %>
+				<td><%=attendanceList.get(i).getInfo() %></td>
+				<%flag = 2; %>
+
+				<% if(i < attendanceList.size() -1){ %>
+				<% if(attendanceList.get(i + 1).getTime() == 3) {%>
+				<td><%=attendanceList.get(i + 1).getInfo() %></td>
+				<%i++; %>
+				<%flag = 3; %>
+				<%} %>
+
+				<% if(attendanceList.get(i + 1).getTime() == 4) {%>
+				<td><%=attendanceList.get(i + 1).getInfo() %></td>
+				<%i++; %>
+				<%flag = 4; %>
+
+				<% if(attendanceList.get(i + 1).getTime() == 5) {%>
+				<td><%=attendanceList.get(i + 1).getInfo() %></td>
+				<%i++; %>
+				<%flag = 5; %>
+
+				<% if(attendanceList.get(i + 1).getTime() == 6) {%>
+				<td><%=attendanceList.get(i + 1).getInfo() %></td>
+				<%i++; %>
+				<%flag = 6; %>
+
+				<%} %>
+				<%} %>
+				<%} %>
+				<%} %>
+				<%} else {%>
+				<td>欠</td>
+				<%flag = 10; %>
+
+				<%} %>
+				<%} %>
+				<%} %>
+
+				<%if(flag == 0 || flag == 2 || flag == 10){ %>
+				<% if(attendanceList.get(i).getTime() == 3) {%>
+				<td><%=attendanceList.get(i).getInfo() %></td>
+				<%flag = 3; %>
+
+				<% if(i < attendanceList.size() -1){ %>
+				<% if(attendanceList.get(i + 1).getTime() == 4) {%>
+				<td><%=attendanceList.get(i + 1).getInfo() %></td>
+				<%i++; %>
+				<%flag = 4; %>
+				<%} %>
+
+				<% if(attendanceList.get(i + 1).getTime() == 5) {%>
+				<td><%=attendanceList.get(i + 1).getInfo() %></td>
+				<%i++; %>
+				<%flag = 5; %>
+
+				<% if(attendanceList.get(i + 1).getTime() == 6) {%>
+				<td><%=attendanceList.get(i + 1).getInfo() %></td>
+				<%i++; %>
+				<%flag = 6; %>
+
+				<%} %>
+				<%} %>
+				<%} %>
+				<%} else {%>
+				<td>欠</td>
+				<%flag = 10; %>
+
+				<%} %>
+				<%} %>
+
+				<%if(flag == 0 || flag == 3 || flag == 10){ %>
+				<% if(attendanceList.get(i).getTime() == 4) {%>
+				<td><%=attendanceList.get(i).getInfo() %></td>
+				<%flag = 4; %>
+
+
+				<% if(i < attendanceList.size() -1){ %>
+				<% if(attendanceList.get(i + 1).getTime() == 5) {%>
+				<td><%=attendanceList.get(i + 1).getInfo() %></td>
+				<%i++; %>
+				<%flag = 5; %>
+				<%} %>
+
+				<% if(attendanceList.get(i + 1).getTime() == 6) {%>
+				<td><%=attendanceList.get(i + 1).getInfo() %></td>
+				<%i++; %>
+				<%flag = 6; %>
+
+				<%} %>
+				<%} %>
+				<%} else {%>
+				<td>欠</td>
+				<%flag = 10; %>
+
+				<%} %>
+				<%} %>
+
+				<%if(flag == 0 || flag == 4 || flag == 10){ %>
+				<% if(attendanceList.get(i).getTime() == 5) {%>
+				<td><%=attendanceList.get(i).getInfo() %></td>
+				<%flag = 5; %>
+
+				<% if(i < attendanceList.size() -1){ %>
+				<% if(attendanceList.get(i + 1).getTime() == 6) {%>
+				<td><%=attendanceList.get(i + 1).getInfo() %></td>
+				<%i++; %>
+				<%flag = 6; %>
+				<%} %>
+
+				<%} %>
+				<%} else {%>
+				<td>欠</td>
+				<%flag = 10; %>
+
+				<%} %>
+				<%} %>
+
+
+				<%if(flag == 0 || flag == 5 || flag == 10){ %>
+				<% if(attendanceList.get(i).getTime() == 6){%>
+				<td><%=attendanceList.get(i).getInfo() %></td>
+				<%flag = 6; %>
+
+				<%} else {%>
+				<td>欠</td>
+				<%flag = 10; %>
+
+				<%} %>
+
+				<%} %>
+				<%} %>
+				<%} %>
+				<%flag = 0; %>
+
+
+
+				<%if(k < attendanceList2.size()){ %>
+				<%if(attendanceList2.get(k).getDate() == null){%>
+				<%for(int j = 1; j <= 6; j++){ %>
+				<td>欠</td>
+				<%flag = 10; %>
+
+				<% }%>
+				<% }else { %>
+
+				<% if(attendanceList2.get(k).getTime() == 1){%>
+				<td><%=attendanceList2.get(k).getInfo() %></td>
+				<%flag = 1; %>
+
+				<% if(k < attendanceList2.size() -1){ %>
+				<% if(attendanceList2.get(k + 1).getTime() == 2){ %>
+				<td><%=attendanceList2.get(k + 1).getInfo() %></td>
+				<%k++; %>
+				<%flag = 2; %>
+				<%} %>
+				<%} %>
+
+				<% if(attendanceList2.get(k + 1).getTime() == 3) {%>
+				<td><%=attendanceList2.get(k + 1).getInfo() %></td>
+				<%k++; %>
+				<%flag = 3; %>
+
+				<% if(attendanceList2.get(k + 1).getTime() == 4) {%>
+				<td><%=attendanceList2.get(k + 1).getInfo() %></td>
+				<%k++; %>
+				<%flag = 4; %>
+
+				<% if(attendanceList2.get(k + 1).getTime() == 5) {%>
+				<td><%=attendanceList2.get(k + 1).getInfo() %></td>
+				<%k++; %>
+				<%flag = 5; %>
+
+				<% if(attendanceList2.get(k + 1).getTime() == 6) {%>
+				<td><%=attendanceList2.get(k + 1).getInfo() %></td>
+				<%k++; %>
+				<%flag = 6; %>
+
+				<%} %>
+				<%} %>
+				<%} %>
+				<%} %>
+				<%} else {%>
+				<td>欠</td>
+				<%flag = 10; %>
+
+				<%} %>
+
+				<%if(flag == 0 || flag == 1 || flag == 10){ %>
+				<% if(attendanceList2.get(k).getTime() == 2){ %>
+				<td><%=attendanceList2.get(k).getInfo() %></td>
+				<%flag = 2; %>
+
+
+				<% if(k < attendanceList2.size() -1){ %>
+				<% if(attendanceList2.get(k + 1).getTime() == 3) {%>
+				<td><%=attendanceList2.get(k + 1).getInfo() %></td>
+				<%k++; %>
+				<%flag = 3; %>
+				<%} %>
+				<%} %>
+
+				<% if(attendanceList2.get(k + 1).getTime() == 4) {%>
+				<td><%=attendanceList2.get(k + 1).getInfo() %></td>
+				<%k++; %>
+				<%flag = 4; %>
+
+				<% if(attendanceList2.get(k + 1).getTime() == 5) {%>
+				<td><%=attendanceList2.get(k + 1).getInfo() %></td>
+				<%k++; %>
+				<%flag = 5; %>
+
+				<% if(attendanceList2.get(k + 1).getTime() == 6) {%>
+				<td><%=attendanceList2.get(k + 1).getInfo() %></td>
+				<%k++; %>
+				<%flag = 6; %>
+
+				<%} %>
+				<%} %>
+				<%} %>
+				<%} else {%>
+				<td>欠</td>
+				<%flag = 10; %>
+
+				<%} %>
+				<%} %>
+
+
+				<%if(flag == 0 || flag == 2 || flag == 10){ %>
+				<% if(attendanceList2.get(k).getTime() == 3) {%>
+				<%flag = 3; %>
+
+				<td><%=attendanceList2.get(k).getInfo() %></td>
+
+				<% if(k < attendanceList2.size() -1){ %>
+				<% if(attendanceList2.get(k + 1).getTime() == 4) {%>
+				<td><%=attendanceList2.get(k + 1).getInfo() %></td>
+				<%k++; %>
+				<%flag = 4; %>
+				<%} %>
+
+				<% if(attendanceList2.get(k + 1).getTime() == 5) {%>
+				<td><%=attendanceList2.get(k + 1).getInfo() %></td>
+				<%k++; %>
+				<%flag = 5; %>
+
+				<% if(attendanceList2.get(k + 1).getTime() == 6) {%>
+				<td><%=attendanceList2.get(k + 1).getInfo() %></td>
+				<%k++; %>
+				<%flag = 6; %>
+
+				<%} %>
+				<%} %>
+				<%} %>
+				<%} else {%>
+				<td>欠</td>
+				<%flag = 10; %>
+
+				<%} %>
+				<%} %>
+
+
+				<%if(flag == 0 || flag == 3 || flag == 10){ %>
+				<% if(attendanceList2.get(k).getTime() == 4) {%>
+				<td><%=attendanceList2.get(k).getInfo() %></td>
+				<%flag = 4; %>
+
+				<% if(k < attendanceList2.size() -1){ %>
+				<% if(attendanceList2.get(k + 1).getTime() == 5) {%>
+				<td><%=attendanceList2.get(k + 1).getInfo() %></td>
+				<%k++; %>
+				<%flag = 5; %>
+				<%} %>
+
+				<% if(attendanceList2.get(k + 1).getTime() == 6) {%>
+				<td><%=attendanceList2.get(k + 1).getInfo() %></td>
+				<%k++; %>
+				<%flag = 6; %>
+
+				<%} %>
+				<%} %>
+				<%} else {%>
+				<td>欠</td>
+				<%flag = 10; %>
+
+				<%} %>
+				<%} %>
+
+
+				<%if(flag == 0 || flag == 4 || flag == 10){ %>
+				<% if(attendanceList2.get(k).getTime() == 5) {%>
+				<td><%=attendanceList2.get(k).getInfo() %></td>
+				<%flag = 5; %>
+
+
+				<% if(k < attendanceList2.size() -1){ %>
+				<% if(attendanceList2.get(k + 1).getTime() == 6) {%>
+				<td><%=attendanceList2.get(k + 1).getInfo() %></td>
+				<%k++; %>
+				<%flag = 6; %>
+				<%} %>
+
+				<%} %>
+				<%} else {%>
+				<td>欠</td>
+				<%flag = 10; %>
+
+				<%} %>
+				<%} %>
+
+				<%if(flag == 0 || flag == 5 || flag == 10){ %>
+				<% if(attendanceList2.get(k).getTime() == 6){%>
+				<td><%=attendanceList2.get(k).getInfo() %></td>
+				<%flag = 6; %>
+
+				<%} else {%>
+				<td>欠</td>
+				<%flag = 10; %>
+
+				<%} %>
+				<%} %>
+				<%} %>
+				<%} %>
+				<%flag = 0; %>
 
 
 				<%if(l < attendanceList3.size()){ %>
 				<%if(attendanceList3.get(l).getDate() == null){%>
 				<%for(int j = 1; j <= 6; j++){ %>
 				<td>欠</td>
+				<%flag = 10; %>
+
 				<% }%>
 				<% }else { %>
 
 				<% if(attendanceList3.get(l).getTime() == 1){%>
 				<td><%=attendanceList3.get(l).getInfo() %></td>
+				<%flag = 1; %>
+
+				<% if(l < attendanceList3.size() -1){ %>
 				<% if(attendanceList3.get(l + 1).getTime() == 2){ %>
 				<td><%=attendanceList3.get(l + 1).getInfo() %></td>
 				<%l++; %>
+				<%flag = 2; %>
+				<%} %>
+
 				<% if(attendanceList3.get(l + 1).getTime() == 3) {%>
 				<td><%=attendanceList3.get(l + 1).getInfo() %></td>
 				<%l++; %>
+				<%flag = 3; %>
+
 				<% if(attendanceList3.get(l + 1).getTime() == 4) {%>
 				<td><%=attendanceList3.get(l + 1).getInfo() %></td>
 				<%l++; %>
+				<%flag = 4; %>
+
 				<% if(attendanceList3.get(l + 1).getTime() == 5) {%>
 				<td><%=attendanceList3.get(l + 1).getInfo() %></td>
 				<%l++; %>
+				<%flag = 5; %>
+
 				<% if(attendanceList3.get(l + 1).getTime() == 6) {%>
 				<td><%=attendanceList3.get(l + 1).getInfo() %></td>
 				<%l++; %>
+				<%flag = 6; %>
+
 				<%} %>
 				<%} %>
 				<%} %>
 				<%} %>
 				<%} %>
 				<%} else {%>
+				<%flag = 10; %>
+
 				<td>欠</td>
 				<%} %>
 
+				<%if(flag == 0 || flag == 1 || flag == 10){ %>
 				<% if(attendanceList3.get(l).getTime() == 2){ %>
 				<td><%=attendanceList3.get(l).getInfo() %></td>
+				<%flag = 2; %>
+
+				<% if(l < attendanceList3.size() -1){ %>
 				<% if(attendanceList3.get(l + 1).getTime() == 3) {%>
 				<td><%=attendanceList3.get(l + 1).getInfo() %></td>
 				<%l++; %>
+				<%flag = 3; %>
+				<%} %>
+
 				<% if(attendanceList3.get(l + 1).getTime() == 4) {%>
 				<td><%=attendanceList3.get(l + 1).getInfo() %></td>
 				<%l++; %>
+				<%flag = 4; %>
+
 				<% if(attendanceList3.get(l + 1).getTime() == 5) {%>
 				<td><%=attendanceList3.get(l + 1).getInfo() %></td>
 				<%l++; %>
+				<%flag = 5; %>
+
 				<% if(attendanceList3.get(l + 1).getTime() == 6) {%>
 				<td><%=attendanceList3.get(l + 1).getInfo() %></td>
 				<%l++; %>
+				<%flag = 6; %>
+
 				<%} %>
 				<%} %>
 				<%} %>
 				<%} %>
 				<%} else {%>
 				<td>欠</td>
+				<%flag = 10; %>
+
+				<%} %>
 				<%} %>
 
+
+				<%if(flag == 0 || flag == 2 || flag == 10){ %>
 				<% if(attendanceList3.get(l).getTime() == 3) {%>
 				<td><%=attendanceList3.get(l).getInfo() %></td>
+				<%flag = 3; %>
+
+				<% if(l < attendanceList3.size() -1){ %>
 				<% if(attendanceList3.get(l + 1).getTime() == 4) {%>
 				<td><%=attendanceList3.get(l + 1).getInfo() %></td>
 				<%l++; %>
+				<%flag = 4; %>
+				<%} %>
+
 				<% if(attendanceList3.get(l + 1).getTime() == 5) {%>
 				<td><%=attendanceList3.get(l + 1).getInfo() %></td>
 				<%l++; %>
+				<%flag = 5; %>
+
 				<% if(attendanceList3.get(l + 1).getTime() == 6) {%>
 				<td><%=attendanceList3.get(l + 1).getInfo() %></td>
 				<%l++; %>
+				<%flag = 6; %>
+
 				<%} %>
 				<%} %>
 				<%} %>
 				<%} else {%>
 				<td>欠</td>
+				<%flag = 10; %>
+
+				<%} %>
 				<%} %>
 
+				<%if(flag == 0 || flag == 3 || flag == 10){ %>
 				<% if(attendanceList3.get(l).getTime() == 4) {%>
 				<td><%=attendanceList3.get(l).getInfo() %></td>
+				<%flag = 4; %>
+
+				<% if(l < attendanceList3.size() -1){ %>
 				<% if(attendanceList3.get(l + 1).getTime() == 5) {%>
 				<td><%=attendanceList3.get(l + 1).getInfo() %></td>
-				<%k++; %>
+				<%l++; %>
+				<%flag = 5; %>
+				<%} %>
+
 				<% if(attendanceList3.get(l + 1).getTime() == 6) {%>
 				<td><%=attendanceList3.get(l + 1).getInfo() %></td>
 				<%l++; %>
+				<%flag = 6; %>
+
 				<%} %>
 				<%} %>
 				<%} else {%>
 				<td>欠</td>
+				<%flag = 10; %>
+
+				<%} %>
 				<%} %>
 
+
+				<%if(flag == 0 || flag == 4 || flag == 10){ %>
 				<% if(attendanceList3.get(l).getTime() == 5) {%>
 				<td><%=attendanceList3.get(l).getInfo() %></td>
+				<%flag = 5; %>
+
+				<% if(l < attendanceList3.size() -1){ %>
 				<% if(attendanceList3.get(l + 1).getTime() == 6) {%>
 				<td><%=attendanceList3.get(l + 1).getInfo() %></td>
 				<%l++; %>
+				<%flag = 6; %>
+				<%} %>
+
 				<%} %>
 				<%} else {%>
 				<td>欠</td>
+				<%flag = 10; %>
+
+				<%} %>
 				<%} %>
 
+				<%if(flag == 0 || flag == 5 || flag == 10){ %>
 				<% if(attendanceList3.get(l).getTime() == 6){%>
 				<td><%=attendanceList3.get(l).getInfo() %></td>
+				<%flag = 6; %>
+
 				<%} else {%>
 				<td>欠</td>
+				<%flag = 10; %>
+
 				<%} %>
 				<%} %>
 				<%} %>
+				<%} %>
+				<%flag = 0; %>
 
+				<td>　</td>
+				<td>　</td>
+				<td>　</td>
+				<td>　</td>
+				<td>　</td>
+				<td>　</td>
 
+				<td>　</td>
+				<td>　</td>
+				<td>　</td>
+				<td>　</td>
+				<td>　</td>
+				<td>　</td>
 
-
-
-
-
+				<td>0</td>
+				<td>0</td>
+				<td>％</td>
+				<td>あり</td>
 
 
 
 			</tr>
 			<tr>
-				<% i++;
-				   k++;
-				   l++;
-				   m++; }
-				%>
+				<% }%>
+
+				<%} else if(day == 4){ %>
+				<%for(int i = 0, k = 0, l = 0, m = 0; i < attendanceList.size(); i++, k++, l++, m++){ %>
+
+			<tr>
+			<tr align="center">
+
+				<%if(i < attendanceList.size()){ %>
+				<td><%=attendanceList.get(i).getName()%></td>
+
+				<%if(attendanceList.get(i).getDate() == null){%>
+				<%for(int j = 1; j <= 6; j++){ %>
+				<td>欠</td>
+				<%flag = 10; %>
+				<% }%>
+				<% }else { %>
+
+				<% if(attendanceList.get(i).getTime() == 1){%>
+				<td><%=attendanceList.get(i).getInfo() %></td>
+				<%flag = 1; %>
+
+				<% if(i < attendanceList.size() -1){ %>
+				<% if(attendanceList.get(i + 1).getTime() == 2){ %>
+				<td><%=attendanceList.get(i + 1).getInfo() %></td>
+				<%i++;%>
+				<%flag = 2; %>
+				<%} %>
+
+				<% if(attendanceList.get(i + 1).getTime() == 3) {%>
+				<td><%=attendanceList.get(i + 1).getInfo() %></td>
+				<%i++; %>
+				<%flag = 3; %>
+
+				<% if(attendanceList.get(i + 1).getTime() == 4) {%>
+				<td><%=attendanceList.get(i + 1).getInfo() %></td>
+				<%i++; %>
+				<%flag = 4; %>
+
+				<% if(attendanceList.get(i + 1).getTime() == 5) {%>
+				<td><%=attendanceList.get(i + 1).getInfo() %></td>
+				<%i++; %>
+				<%flag = 5; %>
+
+				<% if(attendanceList.get(i + 1).getTime() == 6) {%>
+				<td><%=attendanceList.get(i + 1).getInfo() %></td>
+				<%i++; %>
+				<%flag = 6; %>
+
+				<%} %>
+				<%} %>
+				<%} %>
+				<%} %>
+				<%} %>
+				<%} else {%>
+				<td>欠</td>
+				<%flag = 10; %>
+
+				<%} %>
+
+				<% if(flag == 0 || flag == 1 || flag == 10){ {%>
+				<% if(attendanceList.get(i).getTime() == 2){ %>
+				<td><%=attendanceList.get(i).getInfo() %></td>
+				<%flag = 2; %>
+
+				<% if(i < attendanceList.size() -1){ %>
+				<% if(attendanceList.get(i + 1).getTime() == 3) {%>
+				<td><%=attendanceList.get(i + 1).getInfo() %></td>
+				<%i++; %>
+				<%flag = 3; %>
+				<%} %>
+
+				<% if(attendanceList.get(i + 1).getTime() == 4) {%>
+				<td><%=attendanceList.get(i + 1).getInfo() %></td>
+				<%i++; %>
+				<%flag = 4; %>
+
+				<% if(attendanceList.get(i + 1).getTime() == 5) {%>
+				<td><%=attendanceList.get(i + 1).getInfo() %></td>
+				<%i++; %>
+				<%flag = 5; %>
+
+				<% if(attendanceList.get(i + 1).getTime() == 6) {%>
+				<td><%=attendanceList.get(i + 1).getInfo() %></td>
+				<%i++; %>
+				<%flag = 6; %>
+
+				<%} %>
+				<%} %>
+				<%} %>
+				<%} %>
+				<%} else {%>
+				<td>欠</td>
+				<%flag = 10; %>
+
+				<%} %>
+				<%} %>
+				<%} %>
+
+				<%if(flag == 0 || flag == 2 || flag == 10){ %>
+				<% if(attendanceList.get(i).getTime() == 3) {%>
+				<td><%=attendanceList.get(i).getInfo() %></td>
+				<%flag = 3; %>
+
+				<% if(i < attendanceList.size() -1){ %>
+				<% if(attendanceList.get(i + 1).getTime() == 4) {%>
+				<td><%=attendanceList.get(i + 1).getInfo() %></td>
+				<%i++; %>
+				<%flag = 4; %>
+				<%} %>
+
+				<% if(attendanceList.get(i + 1).getTime() == 5) {%>
+				<td><%=attendanceList.get(i + 1).getInfo() %></td>
+				<%i++; %>
+				<%flag = 5; %>
+
+				<% if(attendanceList.get(i + 1).getTime() == 6) {%>
+				<td><%=attendanceList.get(i + 1).getInfo() %></td>
+				<%i++; %>
+				<%flag = 6; %>
+
+				<%} %>
+				<%} %>
+				<%} %>
+				<%} else {%>
+				<td>欠</td>
+				<%flag = 10; %>
+
+				<%} %>
+				<%} %>
+
+				<%if(flag == 0 || flag == 3 || flag == 10){ %>
+				<% if(attendanceList.get(i).getTime() == 4) {%>
+				<td><%=attendanceList.get(i).getInfo() %></td>
+				<%flag = 4; %>
+
+
+				<% if(i < attendanceList.size() -1){ %>
+				<% if(attendanceList.get(i + 1).getTime() == 5) {%>
+				<td><%=attendanceList.get(i + 1).getInfo() %></td>
+				<%i++; %>
+				<%flag = 5; %>
+				<%} %>
+
+				<% if(attendanceList.get(i + 1).getTime() == 6) {%>
+				<td><%=attendanceList.get(i + 1).getInfo() %></td>
+				<%i++; %>
+				<%flag = 6; %>
+
+				<%} %>
+				<%} %>
+				<%} else {%>
+				<td>欠</td>
+				<%flag = 10; %>
+
+				<%} %>
+				<%} %>
+
+				<%if(flag == 0 || flag == 4 || flag == 10){ %>
+				<% if(attendanceList.get(i).getTime() == 5) {%>
+				<td><%=attendanceList.get(i).getInfo() %></td>
+				<%flag = 5; %>
+
+				<% if(i < attendanceList.size() -1){ %>
+				<% if(attendanceList.get(i + 1).getTime() == 6) {%>
+				<td><%=attendanceList.get(i + 1).getInfo() %></td>
+				<%i++; %>
+				<%flag = 6; %>
+				<%} %>
+
+				<%} %>
+				<%} else {%>
+				<td>欠</td>
+				<%flag = 10; %>
+
+				<%} %>
+				<%} %>
+
+
+				<%if(flag == 0 || flag == 5 || flag == 10){ %>
+				<% if(attendanceList.get(i).getTime() == 6){%>
+				<td><%=attendanceList.get(i).getInfo() %></td>
+				<%flag = 6; %>
+
+				<%} else {%>
+				<td>欠</td>
+				<%flag = 10; %>
+
+				<%} %>
+
+				<%} %>
+				<%} %>
+				<%} %>
+				<%flag = 0; %>
+
+
+
+				<%if(k < attendanceList2.size()){ %>
+				<%if(attendanceList2.get(k).getDate() == null){%>
+				<%for(int j = 1; j <= 6; j++){ %>
+				<td>欠</td>
+				<%flag = 10; %>
+
+				<% }%>
+				<% }else { %>
+
+				<% if(attendanceList2.get(k).getTime() == 1){%>
+				<td><%=attendanceList2.get(k).getInfo() %></td>
+				<%flag = 1; %>
+
+				<% if(k < attendanceList2.size() -1){ %>
+				<% if(attendanceList2.get(k + 1).getTime() == 2){ %>
+				<td><%=attendanceList2.get(k + 1).getInfo() %></td>
+				<%k++; %>
+				<%flag = 2; %>
+				<%} %>
+				<%} %>
+
+				<% if(attendanceList2.get(k + 1).getTime() == 3) {%>
+				<td><%=attendanceList2.get(k + 1).getInfo() %></td>
+				<%k++; %>
+				<%flag = 3; %>
+
+				<% if(attendanceList2.get(k + 1).getTime() == 4) {%>
+				<td><%=attendanceList2.get(k + 1).getInfo() %></td>
+				<%k++; %>
+				<%flag = 4; %>
+
+				<% if(attendanceList2.get(k + 1).getTime() == 5) {%>
+				<td><%=attendanceList2.get(k + 1).getInfo() %></td>
+				<%k++; %>
+				<%flag = 5; %>
+
+				<% if(attendanceList2.get(k + 1).getTime() == 6) {%>
+				<td><%=attendanceList2.get(k + 1).getInfo() %></td>
+				<%k++; %>
+				<%flag = 6; %>
+
+				<%} %>
+				<%} %>
+				<%} %>
+				<%} %>
+				<%} else {%>
+				<td>欠</td>
+				<%flag = 10; %>
+
+				<%} %>
+
+				<%if(flag == 0 || flag == 1 || flag == 10){ %>
+				<% if(attendanceList2.get(k).getTime() == 2){ %>
+				<td><%=attendanceList2.get(k).getInfo() %></td>
+				<%flag = 2; %>
+
+
+				<% if(k < attendanceList2.size() -1){ %>
+				<% if(attendanceList2.get(k + 1).getTime() == 3) {%>
+				<td><%=attendanceList2.get(k + 1).getInfo() %></td>
+				<%k++; %>
+				<%flag = 3; %>
+				<%} %>
+				<%} %>
+
+				<% if(attendanceList2.get(k + 1).getTime() == 4) {%>
+				<td><%=attendanceList2.get(k + 1).getInfo() %></td>
+				<%k++; %>
+				<%flag = 4; %>
+
+				<% if(attendanceList2.get(k + 1).getTime() == 5) {%>
+				<td><%=attendanceList2.get(k + 1).getInfo() %></td>
+				<%k++; %>
+				<%flag = 5; %>
+
+				<% if(attendanceList2.get(k + 1).getTime() == 6) {%>
+				<td><%=attendanceList2.get(k + 1).getInfo() %></td>
+				<%k++; %>
+				<%flag = 6; %>
+
+				<%} %>
+				<%} %>
+				<%} %>
+				<%} else {%>
+				<td>欠</td>
+				<%flag = 10; %>
+
+				<%} %>
+				<%} %>
+
+
+				<%if(flag == 0 || flag == 2 || flag == 10){ %>
+				<% if(attendanceList2.get(k).getTime() == 3) {%>
+				<%flag = 3; %>
+
+				<td><%=attendanceList2.get(k).getInfo() %></td>
+
+				<% if(k < attendanceList2.size() -1){ %>
+				<% if(attendanceList2.get(k + 1).getTime() == 4) {%>
+				<td><%=attendanceList2.get(k + 1).getInfo() %></td>
+				<%k++; %>
+				<%flag = 4; %>
+				<%} %>
+
+				<% if(attendanceList2.get(k + 1).getTime() == 5) {%>
+				<td><%=attendanceList2.get(k + 1).getInfo() %></td>
+				<%k++; %>
+				<%flag = 5; %>
+
+				<% if(attendanceList2.get(k + 1).getTime() == 6) {%>
+				<td><%=attendanceList2.get(k + 1).getInfo() %></td>
+				<%k++; %>
+				<%flag = 6; %>
+
+				<%} %>
+				<%} %>
+				<%} %>
+				<%} else {%>
+				<td>欠</td>
+				<%flag = 10; %>
+
+				<%} %>
+				<%} %>
+
+
+				<%if(flag == 0 || flag == 3 || flag == 10){ %>
+				<% if(attendanceList2.get(k).getTime() == 4) {%>
+				<td><%=attendanceList2.get(k).getInfo() %></td>
+				<%flag = 4; %>
+
+				<% if(k < attendanceList2.size() -1){ %>
+				<% if(attendanceList2.get(k + 1).getTime() == 5) {%>
+				<td><%=attendanceList2.get(k + 1).getInfo() %></td>
+				<%k++; %>
+				<%flag = 5; %>
+				<%} %>
+
+				<% if(attendanceList2.get(k + 1).getTime() == 6) {%>
+				<td><%=attendanceList2.get(k + 1).getInfo() %></td>
+				<%k++; %>
+				<%flag = 6; %>
+
+				<%} %>
+				<%} %>
+				<%} else {%>
+				<td>欠</td>
+				<%flag = 10; %>
+
+				<%} %>
+				<%} %>
+
+
+				<%if(flag == 0 || flag == 4 || flag == 10){ %>
+				<% if(attendanceList2.get(k).getTime() == 5) {%>
+				<td><%=attendanceList2.get(k).getInfo() %></td>
+				<%flag = 5; %>
+
+
+				<% if(k < attendanceList2.size() -1){ %>
+				<% if(attendanceList2.get(k + 1).getTime() == 6) {%>
+				<td><%=attendanceList2.get(k + 1).getInfo() %></td>
+				<%k++; %>
+				<%flag = 6; %>
+				<%} %>
+
+				<%} %>
+				<%} else {%>
+				<td>欠</td>
+				<%flag = 10; %>
+
+				<%} %>
+				<%} %>
+
+				<%if(flag == 0 || flag == 5 || flag == 10){ %>
+				<% if(attendanceList2.get(k).getTime() == 6){%>
+				<td><%=attendanceList2.get(k).getInfo() %></td>
+				<%flag = 6; %>
+
+				<%} else {%>
+				<td>欠</td>
+				<%flag = 10; %>
+
+				<%} %>
+				<%} %>
+				<%} %>
+				<%} %>
+				<%flag = 0; %>
+
+
+				<%if(l < attendanceList3.size()){ %>
+				<%if(attendanceList3.get(l).getDate() == null){%>
+				<%for(int j = 1; j <= 6; j++){ %>
+				<td>欠</td>
+				<%flag = 10; %>
+
+				<% }%>
+				<% }else { %>
+
+				<% if(attendanceList3.get(l).getTime() == 1){%>
+				<td><%=attendanceList3.get(l).getInfo() %></td>
+				<%flag = 1; %>
+
+				<% if(l < attendanceList3.size() -1){ %>
+				<% if(attendanceList3.get(l + 1).getTime() == 2){ %>
+				<td><%=attendanceList3.get(l + 1).getInfo() %></td>
+				<%l++; %>
+				<%flag = 2; %>
+				<%} %>
+
+				<% if(attendanceList3.get(l + 1).getTime() == 3) {%>
+				<td><%=attendanceList3.get(l + 1).getInfo() %></td>
+				<%l++; %>
+				<%flag = 3; %>
+
+				<% if(attendanceList3.get(l + 1).getTime() == 4) {%>
+				<td><%=attendanceList3.get(l + 1).getInfo() %></td>
+				<%l++; %>
+				<%flag = 4; %>
+
+				<% if(attendanceList3.get(l + 1).getTime() == 5) {%>
+				<td><%=attendanceList3.get(l + 1).getInfo() %></td>
+				<%l++; %>
+				<%flag = 5; %>
+
+				<% if(attendanceList3.get(l + 1).getTime() == 6) {%>
+				<td><%=attendanceList3.get(l + 1).getInfo() %></td>
+				<%l++; %>
+				<%flag = 6; %>
+
+				<%} %>
+				<%} %>
+				<%} %>
+				<%} %>
+				<%} %>
+				<%} else {%>
+				<%flag = 10; %>
+
+				<td>欠</td>
+				<%} %>
+
+				<%if(flag == 0 || flag == 1 || flag == 10){ %>
+				<% if(attendanceList3.get(l).getTime() == 2){ %>
+				<td><%=attendanceList3.get(l).getInfo() %></td>
+				<%flag = 2; %>
+
+				<% if(l < attendanceList3.size() -1){ %>
+				<% if(attendanceList3.get(l + 1).getTime() == 3) {%>
+				<td><%=attendanceList3.get(l + 1).getInfo() %></td>
+				<%l++; %>
+				<%flag = 3; %>
+				<%} %>
+
+				<% if(attendanceList3.get(l + 1).getTime() == 4) {%>
+				<td><%=attendanceList3.get(l + 1).getInfo() %></td>
+				<%l++; %>
+				<%flag = 4; %>
+
+				<% if(attendanceList3.get(l + 1).getTime() == 5) {%>
+				<td><%=attendanceList3.get(l + 1).getInfo() %></td>
+				<%l++; %>
+				<%flag = 5; %>
+
+				<% if(attendanceList3.get(l + 1).getTime() == 6) {%>
+				<td><%=attendanceList3.get(l + 1).getInfo() %></td>
+				<%l++; %>
+				<%flag = 6; %>
+
+				<%} %>
+				<%} %>
+				<%} %>
+				<%} %>
+				<%} else {%>
+				<td>欠</td>
+				<%flag = 10; %>
+
+				<%} %>
+				<%} %>
+
+
+				<%if(flag == 0 || flag == 2 || flag == 10){ %>
+				<% if(attendanceList3.get(l).getTime() == 3) {%>
+				<td><%=attendanceList3.get(l).getInfo() %></td>
+				<%flag = 3; %>
+
+				<% if(l < attendanceList3.size() -1){ %>
+				<% if(attendanceList3.get(l + 1).getTime() == 4) {%>
+				<td><%=attendanceList3.get(l + 1).getInfo() %></td>
+				<%l++; %>
+				<%flag = 4; %>
+				<%} %>
+
+				<% if(attendanceList3.get(l + 1).getTime() == 5) {%>
+				<td><%=attendanceList3.get(l + 1).getInfo() %></td>
+				<%l++; %>
+				<%flag = 5; %>
+
+				<% if(attendanceList3.get(l + 1).getTime() == 6) {%>
+				<td><%=attendanceList3.get(l + 1).getInfo() %></td>
+				<%l++; %>
+				<%flag = 6; %>
+
+				<%} %>
+				<%} %>
+				<%} %>
+				<%} else {%>
+				<td>欠</td>
+				<%flag = 10; %>
+
+				<%} %>
+				<%} %>
+
+				<%if(flag == 0 || flag == 3 || flag == 10){ %>
+				<% if(attendanceList3.get(l).getTime() == 4) {%>
+				<td><%=attendanceList3.get(l).getInfo() %></td>
+				<%flag = 4; %>
+
+				<% if(l < attendanceList3.size() -1){ %>
+				<% if(attendanceList3.get(l + 1).getTime() == 5) {%>
+				<td><%=attendanceList3.get(l + 1).getInfo() %></td>
+				<%l++; %>
+				<%flag = 5; %>
+				<%} %>
+
+				<% if(attendanceList3.get(l + 1).getTime() == 6) {%>
+				<td><%=attendanceList3.get(l + 1).getInfo() %></td>
+				<%l++; %>
+				<%flag = 6; %>
+
+				<%} %>
+				<%} %>
+				<%} else {%>
+				<td>欠</td>
+				<%flag = 10; %>
+
+				<%} %>
+				<%} %>
+
+
+				<%if(flag == 0 || flag == 4 || flag == 10){ %>
+				<% if(attendanceList3.get(l).getTime() == 5) {%>
+				<td><%=attendanceList3.get(l).getInfo() %></td>
+				<%flag = 5; %>
+
+				<% if(l < attendanceList3.size() -1){ %>
+				<% if(attendanceList3.get(l + 1).getTime() == 6) {%>
+				<td><%=attendanceList3.get(l + 1).getInfo() %></td>
+				<%l++; %>
+				<%flag = 6; %>
+				<%} %>
+
+				<%} %>
+				<%} else {%>
+				<td>欠</td>
+				<%flag = 10; %>
+
+				<%} %>
+				<%} %>
+
+				<%if(flag == 0 || flag == 5 || flag == 10){ %>
+				<% if(attendanceList3.get(l).getTime() == 6){%>
+				<td><%=attendanceList3.get(l).getInfo() %></td>
+				<%flag = 6; %>
+
+				<%} else {%>
+				<td>欠</td>
+				<%flag = 10; %>
+
+				<%} %>
+				<%} %>
+				<%} %>
+				<%} %>
+				<%flag = 0; %>
+
+
+
+
+
+
+				<%if(m < attendanceList4.size()){ %>
+				<%if(attendanceList4.get(m).getDate() == null){%>
+				<%for(int j = 1; j <= 6; j++){ %>
+				<td>欠</td>
+				<%flag = 10; %>
+
+				<% }%>
+				<% }else { %>
+
+				<% if(attendanceList4.get(m).getTime() == 1){%>
+				<td><%=attendanceList4.get(m).getInfo() %></td>
+				<%flag = 1; %>
+
+				<% if(m < attendanceList4.size() -1){ %>
+				<% if(attendanceList4.get(m + 1).getTime() == 2){ %>
+				<td><%=attendanceList4.get(m + 1).getInfo() %></td>
+				<%m++; %>
+				<%flag = 2; %>
+				<%} %>
+
+				<% if(attendanceList4.get(m + 1).getTime() == 3) {%>
+				<td><%=attendanceList4.get(m + 1).getInfo() %></td>
+				<%m++; %>
+				<%flag = 3; %>
+
+				<% if(attendanceList4.get(m + 1).getTime() == 4) {%>
+				<td><%=attendanceList4.get(m + 1).getInfo() %></td>
+				<%m++; %>
+				<%flag = 4; %>
+
+				<% if(attendanceList4.get(m + 1).getTime() == 5) {%>
+				<td><%=attendanceList4.get(m + 1).getInfo() %></td>
+				<%m++; %>
+				<%flag = 5; %>
+
+				<% if(attendanceList4.get(m + 1).getTime() == 6) {%>
+				<td><%=attendanceList4.get(m + 1).getInfo() %></td>
+				<%m++; %>
+				<%flag = 6; %>
+
+				<%} %>
+				<%} %>
+				<%} %>
+				<%} %>
+				<%} %>
+				<%} else {%>
+				<%flag = 10; %>
+
+				<td>欠</td>
+				<%} %>
+
+				<%if(flag == 0 || flag == 1 || flag == 10){ %>
+				<% if(attendanceList4.get(m).getTime() == 2){ %>
+				<td><%=attendanceList4.get(m).getInfo() %></td>
+				<%flag = 2; %>
+
+				<% if(m < attendanceList4.size() -1){ %>
+				<% if(attendanceList4.get(m + 1).getTime() == 3) {%>
+				<td><%=attendanceList4.get(m + 1).getInfo() %></td>
+				<%m++; %>
+				<%flag = 3; %>
+				<%} %>
+
+				<% if(attendanceList4.get(m + 1).getTime() == 4) {%>
+				<td><%=attendanceList4.get(m + 1).getInfo() %></td>
+				<%m++; %>
+				<%flag = 4; %>
+
+				<% if(attendanceList4.get(m + 1).getTime() == 5) {%>
+				<td><%=attendanceList4.get(m + 1).getInfo() %></td>
+				<%m++; %>
+				<%flag = 5; %>
+
+				<% if(attendanceList4.get(m + 1).getTime() == 6) {%>
+				<td><%=attendanceList4.get(m + 1).getInfo() %></td>
+				<%m++; %>
+				<%flag = 6; %>
+
+				<%} %>
+				<%} %>
+				<%} %>
+				<%} %>
+				<%} else {%>
+				<td>欠</td>
+				<%flag = 10; %>
+
+				<%} %>
+				<%} %>
+
+
+				<%if(flag == 0 || flag == 2 || flag == 10){ %>
+				<% if(attendanceList4.get(m).getTime() == 3) {%>
+				<td><%=attendanceList4.get(m).getInfo() %></td>
+				<%flag = 3; %>
+
+				<% if(m < attendanceList4.size() -1){ %>
+				<% if(attendanceList4.get(m + 1).getTime() == 4) {%>
+				<td><%=attendanceList4.get(m + 1).getInfo() %></td>
+				<%m++; %>
+				<%flag = 4; %>
+				<%} %>
+
+				<% if(attendanceList4.get(m + 1).getTime() == 5) {%>
+				<td><%=attendanceList4.get(m + 1).getInfo() %></td>
+				<%m++; %>
+				<%flag = 5; %>
+
+				<% if(attendanceList4.get(m + 1).getTime() == 6) {%>
+				<td><%=attendanceList4.get(m + 1).getInfo() %></td>
+				<%m++; %>
+				<%flag = 6; %>
+
+				<%} %>
+				<%} %>
+				<%} %>
+				<%} else {%>
+				<td>欠</td>
+				<%flag = 10; %>
+
+				<%} %>
+				<%} %>
+
+				<%if(flag == 0 || flag == 3 || flag == 10){ %>
+				<% if(attendanceList4.get(m).getTime() == 4) {%>
+				<td><%=attendanceList4.get(m).getInfo() %></td>
+				<%flag = 4; %>
+
+				<% if(m < attendanceList4.size() -1){ %>
+				<% if(attendanceList4.get(m + 1).getTime() == 5) {%>
+				<td><%=attendanceList4.get(m + 1).getInfo() %></td>
+				<%m++; %>
+				<%flag = 5; %>
+				<%} %>
+
+				<% if(attendanceList4.get(m + 1).getTime() == 6) {%>
+				<td><%=attendanceList4.get(m + 1).getInfo() %></td>
+				<%m++; %>
+				<%flag = 6; %>
+
+				<%} %>
+				<%} %>
+				<%} else {%>
+				<td>欠</td>
+				<%flag = 10; %>
+
+				<%} %>
+				<%} %>
+
+
+				<%if(flag == 0 || flag == 4 || flag == 10){ %>
+				<% if(attendanceList4.get(m).getTime() == 5) {%>
+				<td><%=attendanceList4.get(m).getInfo() %></td>
+				<%flag = 5; %>
+
+				<% if(l < attendanceList4.size() -1){ %>
+				<% if(attendanceList4.get(m + 1).getTime() == 6) {%>
+				<td><%=attendanceList4.get(m + 1).getInfo() %></td>
+				<%m++; %>
+				<%flag = 6; %>
+				<%} %>
+
+				<%} %>
+				<%} else {%>
+				<td>欠</td>
+				<%flag = 10; %>
+
+				<%} %>
+				<%} %>
+
+				<%if(flag == 0 || flag == 5 || flag == 10){ %>
+				<% if(attendanceList4.get(m).getTime() == 6){%>
+				<td><%=attendanceList4.get(m).getInfo() %></td>
+				<%flag = 6; %>
+
+				<%} else {%>
+				<td>欠</td>
+				<%flag = 10; %>
+
+				<%} %>
+				<%} %>
+				<%} %>
+				<%} %>
+				<%flag = 0; %>
+
+
+				<td>　</td>
+				<td>　</td>
+				<td>　</td>
+				<td>　</td>
+				<td>　</td>
+				<td>　</td>
+				<td>0</td>
+				<td>0</td>
+				<td>％</td>
+				<td>あり</td>
+
+
+
+			</tr>
+			<tr>
+				<% }%>
 
 				<%} else if(day == 5){ %>
+				<%for(int i = 0, k = 0, l = 0, m = 0, n = 0; i < attendanceList.size(); i++, k++, l++, m++, n++){ %>
 
+			<tr>
+			<tr align="center">
+
+				<%if(i < attendanceList.size()){ %>
+				<td><%=attendanceList.get(i).getName()%></td>
+
+				<%if(attendanceList.get(i).getDate() == null){%>
+				<%for(int j = 1; j <= 6; j++){ %>
+				<td>欠</td>
+				<%flag = 10; %>
+				<% }%>
+				<% }else { %>
+
+				<% if(attendanceList.get(i).getTime() == 1){%>
+				<td><%=attendanceList.get(i).getInfo() %></td>
+				<%flag = 1; %>
+
+				<% if(i < attendanceList.size() -1){ %>
+				<% if(attendanceList.get(i + 1).getTime() == 2){ %>
+				<td><%=attendanceList.get(i + 1).getInfo() %></td>
+				<%i++;%>
+				<%flag = 2; %>
+				<%} %>
+
+				<% if(attendanceList.get(i + 1).getTime() == 3) {%>
+				<td><%=attendanceList.get(i + 1).getInfo() %></td>
+				<%i++; %>
+				<%flag = 3; %>
+
+				<% if(attendanceList.get(i + 1).getTime() == 4) {%>
+				<td><%=attendanceList.get(i + 1).getInfo() %></td>
+				<%i++; %>
+				<%flag = 4; %>
+
+				<% if(attendanceList.get(i + 1).getTime() == 5) {%>
+				<td><%=attendanceList.get(i + 1).getInfo() %></td>
+				<%i++; %>
+				<%flag = 5; %>
+
+				<% if(attendanceList.get(i + 1).getTime() == 6) {%>
+				<td><%=attendanceList.get(i + 1).getInfo() %></td>
+				<%i++; %>
+				<%flag = 6; %>
+
+				<%} %>
+				<%} %>
+				<%} %>
+				<%} %>
+				<%} %>
+				<%} else {%>
+				<td>欠</td>
+				<%flag = 10; %>
+
+				<%} %>
+
+				<% if(flag == 0 || flag == 1 || flag == 10){ {%>
+				<% if(attendanceList.get(i).getTime() == 2){ %>
+				<td><%=attendanceList.get(i).getInfo() %></td>
+				<%flag = 2; %>
+
+				<% if(i < attendanceList.size() -1){ %>
+				<% if(attendanceList.get(i + 1).getTime() == 3) {%>
+				<td><%=attendanceList.get(i + 1).getInfo() %></td>
+				<%i++; %>
+				<%flag = 3; %>
+				<%} %>
+
+				<% if(attendanceList.get(i + 1).getTime() == 4) {%>
+				<td><%=attendanceList.get(i + 1).getInfo() %></td>
+				<%i++; %>
+				<%flag = 4; %>
+
+				<% if(attendanceList.get(i + 1).getTime() == 5) {%>
+				<td><%=attendanceList.get(i + 1).getInfo() %></td>
+				<%i++; %>
+				<%flag = 5; %>
+
+				<% if(attendanceList.get(i + 1).getTime() == 6) {%>
+				<td><%=attendanceList.get(i + 1).getInfo() %></td>
+				<%i++; %>
+				<%flag = 6; %>
+
+				<%} %>
+				<%} %>
+				<%} %>
+				<%} %>
+				<%} else {%>
+				<td>欠</td>
+				<%flag = 10; %>
+
+				<%} %>
+				<%} %>
+				<%} %>
+
+				<%if(flag == 0 || flag == 2 || flag == 10){ %>
+				<% if(attendanceList.get(i).getTime() == 3) {%>
+				<td><%=attendanceList.get(i).getInfo() %></td>
+				<%flag = 3; %>
+
+				<% if(i < attendanceList.size() -1){ %>
+				<% if(attendanceList.get(i + 1).getTime() == 4) {%>
+				<td><%=attendanceList.get(i + 1).getInfo() %></td>
+				<%i++; %>
+				<%flag = 4; %>
+				<%} %>
+
+				<% if(attendanceList.get(i + 1).getTime() == 5) {%>
+				<td><%=attendanceList.get(i + 1).getInfo() %></td>
+				<%i++; %>
+				<%flag = 5; %>
+
+				<% if(attendanceList.get(i + 1).getTime() == 6) {%>
+				<td><%=attendanceList.get(i + 1).getInfo() %></td>
+				<%i++; %>
+				<%flag = 6; %>
+
+				<%} %>
+				<%} %>
+				<%} %>
+				<%} else {%>
+				<td>欠</td>
+				<%flag = 10; %>
+
+				<%} %>
+				<%} %>
+
+				<%if(flag == 0 || flag == 3 || flag == 10){ %>
+				<% if(attendanceList.get(i).getTime() == 4) {%>
+				<td><%=attendanceList.get(i).getInfo() %></td>
+				<%flag = 4; %>
+
+
+				<% if(i < attendanceList.size() -1){ %>
+				<% if(attendanceList.get(i + 1).getTime() == 5) {%>
+				<td><%=attendanceList.get(i + 1).getInfo() %></td>
+				<%i++; %>
+				<%flag = 5; %>
+				<%} %>
+
+				<% if(attendanceList.get(i + 1).getTime() == 6) {%>
+				<td><%=attendanceList.get(i + 1).getInfo() %></td>
+				<%i++; %>
+				<%flag = 6; %>
+
+				<%} %>
+				<%} %>
+				<%} else {%>
+				<td>欠</td>
+				<%flag = 10; %>
+
+				<%} %>
+				<%} %>
+
+				<%if(flag == 0 || flag == 4 || flag == 10){ %>
+				<% if(attendanceList.get(i).getTime() == 5) {%>
+				<td><%=attendanceList.get(i).getInfo() %></td>
+				<%flag = 5; %>
+
+				<% if(i < attendanceList.size() -1){ %>
+				<% if(attendanceList.get(i + 1).getTime() == 6) {%>
+				<td><%=attendanceList.get(i + 1).getInfo() %></td>
+				<%i++; %>
+				<%flag = 6; %>
+				<%} %>
+
+				<%} %>
+				<%} else {%>
+				<td>欠</td>
+				<%flag = 10; %>
+
+				<%} %>
+				<%} %>
+
+
+				<%if(flag == 0 || flag == 5 || flag == 10){ %>
+				<% if(attendanceList.get(i).getTime() == 6){%>
+				<td><%=attendanceList.get(i).getInfo() %></td>
+				<%flag = 6; %>
+
+				<%} else {%>
+				<td>欠</td>
+				<%flag = 10; %>
+
+				<%} %>
+
+				<%} %>
+				<%} %>
+				<%} %>
+				<%flag = 0; %>
+
+
+
+				<%if(k < attendanceList2.size()){ %>
+				<%if(attendanceList2.get(k).getDate() == null){%>
+				<%for(int j = 1; j <= 6; j++){ %>
+				<td>欠</td>
+				<%flag = 10; %>
+
+				<% }%>
+				<% }else { %>
+
+				<% if(attendanceList2.get(k).getTime() == 1){%>
+				<td><%=attendanceList2.get(k).getInfo() %></td>
+				<%flag = 1; %>
+
+				<% if(k < attendanceList2.size() -1){ %>
+				<% if(attendanceList2.get(k + 1).getTime() == 2){ %>
+				<td><%=attendanceList2.get(k + 1).getInfo() %></td>
+				<%k++; %>
+				<%flag = 2; %>
+				<%} %>
+				<%} %>
+
+				<% if(attendanceList2.get(k + 1).getTime() == 3) {%>
+				<td><%=attendanceList2.get(k + 1).getInfo() %></td>
+				<%k++; %>
+				<%flag = 3; %>
+
+				<% if(attendanceList2.get(k + 1).getTime() == 4) {%>
+				<td><%=attendanceList2.get(k + 1).getInfo() %></td>
+				<%k++; %>
+				<%flag = 4; %>
+
+				<% if(attendanceList2.get(k + 1).getTime() == 5) {%>
+				<td><%=attendanceList2.get(k + 1).getInfo() %></td>
+				<%k++; %>
+				<%flag = 5; %>
+
+				<% if(attendanceList2.get(k + 1).getTime() == 6) {%>
+				<td><%=attendanceList2.get(k + 1).getInfo() %></td>
+				<%k++; %>
+				<%flag = 6; %>
+
+				<%} %>
+				<%} %>
+				<%} %>
+				<%} %>
+				<%} else {%>
+				<td>欠</td>
+				<%flag = 10; %>
+
+				<%} %>
+
+				<%if(flag == 0 || flag == 1 || flag == 10){ %>
+				<% if(attendanceList2.get(k).getTime() == 2){ %>
+				<td><%=attendanceList2.get(k).getInfo() %></td>
+				<%flag = 2; %>
+
+
+				<% if(k < attendanceList2.size() -1){ %>
+				<% if(attendanceList2.get(k + 1).getTime() == 3) {%>
+				<td><%=attendanceList2.get(k + 1).getInfo() %></td>
+				<%k++; %>
+				<%flag = 3; %>
+				<%} %>
+				<%} %>
+
+				<% if(attendanceList2.get(k + 1).getTime() == 4) {%>
+				<td><%=attendanceList2.get(k + 1).getInfo() %></td>
+				<%k++; %>
+				<%flag = 4; %>
+
+				<% if(attendanceList2.get(k + 1).getTime() == 5) {%>
+				<td><%=attendanceList2.get(k + 1).getInfo() %></td>
+				<%k++; %>
+				<%flag = 5; %>
+
+				<% if(attendanceList2.get(k + 1).getTime() == 6) {%>
+				<td><%=attendanceList2.get(k + 1).getInfo() %></td>
+				<%k++; %>
+				<%flag = 6; %>
+
+				<%} %>
+				<%} %>
+				<%} %>
+				<%} else {%>
+				<td>欠</td>
+				<%flag = 10; %>
+
+				<%} %>
+				<%} %>
+
+
+				<%if(flag == 0 || flag == 2 || flag == 10){ %>
+				<% if(attendanceList2.get(k).getTime() == 3) {%>
+				<%flag = 3; %>
+
+				<td><%=attendanceList2.get(k).getInfo() %></td>
+
+				<% if(k < attendanceList2.size() -1){ %>
+				<% if(attendanceList2.get(k + 1).getTime() == 4) {%>
+				<td><%=attendanceList2.get(k + 1).getInfo() %></td>
+				<%k++; %>
+				<%flag = 4; %>
+				<%} %>
+
+				<% if(attendanceList2.get(k + 1).getTime() == 5) {%>
+				<td><%=attendanceList2.get(k + 1).getInfo() %></td>
+				<%k++; %>
+				<%flag = 5; %>
+
+				<% if(attendanceList2.get(k + 1).getTime() == 6) {%>
+				<td><%=attendanceList2.get(k + 1).getInfo() %></td>
+				<%k++; %>
+				<%flag = 6; %>
+
+				<%} %>
+				<%} %>
+				<%} %>
+				<%} else {%>
+				<td>欠</td>
+				<%flag = 10; %>
+
+				<%} %>
+				<%} %>
+
+
+				<%if(flag == 0 || flag == 3 || flag == 10){ %>
+				<% if(attendanceList2.get(k).getTime() == 4) {%>
+				<td><%=attendanceList2.get(k).getInfo() %></td>
+				<%flag = 4; %>
+
+				<% if(k < attendanceList2.size() -1){ %>
+				<% if(attendanceList2.get(k + 1).getTime() == 5) {%>
+				<td><%=attendanceList2.get(k + 1).getInfo() %></td>
+				<%k++; %>
+				<%flag = 5; %>
+				<%} %>
+
+				<% if(attendanceList2.get(k + 1).getTime() == 6) {%>
+				<td><%=attendanceList2.get(k + 1).getInfo() %></td>
+				<%k++; %>
+				<%flag = 6; %>
+
+				<%} %>
+				<%} %>
+				<%} else {%>
+				<td>欠</td>
+				<%flag = 10; %>
+
+				<%} %>
+				<%} %>
+
+
+				<%if(flag == 0 || flag == 4 || flag == 10){ %>
+				<% if(attendanceList2.get(k).getTime() == 5) {%>
+				<td><%=attendanceList2.get(k).getInfo() %></td>
+				<%flag = 5; %>
+
+
+				<% if(k < attendanceList2.size() -1){ %>
+				<% if(attendanceList2.get(k + 1).getTime() == 6) {%>
+				<td><%=attendanceList2.get(k + 1).getInfo() %></td>
+				<%k++; %>
+				<%flag = 6; %>
+				<%} %>
+
+				<%} %>
+				<%} else {%>
+				<td>欠</td>
+				<%flag = 10; %>
+
+				<%} %>
+				<%} %>
+
+				<%if(flag == 0 || flag == 5 || flag == 10){ %>
+				<% if(attendanceList2.get(k).getTime() == 6){%>
+				<td><%=attendanceList2.get(k).getInfo() %></td>
+				<%flag = 6; %>
+
+				<%} else {%>
+				<td>欠</td>
+				<%flag = 10; %>
+
+				<%} %>
+				<%} %>
+				<%} %>
+				<%} %>
+				<%flag = 0; %>
+
+
+				<%if(l < attendanceList3.size()){ %>
+				<%if(attendanceList3.get(l).getDate() == null){%>
+				<%for(int j = 1; j <= 6; j++){ %>
+				<td>欠</td>
+				<%flag = 10; %>
+
+				<% }%>
+				<% }else { %>
+
+				<% if(attendanceList3.get(l).getTime() == 1){%>
+				<td><%=attendanceList3.get(l).getInfo() %></td>
+				<%flag = 1; %>
+
+				<% if(l < attendanceList3.size() -1){ %>
+				<% if(attendanceList3.get(l + 1).getTime() == 2){ %>
+				<td><%=attendanceList3.get(l + 1).getInfo() %></td>
+				<%l++; %>
+				<%flag = 2; %>
+				<%} %>
+
+				<% if(attendanceList3.get(l + 1).getTime() == 3) {%>
+				<td><%=attendanceList3.get(l + 1).getInfo() %></td>
+				<%l++; %>
+				<%flag = 3; %>
+
+				<% if(attendanceList3.get(l + 1).getTime() == 4) {%>
+				<td><%=attendanceList3.get(l + 1).getInfo() %></td>
+				<%l++; %>
+				<%flag = 4; %>
+
+				<% if(attendanceList3.get(l + 1).getTime() == 5) {%>
+				<td><%=attendanceList3.get(l + 1).getInfo() %></td>
+				<%l++; %>
+				<%flag = 5; %>
+
+				<% if(attendanceList3.get(l + 1).getTime() == 6) {%>
+				<td><%=attendanceList3.get(l + 1).getInfo() %></td>
+				<%l++; %>
+				<%flag = 6; %>
+
+				<%} %>
+				<%} %>
+				<%} %>
+				<%} %>
+				<%} %>
+				<%} else {%>
+				<%flag = 10; %>
+
+				<td>欠</td>
+				<%} %>
+
+				<%if(flag == 0 || flag == 1 || flag == 10){ %>
+				<% if(attendanceList3.get(l).getTime() == 2){ %>
+				<td><%=attendanceList3.get(l).getInfo() %></td>
+				<%flag = 2; %>
+
+				<% if(l < attendanceList3.size() -1){ %>
+				<% if(attendanceList3.get(l + 1).getTime() == 3) {%>
+				<td><%=attendanceList3.get(l + 1).getInfo() %></td>
+				<%l++; %>
+				<%flag = 3; %>
+				<%} %>
+
+				<% if(attendanceList3.get(l + 1).getTime() == 4) {%>
+				<td><%=attendanceList3.get(l + 1).getInfo() %></td>
+				<%l++; %>
+				<%flag = 4; %>
+
+				<% if(attendanceList3.get(l + 1).getTime() == 5) {%>
+				<td><%=attendanceList3.get(l + 1).getInfo() %></td>
+				<%l++; %>
+				<%flag = 5; %>
+
+				<% if(attendanceList3.get(l + 1).getTime() == 6) {%>
+				<td><%=attendanceList3.get(l + 1).getInfo() %></td>
+				<%l++; %>
+				<%flag = 6; %>
+
+				<%} %>
+				<%} %>
+				<%} %>
+				<%} %>
+				<%} else {%>
+				<td>欠</td>
+				<%flag = 10; %>
+
+				<%} %>
+				<%} %>
+
+
+				<%if(flag == 0 || flag == 2 || flag == 10){ %>
+				<% if(attendanceList3.get(l).getTime() == 3) {%>
+				<td><%=attendanceList3.get(l).getInfo() %></td>
+				<%flag = 3; %>
+
+				<% if(l < attendanceList3.size() -1){ %>
+				<% if(attendanceList3.get(l + 1).getTime() == 4) {%>
+				<td><%=attendanceList3.get(l + 1).getInfo() %></td>
+				<%l++; %>
+				<%flag = 4; %>
+				<%} %>
+
+				<% if(attendanceList3.get(l + 1).getTime() == 5) {%>
+				<td><%=attendanceList3.get(l + 1).getInfo() %></td>
+				<%l++; %>
+				<%flag = 5; %>
+
+				<% if(attendanceList3.get(l + 1).getTime() == 6) {%>
+				<td><%=attendanceList3.get(l + 1).getInfo() %></td>
+				<%l++; %>
+				<%flag = 6; %>
+
+				<%} %>
+				<%} %>
+				<%} %>
+				<%} else {%>
+				<td>欠</td>
+				<%flag = 10; %>
+
+				<%} %>
+				<%} %>
+
+				<%if(flag == 0 || flag == 3 || flag == 10){ %>
+				<% if(attendanceList3.get(l).getTime() == 4) {%>
+				<td><%=attendanceList3.get(l).getInfo() %></td>
+				<%flag = 4; %>
+
+				<% if(l < attendanceList3.size() -1){ %>
+				<% if(attendanceList3.get(l + 1).getTime() == 5) {%>
+				<td><%=attendanceList3.get(l + 1).getInfo() %></td>
+				<%l++; %>
+				<%flag = 5; %>
+				<%} %>
+
+				<% if(attendanceList3.get(l + 1).getTime() == 6) {%>
+				<td><%=attendanceList3.get(l + 1).getInfo() %></td>
+				<%l++; %>
+				<%flag = 6; %>
+
+				<%} %>
+				<%} %>
+				<%} else {%>
+				<td>欠</td>
+				<%flag = 10; %>
+
+				<%} %>
+				<%} %>
+
+
+				<%if(flag == 0 || flag == 4 || flag == 10){ %>
+				<% if(attendanceList3.get(l).getTime() == 5) {%>
+				<td><%=attendanceList3.get(l).getInfo() %></td>
+				<%flag = 5; %>
+
+				<% if(l < attendanceList3.size() -1){ %>
+				<% if(attendanceList3.get(l + 1).getTime() == 6) {%>
+				<td><%=attendanceList3.get(l + 1).getInfo() %></td>
+				<%l++; %>
+				<%flag = 6; %>
+				<%} %>
+
+				<%} %>
+				<%} else {%>
+				<td>欠</td>
+				<%flag = 10; %>
+
+				<%} %>
+				<%} %>
+
+				<%if(flag == 0 || flag == 5 || flag == 10){ %>
+				<% if(attendanceList3.get(l).getTime() == 6){%>
+				<td><%=attendanceList3.get(l).getInfo() %></td>
+				<%flag = 6; %>
+
+				<%} else {%>
+				<td>欠</td>
+				<%flag = 10; %>
+
+				<%} %>
+				<%} %>
+				<%} %>
+				<%} %>
+				<%flag = 0; %>
+
+
+
+
+
+
+				<%if(m < attendanceList4.size()){ %>
+				<%if(attendanceList4.get(m).getDate() == null){%>
+				<%for(int j = 1; j <= 6; j++){ %>
+				<td>欠</td>
+				<%flag = 10; %>
+
+				<% }%>
+				<% }else { %>
+
+				<% if(attendanceList4.get(m).getTime() == 1){%>
+				<td><%=attendanceList4.get(m).getInfo() %></td>
+				<%flag = 1; %>
+
+				<% if(m < attendanceList4.size() -1){ %>
+				<% if(attendanceList4.get(m + 1).getTime() == 2){ %>
+				<td><%=attendanceList4.get(m + 1).getInfo() %></td>
+				<%m++; %>
+				<%flag = 2; %>
+				<%} %>
+
+				<% if(attendanceList4.get(m + 1).getTime() == 3) {%>
+				<td><%=attendanceList4.get(m + 1).getInfo() %></td>
+				<%m++; %>
+				<%flag = 3; %>
+
+				<% if(attendanceList4.get(m + 1).getTime() == 4) {%>
+				<td><%=attendanceList4.get(m + 1).getInfo() %></td>
+				<%m++; %>
+				<%flag = 4; %>
+
+				<% if(attendanceList4.get(m + 1).getTime() == 5) {%>
+				<td><%=attendanceList4.get(m + 1).getInfo() %></td>
+				<%m++; %>
+				<%flag = 5; %>
+
+				<% if(attendanceList4.get(m + 1).getTime() == 6) {%>
+				<td><%=attendanceList4.get(m + 1).getInfo() %></td>
+				<%m++; %>
+				<%flag = 6; %>
+
+				<%} %>
+				<%} %>
+				<%} %>
+				<%} %>
+				<%} %>
+				<%} else {%>
+				<%flag = 10; %>
+
+				<td>欠</td>
+				<%} %>
+
+				<%if(flag == 0 || flag == 1 || flag == 10){ %>
+				<% if(attendanceList4.get(m).getTime() == 2){ %>
+				<td><%=attendanceList4.get(m).getInfo() %></td>
+				<%flag = 2; %>
+
+				<% if(m < attendanceList4.size() -1){ %>
+				<% if(attendanceList4.get(m + 1).getTime() == 3) {%>
+				<td><%=attendanceList4.get(m + 1).getInfo() %></td>
+				<%m++; %>
+				<%flag = 3; %>
+				<%} %>
+
+				<% if(attendanceList4.get(m + 1).getTime() == 4) {%>
+				<td><%=attendanceList4.get(m + 1).getInfo() %></td>
+				<%m++; %>
+				<%flag = 4; %>
+
+				<% if(attendanceList4.get(m + 1).getTime() == 5) {%>
+				<td><%=attendanceList4.get(m + 1).getInfo() %></td>
+				<%m++; %>
+				<%flag = 5; %>
+
+				<% if(attendanceList4.get(m + 1).getTime() == 6) {%>
+				<td><%=attendanceList4.get(m + 1).getInfo() %></td>
+				<%m++; %>
+				<%flag = 6; %>
+
+				<%} %>
+				<%} %>
+				<%} %>
+				<%} %>
+				<%} else {%>
+				<td>欠</td>
+				<%flag = 10; %>
+
+				<%} %>
+				<%} %>
+
+
+				<%if(flag == 0 || flag == 2 || flag == 10){ %>
+				<% if(attendanceList4.get(m).getTime() == 3) {%>
+				<td><%=attendanceList4.get(m).getInfo() %></td>
+				<%flag = 3; %>
+
+				<% if(m < attendanceList4.size() -1){ %>
+				<% if(attendanceList4.get(m + 1).getTime() == 4) {%>
+				<td><%=attendanceList4.get(m + 1).getInfo() %></td>
+				<%m++; %>
+				<%flag = 4; %>
+				<%} %>
+
+				<% if(attendanceList4.get(m + 1).getTime() == 5) {%>
+				<td><%=attendanceList4.get(m + 1).getInfo() %></td>
+				<%m++; %>
+				<%flag = 5; %>
+
+				<% if(attendanceList4.get(m + 1).getTime() == 6) {%>
+				<td><%=attendanceList4.get(m + 1).getInfo() %></td>
+				<%m++; %>
+				<%flag = 6; %>
+
+				<%} %>
+				<%} %>
+				<%} %>
+				<%} else {%>
+				<td>欠</td>
+				<%flag = 10; %>
+
+				<%} %>
+				<%} %>
+
+				<%if(flag == 0 || flag == 3 || flag == 10){ %>
+				<% if(attendanceList4.get(m).getTime() == 4) {%>
+				<td><%=attendanceList4.get(m).getInfo() %></td>
+				<%flag = 4; %>
+
+				<% if(m < attendanceList4.size() -1){ %>
+				<% if(attendanceList4.get(m + 1).getTime() == 5) {%>
+				<td><%=attendanceList4.get(m + 1).getInfo() %></td>
+				<%m++; %>
+				<%flag = 5; %>
+				<%} %>
+
+				<% if(attendanceList4.get(m + 1).getTime() == 6) {%>
+				<td><%=attendanceList4.get(m + 1).getInfo() %></td>
+				<%m++; %>
+				<%flag = 6; %>
+
+				<%} %>
+				<%} %>
+				<%} else {%>
+				<td>欠</td>
+				<%flag = 10; %>
+
+				<%} %>
+				<%} %>
+
+
+				<%if(flag == 0 || flag == 4 || flag == 10){ %>
+				<% if(attendanceList4.get(m).getTime() == 5) {%>
+				<td><%=attendanceList4.get(m).getInfo() %></td>
+				<%flag = 5; %>
+
+				<% if(m < attendanceList4.size() -1){ %>
+				<% if(attendanceList4.get(m + 1).getTime() == 6) {%>
+				<td><%=attendanceList4.get(m + 1).getInfo() %></td>
+				<%m++; %>
+				<%flag = 6; %>
+				<%} %>
+
+				<%} %>
+				<%} else {%>
+				<td>欠</td>
+				<%flag = 10; %>
+
+				<%} %>
+				<%} %>
+
+				<%if(flag == 0 || flag == 5 || flag == 10){ %>
+				<% if(attendanceList4.get(m).getTime() == 6){%>
+				<td><%=attendanceList4.get(m).getInfo() %></td>
+				<%flag = 6; %>
+
+				<%} else {%>
+				<td>欠</td>
+				<%flag = 10; %>
+
+				<%} %>
+				<%} %>
+				<%} %>
+				<%} %>
+				<%flag = 0; %>
+
+
+				<%if(n < attendanceList5.size()){ %>
+				<%if(attendanceList5.get(n).getDate() == null){%>
+				<%for(int j = 1; j <= 6; j++){ %>
+				<td>欠</td>
+				<%flag = 10; %>
+
+				<% }%>
+				<% }else { %>
+
+				<% if(attendanceList5.get(n).getTime() == 1){%>
+				<td><%=attendanceList5.get(n).getInfo() %></td>
+				<%flag = 1; %>
+
+				<% if(n < attendanceList5.size() -1){ %>
+				<% if(attendanceList5.get(n + 1).getTime() == 2){ %>
+				<td><%=attendanceList5.get(n + 1).getInfo() %></td>
+				<%n++; %>
+				<%flag = 2; %>
+				<%} %>
+
+				<% if(attendanceList5.get(n + 1).getTime() == 3) {%>
+				<td><%=attendanceList5.get(n + 1).getInfo() %></td>
+				<%n++; %>
+				<%flag = 3; %>
+
+				<% if(attendanceList5.get(n + 1).getTime() == 4) {%>
+				<td><%=attendanceList5.get(n + 1).getInfo() %></td>
+				<%n++; %>
+				<%flag = 4; %>
+
+				<% if(attendanceList5.get(n + 1).getTime() == 5) {%>
+				<td><%=attendanceList5.get(n + 1).getInfo() %></td>
+				<%n++; %>
+				<%flag = 5; %>
+
+				<% if(attendanceList5.get(n + 1).getTime() == 6) {%>
+				<td><%=attendanceList5.get(n + 1).getInfo() %></td>
+				<%n++; %>
+				<%flag = 6; %>
+
+				<%} %>
+				<%} %>
+				<%} %>
+				<%} %>
+				<%} %>
+				<%} else {%>
+				<%flag = 10; %>
+
+				<td>欠</td>
+				<%} %>
+
+				<%if(flag == 0 || flag == 1 || flag == 10){ %>
+				<% if(attendanceList5.get(n).getTime() == 2){ %>
+				<td><%=attendanceList5.get(n).getInfo() %></td>
+				<%flag = 2; %>
+
+				<% if(n < attendanceList5.size() -1){ %>
+				<% if(attendanceList5.get(n + 1).getTime() == 3) {%>
+				<td><%=attendanceList5.get(n + 1).getInfo() %></td>
+				<%n++; %>
+				<%flag = 3; %>
+				<%} %>
+
+				<% if(attendanceList5.get(n + 1).getTime() == 4) {%>
+				<td><%=attendanceList5.get(n + 1).getInfo() %></td>
+				<%n++; %>
+				<%flag = 4; %>
+
+				<% if(attendanceList5.get(n + 1).getTime() == 5) {%>
+				<td><%=attendanceList5.get(n + 1).getInfo() %></td>
+				<%n++; %>
+				<%flag = 5; %>
+
+				<% if(attendanceList5.get(n + 1).getTime() == 6) {%>
+				<td><%=attendanceList5.get(n + 1).getInfo() %></td>
+				<%n++; %>
+				<%flag = 6; %>
+
+				<%} %>
+				<%} %>
+				<%} %>
+				<%} %>
+				<%} else {%>
+				<td>欠</td>
+				<%flag = 10; %>
+
+				<%} %>
+				<%} %>
+
+
+				<%if(flag == 0 || flag == 2 || flag == 10){ %>
+				<% if(attendanceList5.get(n).getTime() == 3) {%>
+				<td><%=attendanceList5.get(n).getInfo() %></td>
+				<%flag = 3; %>
+
+				<% if(n < attendanceList5.size() -1){ %>
+				<% if(attendanceList5.get(n + 1).getTime() == 4) {%>
+				<td><%=attendanceList5.get(n + 1).getInfo() %></td>
+				<%n++; %>
+				<%flag = 4; %>
+				<%} %>
+
+				<% if(attendanceList5.get(n + 1).getTime() == 5) {%>
+				<td><%=attendanceList5.get(n + 1).getInfo() %></td>
+				<%n++; %>
+				<%flag = 5; %>
+
+				<% if(attendanceList5.get(n + 1).getTime() == 6) {%>
+				<td><%=attendanceList5.get(n + 1).getInfo() %></td>
+				<%n++; %>
+				<%flag = 6; %>
+
+				<%} %>
+				<%} %>
+				<%} %>
+				<%} else {%>
+				<td>欠</td>
+				<%flag = 10; %>
+
+				<%} %>
+				<%} %>
+
+				<%if(flag == 0 || flag == 3 || flag == 10){ %>
+				<% if(attendanceList5.get(n).getTime() == 4) {%>
+				<td><%=attendanceList5.get(n).getInfo() %></td>
+				<%flag = 4; %>
+
+				<% if(n < attendanceList5.size() -1){ %>
+				<% if(attendanceList5.get(n + 1).getTime() == 5) {%>
+				<td><%=attendanceList5.get(n + 1).getInfo() %></td>
+				<%n++; %>
+				<%flag = 5; %>
+				<%} %>
+
+				<% if(attendanceList5.get(n + 1).getTime() == 6) {%>
+				<td><%=attendanceList5.get(n + 1).getInfo() %></td>
+				<%n++; %>
+				<%flag = 6; %>
+
+				<%} %>
+				<%} %>
+				<%} else {%>
+				<td>欠</td>
+				<%flag = 10; %>
+
+				<%} %>
+				<%} %>
+
+
+				<%if(flag == 0 || flag == 4 || flag == 10){ %>
+				<% if(attendanceList5.get(n).getTime() == 5) {%>
+				<td><%=attendanceList5.get(n).getInfo() %></td>
+				<%flag = 5; %>
+
+				<% if(n < attendanceList5.size() -1){ %>
+				<% if(attendanceList5.get(n + 1).getTime() == 6) {%>
+				<td><%=attendanceList5.get(n + 1).getInfo() %></td>
+				<%n++; %>
+				<%flag = 6; %>
+				<%} %>
+
+				<%} %>
+				<%} else {%>
+				<td>欠</td>
+				<%flag = 10; %>
+
+				<%} %>
+				<%} %>
+
+				<%if(flag == 0 || flag == 5 || flag == 10){ %>
+				<% if(attendanceList5.get(n).getTime() == 6){%>
+				<td><%=attendanceList5.get(n).getInfo() %></td>
+				<%flag = 6; %>
+
+				<%} else {%>
+				<td>欠</td>
+				<%flag = 10; %>
+
+				<%} %>
+				<%} %>
+				<%} %>
+				<%} %>
+				<%flag = 0; %>
+
+				<td>0</td>
+				<td>0</td>
+				<td>％</td>
+				<td>あり</td>
+
+
+
+			</tr>
+			<tr>
+				<% }%>
 				<%} %>
 
 		</table>
