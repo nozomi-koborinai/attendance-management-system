@@ -1,11 +1,22 @@
 @charset "utf-8";
 
-header {
+a {
+	color: #337693;
+}
+.header {
 	text-align: center;
 	font-size: 2.2em;
 	margin-top: 35px;
 	margin-bottom: 20px;
 }
+
+.login {
+	position: absolute;
+	top: 30px;
+	right: 9%;
+	text-align: center;
+}
+
 
 table, th, td {
 	border-collapse: collapse;
@@ -30,7 +41,7 @@ table.table td {
 	vertical-align: top;
 }
 
-table tr:nth-child(4n+7) {
+table tr:nth-child(even) {
 	background: #C0C0C0;
 }
 
