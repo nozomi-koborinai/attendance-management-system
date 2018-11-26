@@ -41,6 +41,12 @@ cl.setTime(date);
 %>
 
 <header> 生徒の出席状況 </header>
+<a><%=user.getUser_name()%>さん</a>
+		<form>
+			<button type="button"
+				onClick="location.href='/Attendance_management_system/LogOut'">ログアウト</button>
+		</form>
+
 
 
 	<center>
