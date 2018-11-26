@@ -78,52 +78,60 @@ public class AttendingStatusCheck extends HttpServlet {
 				//日付フォーマットの定義
 				SimpleDateFormat sdf = new SimpleDateFormat("MM'月'dd'日'");
 				SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy'年'MM'月'dd'日'E'曜日'k'時'mm'分'");
+				SimpleDateFormat sdf3 = new SimpleDateFormat("kk:mm");
 				//フォーマット後の現在時刻
 				String nowTime = sdf2.format(date);
 				System.out.println("教員ログイン時刻" + nowTime);
 
 				//曜日を求める
 				cl.setTime(date);
-				System.out.println(sdf.format(cl.getTime()));
-				int day = 100;		//0.日曜日、1.月曜日、2.火曜日、3.水曜日、4.木曜日、5.金曜日、6.土曜日
+				System.out.println(date);
 
+				request.setAttribute("date", date);
+				request.setAttribute("nowTime", sdf3.format(date));
 
 				switch (cl.get(Calendar.DAY_OF_WEEK)) {
 				case Calendar.SUNDAY:     // Calendar.SUNDAY:1
-					day = 0;
+					cl.add(Calendar.DAY_OF_MONTH, -6);
+					date = cl.getTime();
+					request.setAttribute("attendanceList", AmsDAO.getAttendanceInformation(sdf2.format(date)));	//月
+
+					//火曜日に更新
+					cl.add(Calendar.DAY_OF_MONTH, 1);
+					date = cl.getTime();
+					request.setAttribute("attendanceList2", AmsDAO.getAttendanceInformation(sdf2.format(date))); //火
+
+					//水曜日に更新
+					cl.add(Calendar.DAY_OF_MONTH, 1);
+					date = cl.getTime();
+					request.setAttribute("attendanceList3", AmsDAO.getAttendanceInformation(sdf2.format(date))); //水
+
+					//木曜日に更新
+					cl.add(Calendar.DAY_OF_MONTH, 1);
+					date = cl.getTime();
+					request.setAttribute("attendanceList4", AmsDAO.getAttendanceInformation(sdf2.format(date))); //木
+
+					//金曜日に更新
+					cl.add(Calendar.DAY_OF_MONTH, 1);
+					date = cl.getTime();
+					request.setAttribute("attendanceList5", AmsDAO.getAttendanceInformation(sdf2.format(date))); //金
+
+					request.setAttribute("day", "Sunday");
+
+					String view = "/WEB-INF/view/attendingstatuscheckSturdaySunday.jsp";
+					RequestDispatcher dispatcher = request.getRequestDispatcher(view);
+					dispatcher.forward(request, response);
+
 					break;
 				case Calendar.MONDAY:     // Calendar.MONDAY:2
-					day = 1;
+					request.setAttribute("attendanceList", AmsDAO.getAttendanceInformation(sdf2.format(date))); //月
+
+					String view1 = "/WEB-INF/view/attendingstatuscheckMonday.jsp";
+					RequestDispatcher dispatcher1 = request.getRequestDispatcher(view1);
+					dispatcher1.forward(request, response);
+
 					break;
 				case Calendar.TUESDAY:    // Calendar.TUESDAY:3
-					day = 2;
-					break;
-				case Calendar.WEDNESDAY:  // Calendar.WEDNESDAY:4
-					day = 3;
-					break;
-				case Calendar.THURSDAY:   // Calendar.THURSDAY:5
-					day = 4;
-					break;
-				case Calendar.FRIDAY:     // Calendar.FRIDAY:6
-					day = 5;
-					break;
-				case Calendar.SATURDAY:   // Calendar.SATURDAY:7
-					day = 6;
-					break;
-				}
-
-
-
-				request.setAttribute("day", day);
-				request.setAttribute("date", date);
-				request.setAttribute("studentList", AmsDAO.getStudentInfo());
-
-				//現在日付が月曜日の場合・・・月曜日のみの出席情報を取得
-				if(day == 1){
-					request.setAttribute("attendanceList", AmsDAO.getAttendanceInformation(nowTime)); //月
-
-				//現在日付が火曜日の場合・・・月・火曜日の出席情報を取得
-				} else if(day == 2){
 					cl.add(Calendar.DAY_OF_MONTH, -1);
 					date = cl.getTime();
 
@@ -134,9 +142,12 @@ public class AttendingStatusCheck extends HttpServlet {
 					date = cl.getTime();
 					request.setAttribute("attendanceList2", AmsDAO.getAttendanceInformation(sdf2.format(date))); //火
 
+					String view2 = "/WEB-INF/view/attendingstatuscheckTuesday.jsp";
+					RequestDispatcher dispatcher2 = request.getRequestDispatcher(view2);
+					dispatcher2.forward(request, response);
 
-				//現在日付が水曜日の場合・・・月・火・水曜日の出席情報を取得
-				} else if(day == 3){
+					break;
+				case Calendar.WEDNESDAY:  // Calendar.WEDNESDAY:4
 					cl.add(Calendar.DAY_OF_MONTH, -2);
 					date = cl.getTime();
 					request.setAttribute("attendanceList", AmsDAO.getAttendanceInformation(sdf2.format(date)));	//月
@@ -151,8 +162,12 @@ public class AttendingStatusCheck extends HttpServlet {
 					date = cl.getTime();
 					request.setAttribute("attendanceList3", AmsDAO.getAttendanceInformation(sdf2.format(date))); //水
 
-				//現在日付が木曜日の場合・・・月・火・水・木曜日の出席情報を取得
-				} else if(day == 4){
+					String view3 = "/WEB-INF/view/attendingstatuscheckWednesday.jsp";
+					RequestDispatcher dispatcher3 = request.getRequestDispatcher(view3);
+					dispatcher3.forward(request, response);
+
+					break;
+				case Calendar.THURSDAY:   // Calendar.THURSDAY:5
 					cl.add(Calendar.DAY_OF_MONTH, -3);
 					date = cl.getTime();
 					request.setAttribute("attendanceList", AmsDAO.getAttendanceInformation(sdf2.format(date)));	//月
@@ -172,8 +187,13 @@ public class AttendingStatusCheck extends HttpServlet {
 					date = cl.getTime();
 					request.setAttribute("attendanceList4", AmsDAO.getAttendanceInformation(sdf2.format(date))); //木
 
-				//現在日付が金曜日の場合・・・月・火・水・木・金曜日の出席情報を取得
-				} else if(day == 5){
+					String view4 = "/WEB-INF/view/attendingstatuscheckThursday.jsp";
+					RequestDispatcher dispatcher4 = request.getRequestDispatcher(view4);
+					dispatcher4.forward(request, response);
+
+
+					break;
+				case Calendar.FRIDAY:     // Calendar.FRIDAY:6
 					cl.add(Calendar.DAY_OF_MONTH, -4);
 					date = cl.getTime();
 					request.setAttribute("attendanceList", AmsDAO.getAttendanceInformation(sdf2.format(date)));	//月
@@ -197,13 +217,45 @@ public class AttendingStatusCheck extends HttpServlet {
 					cl.add(Calendar.DAY_OF_MONTH, 1);
 					date = cl.getTime();
 					request.setAttribute("attendanceList5", AmsDAO.getAttendanceInformation(sdf2.format(date))); //金
+
+					String view5 = "/WEB-INF/view/attendingstatuscheckFriday.jsp";
+					RequestDispatcher dispatcher5 = request.getRequestDispatcher(view5);
+					dispatcher5.forward(request, response);
+
+					break;
+				case Calendar.SATURDAY:   // Calendar.SATURDAY:7
+					cl.add(Calendar.DAY_OF_MONTH, -5);
+					date = cl.getTime();
+					request.setAttribute("attendanceList", AmsDAO.getAttendanceInformation(sdf2.format(date)));	//月
+
+					//火曜日に更新
+					cl.add(Calendar.DAY_OF_MONTH, 1);
+					date = cl.getTime();
+					request.setAttribute("attendanceList2", AmsDAO.getAttendanceInformation(sdf2.format(date))); //火
+
+					//水曜日に更新
+					cl.add(Calendar.DAY_OF_MONTH, 1);
+					date = cl.getTime();
+					request.setAttribute("attendanceList3", AmsDAO.getAttendanceInformation(sdf2.format(date))); //水
+
+					//木曜日に更新
+					cl.add(Calendar.DAY_OF_MONTH, 1);
+					date = cl.getTime();
+					request.setAttribute("attendanceList4", AmsDAO.getAttendanceInformation(sdf2.format(date))); //木
+
+					//金曜日に更新
+					cl.add(Calendar.DAY_OF_MONTH, 1);
+					date = cl.getTime();
+					request.setAttribute("attendanceList5", AmsDAO.getAttendanceInformation(sdf2.format(date))); //金
+
+					request.setAttribute("day", "Saturday");
+
+					String view6 = "/WEB-INF/view/attendingstatuscheckSturdaySunday.jsp";
+					RequestDispatcher dispatcher6 = request.getRequestDispatcher(view6);
+					dispatcher6.forward(request, response);
+					break;
 				}
 
-
-
-				String view = "/WEB-INF/view/attendingstatuscheck.jsp";
-				RequestDispatcher dispatcher = request.getRequestDispatcher(view);
-				dispatcher.forward(request, response);
 
 				//ログインしたユーザが管理者の場合
 			} else if(result == 1){
