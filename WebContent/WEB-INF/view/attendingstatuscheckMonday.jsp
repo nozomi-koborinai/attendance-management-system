@@ -13,6 +13,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link
+	href="${pageContext.request.contextPath}/CSS/attendingstatuscheck.css"
+	rel="stylesheet" type="text/css">
 
 <title>attending status check</title>
 </head>
@@ -57,21 +60,19 @@ cl.setTime(date);
 		function functionName() {
 			var select1 = document.forms.formName.selectName1; //変数select1を宣言
 			var select2 = document.forms.formName.selectName2; //変数select2を宣言
-			var select2 = document.forms.formName.selectName3; //変数select3を宣言
 
 			select2.options.length = 0;
-			select3.options.length = 0;
 
 			if (select1.options[select1.selectedIndex].value == "class") {
 				<%
-				int c = 0;
+				int b = 0;
 				for(ClassData cd : classList){
 				%>
 
-				select2.options[<%=cd.getClass()%>] = new Option("<%=cd.getClass_name()%>");
+				select2.options[<%=b%>] = new Option("<%=cd.getClass_name()%>");
 
 				<%
-				c++;
+				b++;
 				}
 				%>
 			}
@@ -79,30 +80,16 @@ cl.setTime(date);
 			else if (select1.options[select1.selectedIndex].value == "course") {
 
 				<%
-				int b = 0;
-				for(ClassData cd : classList){
-				%>
-
-				select2.options[<%=cd.getClass()%>] = new Option("<%=cd.getClass_name()%>");
-
-				<%
-				b++;
-				}
-				%>
-
-				<%
 				int a = 0;
 				for(CourseData coursed : courseList){
 				%>
 
-				select2.options[<%=coursed.getCourse_id()%>] = new Option("<%=coursed.getCourse_name()%>");
+				select2.options[<%=a%>] = new Option("<%=coursed.getCourse_name()%>");
 
 				<%
 				a++;
 				}
 				%>
-
-
 
 			}
 
@@ -123,8 +110,6 @@ cl.setTime(date);
 
 				<!--選択肢②（選択肢①の項目によって変化）-->
 				<select name="selectName2"></select>
-				<!--選択肢③（選択肢①の項目によって変化）-->
-				<select name="selectName3"></select>
 			<input type="submit" value="検索！" style="WIDTH: 100px; HEIGHT: 30px;">
 		</form><br>
 

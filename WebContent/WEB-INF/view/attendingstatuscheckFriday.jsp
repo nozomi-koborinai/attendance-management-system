@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="dto.LoginUser"%>
 <%@ page import="dto.Time"%>
+<%@ page import="dto.ClassData"%>
+<%@ page import="dto.CourseData"%>
 <%@ page import="dto.AttendanceInfo"%>
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="java.util.Calendar"%>
@@ -23,6 +25,8 @@ ArrayList<AttendanceInfo> attendanceList2 = (ArrayList<AttendanceInfo>) request.
 ArrayList<AttendanceInfo> attendanceList3 = (ArrayList<AttendanceInfo>) request.getAttribute("attendanceList3");
 ArrayList<AttendanceInfo> attendanceList4 = (ArrayList<AttendanceInfo>) request.getAttribute("attendanceList4");
 ArrayList<AttendanceInfo> attendanceList5 = (ArrayList<AttendanceInfo>) request.getAttribute("attendanceList5");
+ArrayList<ClassData> classList = (ArrayList<ClassData>) request.getAttribute("classList");
+ArrayList<CourseData> courseList = (ArrayList<CourseData>) request.getAttribute("courseList");
 
 LoginUser user = (LoginUser) session.getAttribute("user");
 Date date = (Date) request.getAttribute("date");
@@ -55,8 +59,60 @@ cl.setTime(date);
 		</form>
 		</div>
 </header>
+<script>
+		function functionName() {
+			var select1 = document.forms.formName.selectName1; //変数select1を宣言
+			var select2 = document.forms.formName.selectName2; //変数select2を宣言
+
+			select2.options.length = 0;
+
+			if (select1.options[select1.selectedIndex].value == "class") {
+				<%
+				int b = 0;
+				for(ClassData cd : classList){
+				%>
+
+				select2.options[<%=b%>] = new Option("<%=cd.getClass_name()%>");
+
+				<%
+				b++;
+				}
+				%>
+			}
+
+			else if (select1.options[select1.selectedIndex].value == "course") {
+
+				<%
+				int a = 0;
+				for(CourseData coursed : courseList){
+				%>
+
+				select2.options[<%=a%>] = new Option("<%=coursed.getCourse_name()%>");
+
+				<%
+				a++;
+				}
+				%>
+
+			}
+
+		}
+	</script>
 
 	<center>
+
+	<a>絞り込み検索も可能です。</a>
+				<form name="formName" action="/Attendance_management_system/RefineSearch" method="get">
+				<!--選択肢①-->
+				<select name="selectName1" onChange="functionName()">
+					<option value="class">学科全体で絞込</option>
+					<option value="course">コースのみで絞込</option>
+				</select>
+
+				<!--選択肢②（選択肢①の項目によって変化）-->
+				<select name="selectName2"></select>
+			<input type="submit" value="検索！" style="WIDTH: 100px; HEIGHT: 30px;">
+		</form><br>
 		<table border="1" class="table">
 
 			<tr>
