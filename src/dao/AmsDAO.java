@@ -948,6 +948,90 @@ public class AmsDAO {
 
 	}
 
+	//絞込検索後の出席状況取得
+	public static ArrayList<AttendanceInfo> getUserAttendanceInformation(String date, String item, String condition){
+
+		ArrayList<AttendanceInfo> attendanceInfoList = new ArrayList<AttendanceInfo>();
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		//set用
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy'年'MM'月'dd'日'");
+
+		try{
+
+			Class.forName("com.mysql.jdbc.Driver");
+
+			con = DriverManager.getConnection(
+					"jdbc:mysql://localhost:3306/attendance_management?useSSL=false",
+					"attendance",
+					"attendance01");
+
+			String sql = "SELECT s.s_name, ai.date, ai.time, ai.info, s.absence, s.late, s.public_flag"
+					+ " FROM students s"
+					+ " LEFT JOIN attendance_information ai"
+					+ " ON s.s_number = ai.s_number"
+					+ " AND ai.date LIKE ?"
+					+ " WHERE " + item + " = ?";
+
+			pstmt = con.prepareStatement(sql);
+			String dt = date;
+			String cdtn = condition;
+			pstmt.setString(1, sdf.format(sdf.parse(dt)) + "%");
+			pstmt.setString(2, cdtn);
+			rs = pstmt.executeQuery();
+
+			while(rs.next() == true){
+				String name = rs.getString("s.s_name");
+				String daTe = rs.getString("ai.date");
+				int time = rs.getInt("ai.time");
+				String info = rs.getString("ai.info");
+				int absence = rs.getInt("s.absence");
+				int late = rs.getInt("s.late");
+				int flag = rs.getInt("s.public_flag");
+
+				attendanceInfoList.add(new AttendanceInfo(name, daTe, time, info, absence, late, 100, flag));
+			}
+
+
+		} catch (SQLException se){
+			se.printStackTrace();
+		} catch (Exception e){
+
+		} finally {
+			try {
+				if( rs != null){
+					rs.close();
+				}
+			} catch(SQLException e){
+				System.out.println("DB切断時にエラーが発生しました。");
+				e.printStackTrace();
+			}
+			try {
+				if( pstmt != null){
+					pstmt.close();
+				}
+			} catch(SQLException e){
+				System.out.println("DB切断時にエラーが発生しました。");
+				e.printStackTrace();
+			}
+
+			try {
+				if( con != null){
+					con.close();
+				}
+			} catch (SQLException e){
+				System.out.println("DB切断時にエラーが発生しました。");
+				e.printStackTrace();
+			}
+		}
+
+		return attendanceInfoList;
+
+	}
+
 	//生徒取得(テスト段階)
 	public static ArrayList<Student> getStudentInfo(){
 
