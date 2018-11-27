@@ -117,17 +117,17 @@ public class RefineSearch extends HttpServlet {
 		case Calendar.WEDNESDAY:  // Calendar.WEDNESDAY:4
 			cl.add(Calendar.DAY_OF_MONTH, -2);
 			date = cl.getTime();
-			request.setAttribute("attendanceList", AmsDAO.getAttendanceInformation(sdf2.format(date)));	//月
+			request.setAttribute("userAttendanceList1", AmsDAO.getUserAttendanceInformation(sdf2.format(date), item, condition));
 
 			//火曜日に更新
 			cl.add(Calendar.DAY_OF_MONTH, 1);
 			date = cl.getTime();
-			request.setAttribute("attendanceList2", AmsDAO.getAttendanceInformation(sdf2.format(date))); //火
+			request.setAttribute("userAttendanceList2", AmsDAO.getUserAttendanceInformation(sdf2.format(date), item, condition));
 
 			//水曜日に更新
 			cl.add(Calendar.DAY_OF_MONTH, 1);
 			date = cl.getTime();
-			request.setAttribute("attendanceList3", AmsDAO.getAttendanceInformation(sdf2.format(date))); //水
+			request.setAttribute("userAttendanceList3", AmsDAO.getUserAttendanceInformation(sdf2.format(date), item, condition));
 
 			String view3 = "/WEB-INF/view/attendingstatuscheckWednesday.jsp";
 			RequestDispatcher dispatcher3 = request.getRequestDispatcher(view3);
@@ -137,22 +137,22 @@ public class RefineSearch extends HttpServlet {
 		case Calendar.THURSDAY:   // Calendar.THURSDAY:5
 			cl.add(Calendar.DAY_OF_MONTH, -3);
 			date = cl.getTime();
-			request.setAttribute("attendanceList", AmsDAO.getAttendanceInformation(sdf2.format(date)));	//月
+			request.setAttribute("userAttendanceList1", AmsDAO.getUserAttendanceInformation(sdf2.format(date), item, condition));
 
 			//火曜日に更新
 			cl.add(Calendar.DAY_OF_MONTH, 1);
 			date = cl.getTime();
-			request.setAttribute("attendanceList2", AmsDAO.getAttendanceInformation(sdf2.format(date))); //火
+			request.setAttribute("userAttendanceList2", AmsDAO.getUserAttendanceInformation(sdf2.format(date), item, condition));
 
 			//水曜日に更新
 			cl.add(Calendar.DAY_OF_MONTH, 1);
 			date = cl.getTime();
-			request.setAttribute("attendanceList3", AmsDAO.getAttendanceInformation(sdf2.format(date))); //水
+			request.setAttribute("userAttendanceList3", AmsDAO.getUserAttendanceInformation(sdf2.format(date), item, condition));
 
 			//木曜日に更新
 			cl.add(Calendar.DAY_OF_MONTH, 1);
 			date = cl.getTime();
-			request.setAttribute("attendanceList4", AmsDAO.getAttendanceInformation(sdf2.format(date))); //木
+			request.setAttribute("userAttendanceList4", AmsDAO.getUserAttendanceInformation(sdf2.format(date), item, condition));
 
 			String view4 = "/WEB-INF/view/attendingstatuscheckThursday.jsp";
 			RequestDispatcher dispatcher4 = request.getRequestDispatcher(view4);
@@ -163,27 +163,27 @@ public class RefineSearch extends HttpServlet {
 		case Calendar.FRIDAY:     // Calendar.FRIDAY:6
 			cl.add(Calendar.DAY_OF_MONTH, -4);
 			date = cl.getTime();
-			request.setAttribute("attendanceList", AmsDAO.getAttendanceInformation(sdf2.format(date)));	//月
+			request.setAttribute("userAttendanceList1", AmsDAO.getUserAttendanceInformation(sdf2.format(date), item, condition));
 
 			//火曜日に更新
 			cl.add(Calendar.DAY_OF_MONTH, 1);
 			date = cl.getTime();
-			request.setAttribute("attendanceList2", AmsDAO.getAttendanceInformation(sdf2.format(date))); //火
+			request.setAttribute("userAttendanceList2", AmsDAO.getUserAttendanceInformation(sdf2.format(date), item, condition));
 
 			//水曜日に更新
 			cl.add(Calendar.DAY_OF_MONTH, 1);
 			date = cl.getTime();
-			request.setAttribute("attendanceList3", AmsDAO.getAttendanceInformation(sdf2.format(date))); //水
+			request.setAttribute("userAttendanceList3", AmsDAO.getUserAttendanceInformation(sdf2.format(date), item, condition));
 
 			//木曜日に更新
 			cl.add(Calendar.DAY_OF_MONTH, 1);
 			date = cl.getTime();
-			request.setAttribute("attendanceList4", AmsDAO.getAttendanceInformation(sdf2.format(date))); //木
+			request.setAttribute("userAttendanceList4", AmsDAO.getUserAttendanceInformation(sdf2.format(date), item, condition));
 
 			//金曜日に更新
 			cl.add(Calendar.DAY_OF_MONTH, 1);
 			date = cl.getTime();
-			request.setAttribute("attendanceList5", AmsDAO.getAttendanceInformation(sdf2.format(date))); //金
+			request.setAttribute("userAttendanceList5", AmsDAO.getUserAttendanceInformation(sdf2.format(date), item, condition));
 
 			String view5 = "/WEB-INF/view/attendingstatuscheckFriday.jsp";
 			RequestDispatcher dispatcher5 = request.getRequestDispatcher(view5);
@@ -193,27 +193,27 @@ public class RefineSearch extends HttpServlet {
 		case Calendar.SATURDAY:   // Calendar.SATURDAY:7
 			cl.add(Calendar.DAY_OF_MONTH, -5);
 			date = cl.getTime();
-			request.setAttribute("attendanceList", AmsDAO.getAttendanceInformation(sdf2.format(date)));	//月
+			request.setAttribute("userAttendanceList1", AmsDAO.getUserAttendanceInformation(sdf2.format(date), item, condition));
 
 			//火曜日に更新
 			cl.add(Calendar.DAY_OF_MONTH, 1);
 			date = cl.getTime();
-			request.setAttribute("attendanceList2", AmsDAO.getAttendanceInformation(sdf2.format(date))); //火
+			request.setAttribute("userAttendanceList2", AmsDAO.getUserAttendanceInformation(sdf2.format(date), item, condition));
 
 			//水曜日に更新
 			cl.add(Calendar.DAY_OF_MONTH, 1);
 			date = cl.getTime();
-			request.setAttribute("attendanceList3", AmsDAO.getAttendanceInformation(sdf2.format(date))); //水
+			request.setAttribute("userAttendanceList3", AmsDAO.getUserAttendanceInformation(sdf2.format(date), item, condition));
 
 			//木曜日に更新
 			cl.add(Calendar.DAY_OF_MONTH, 1);
 			date = cl.getTime();
-			request.setAttribute("attendanceList4", AmsDAO.getAttendanceInformation(sdf2.format(date))); //木
+			request.setAttribute("userAttendanceList4", AmsDAO.getUserAttendanceInformation(sdf2.format(date), item, condition));
 
 			//金曜日に更新
 			cl.add(Calendar.DAY_OF_MONTH, 1);
 			date = cl.getTime();
-			request.setAttribute("attendanceList5", AmsDAO.getAttendanceInformation(sdf2.format(date))); //金
+			request.setAttribute("userAttendanceList5", AmsDAO.getUserAttendanceInformation(sdf2.format(date), item, condition));
 
 			request.setAttribute("day", "Saturday");
 
