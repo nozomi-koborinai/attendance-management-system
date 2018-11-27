@@ -24,6 +24,14 @@ ArrayList<AttendanceInfo> attendanceList = (ArrayList<AttendanceInfo>) request.g
 ArrayList<AttendanceInfo> attendanceList2 = (ArrayList<AttendanceInfo>) request.getAttribute("attendanceList2");
 ArrayList<ClassData> classList = (ArrayList<ClassData>) request.getAttribute("classList");
 ArrayList<CourseData> courseList = (ArrayList<CourseData>) request.getAttribute("courseList");
+ArrayList<AttendanceInfo> userAttendanceList1 = (ArrayList<AttendanceInfo>) request.getAttribute("userAttendanceList1");
+ArrayList<AttendanceInfo> userAttendanceList2 = (ArrayList<AttendanceInfo>) request.getAttribute("userAttendanceList2");
+if(userAttendanceList1 != null){
+	attendanceList = userAttendanceList1;
+}
+if(userAttendanceList2 != null){
+	attendanceList2 = userAttendanceList2;
+}
 
 LoginUser user = (LoginUser) session.getAttribute("user");
 Date date = (Date) request.getAttribute("date");
@@ -63,7 +71,7 @@ cl.setTime(date);
 
 			select2.options.length = 0;
 
-			if (select1.options[select1.selectedIndex].value == "class") {
+			if (select1.options[select1.selectedIndex].value == "s.s_class_id") {
 				<%
 				int b = 0;
 				for(ClassData cd : classList){
@@ -77,7 +85,7 @@ cl.setTime(date);
 				%>
 			}
 
-			else if (select1.options[select1.selectedIndex].value == "course") {
+			else if (select1.options[select1.selectedIndex].value == "s.s_course_id") {
 
 				<%
 				int a = 0;
@@ -102,8 +110,8 @@ cl.setTime(date);
 				<form name="formName" action="/Attendance_management_system/RefineSearch" method="get">
 				<!--選択肢①-->
 				<select name="selectName1" onChange="functionName()">
-					<option value="class">学科全体で絞込</option>
-					<option value="course">コースのみで絞込</option>
+					<option value="s.s_class_id">学科全体で絞込</option>
+					<option value="s.s_course_id">コースのみで絞込</option>
 				</select>
 
 				<!--選択肢②（選択肢①の項目によって変化）-->
