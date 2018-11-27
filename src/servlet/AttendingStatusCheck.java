@@ -89,6 +89,8 @@ public class AttendingStatusCheck extends HttpServlet {
 
 				request.setAttribute("date", date);
 				request.setAttribute("nowTime", sdf3.format(date));
+				request.setAttribute("classList", AmsDAO.getAllClassData());
+				request.setAttribute("courseList", AmsDAO.getAllCourseData());
 
 				switch (cl.get(Calendar.DAY_OF_WEEK)) {
 				case Calendar.SUNDAY:     // Calendar.SUNDAY:1
@@ -300,6 +302,8 @@ public class AttendingStatusCheck extends HttpServlet {
 
 			request.setAttribute("date", date);
 			request.setAttribute("nowTime", sdf3.format(date));
+			request.setAttribute("classList", AmsDAO.getAllClassData());
+			request.setAttribute("courseList", AmsDAO.getAllCourseData());
 
 			switch (cl.get(Calendar.DAY_OF_WEEK)) {
 			case Calendar.SUNDAY:     // Calendar.SUNDAY:1

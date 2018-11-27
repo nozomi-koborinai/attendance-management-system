@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="dto.LoginUser"%>
 <%@ page import="dto.Time"%>
+<%@ page import="dto.ClassData"%>
+<%@ page import="dto.CourseData"%>
 <%@ page import="dto.AttendanceInfo"%>
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="java.util.Calendar"%>
@@ -11,14 +13,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link
-	href="${pageContext.request.contextPath}/CSS/attendingstatuscheck.css"
-	rel="stylesheet" type="text/css">
+
 <title>attending status check</title>
 </head>
-<body>
+<body onLoad="functionName()">
 <%
 ArrayList<AttendanceInfo> attendanceList = (ArrayList<AttendanceInfo>) request.getAttribute("attendanceList");
+ArrayList<ClassData> classList = (ArrayList<ClassData>) request.getAttribute("classList");
+ArrayList<CourseData> courseList = (ArrayList<CourseData>) request.getAttribute("courseList");
 
 LoginUser user = (LoginUser) session.getAttribute("user");
 Date date = (Date) request.getAttribute("date");
@@ -51,8 +53,81 @@ cl.setTime(date);
 		</form>
 		</div>
 </header>
+<script>
+		function functionName() {
+			var select1 = document.forms.formName.selectName1; //変数select1を宣言
+			var select2 = document.forms.formName.selectName2; //変数select2を宣言
+			var select2 = document.forms.formName.selectName3; //変数select3を宣言
+
+			select2.options.length = 0;
+			select3.options.length = 0;
+
+			if (select1.options[select1.selectedIndex].value == "class") {
+				<%
+				int c = 0;
+				for(ClassData cd : classList){
+				%>
+
+				select2.options[<%=cd.getClass()%>] = new Option("<%=cd.getClass_name()%>");
+
+				<%
+				c++;
+				}
+				%>
+			}
+
+			else if (select1.options[select1.selectedIndex].value == "course") {
+
+				<%
+				int b = 0;
+				for(ClassData cd : classList){
+				%>
+
+				select2.options[<%=cd.getClass()%>] = new Option("<%=cd.getClass_name()%>");
+
+				<%
+				b++;
+				}
+				%>
+
+				<%
+				int a = 0;
+				for(CourseData coursed : courseList){
+				%>
+
+				select2.options[<%=coursed.getCourse_id()%>] = new Option("<%=coursed.getCourse_name()%>");
+
+				<%
+				a++;
+				}
+				%>
+
+
+
+			}
+
+		}
+	</script>
+
+
 
 	<center>
+
+	<a>絞り込み検索も可能です。</a>
+				<form name="formName" action="/Attendance_management_system/RefineSearch" method="get">
+				<!--選択肢①-->
+				<select name="selectName1" onChange="functionName()">
+					<option value="class">学科全体で絞込</option>
+					<option value="course">コースのみで絞込</option>
+				</select>
+
+				<!--選択肢②（選択肢①の項目によって変化）-->
+				<select name="selectName2"></select>
+				<!--選択肢③（選択肢①の項目によって変化）-->
+				<select name="selectName3"></select>
+			<input type="submit" value="検索！" style="WIDTH: 100px; HEIGHT: 30px;">
+		</form><br>
+
 		<table border="1" class="table">
 
 			<tr>
@@ -412,20 +487,15 @@ cl.setTime(date);
 
 				<%if(flag == 0 || flag == 3 || flag == 10){ %>
 				<% if(attendanceList.get(i).getTime() == 4) {%>
-				<%if(nowTime.compareTo(sdf2.format(sdf2.parse(jikan.getEndTime4()))) >= 0){%>
 				<td><%=attendanceList.get(i).getInfo() %></td>
 				<%flag = 4; %>
-				<%} else { %>
-				<td>　</td>
-				<%flag = 4; %>
-				<%}%>
 
 				<% if(i < attendanceList.size() -1){ %>
 				<% if(attendanceList.get(i + 1).getTime() == 5) {%>
-				<%if(nowTime.compareTo(sdf2.format(sdf2.parse(jikan.getEndTime5()))) >= 0){%>
-				<td><%=attendanceList.get(i + 1).getInfo() %></td>
 				<%i++; %>
 				<%flag = 5; %>
+				<%if(nowTime.compareTo(sdf2.format(sdf2.parse(jikan.getEndTime5()))) >= 0){%>
+				<td><%=attendanceList.get(i).getInfo() %></td>
 				<%} else { %>
 				<td>　</td>
 				<%i++; %>
@@ -434,10 +504,10 @@ cl.setTime(date);
 				<%} %>
 
 				<% if(attendanceList.get(i + 1).getTime() == 6) {%>
-				<%if(nowTime.compareTo(sdf2.format(sdf2.parse(jikan.getEndTime6()))) >= 0){%>
-				<td><%=attendanceList.get(i + 1).getInfo() %></td>
 				<%i++; %>
 				<%flag = 6; %>
+				<%if(nowTime.compareTo(sdf2.format(sdf2.parse(jikan.getEndTime6()))) >= 0){%>
+				<td><%=attendanceList.get(i).getInfo() %></td>
 				<%} else { %>
 				<td>　</td>
 				<%i++; %>
@@ -558,6 +628,8 @@ cl.setTime(date);
 			</tr>
 			<tr>
 				<% }%>
+
+
 
 </body>
 </html>
