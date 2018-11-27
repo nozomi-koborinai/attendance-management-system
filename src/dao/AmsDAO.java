@@ -552,6 +552,139 @@ public class AmsDAO {
 
 	}
 
+	//コース名からコースIDを取得
+	public static int getCourseID(String courseName){
+
+		int courseID = 0;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try{
+
+			Class.forName("com.mysql.jdbc.Driver");
+
+			con = DriverManager.getConnection(
+					"jdbc:mysql://localhost:3306/attendance_management?useSSL=false",
+					"attendance",
+					"attendance01");
+
+			String sql = "SELECT course_id FROM course WHERE course_name = ?";
+
+			pstmt = con.prepareStatement(sql);
+			String cName = courseName;
+			pstmt.setString(1, cName);
+
+			rs = pstmt.executeQuery();
+			rs.next();
+
+			courseID = rs.getInt("course_id");
+
+
+		} catch (SQLException se){
+			se.printStackTrace();
+		} catch (Exception e){
+
+		} finally {
+			try {
+				if( rs != null){
+					rs.close();
+				}
+			} catch(SQLException e){
+				System.out.println("DB切断時にエラーが発生しました。");
+				e.printStackTrace();
+			}
+			try {
+				if( pstmt != null){
+					pstmt.close();
+				}
+			} catch(SQLException e){
+				System.out.println("DB切断時にエラーが発生しました。");
+				e.printStackTrace();
+			}
+
+			try {
+				if( con != null){
+					con.close();
+				}
+			} catch (SQLException e){
+				System.out.println("DB切断時にエラーが発生しました。");
+				e.printStackTrace();
+			}
+		}
+
+		return courseID;
+
+	}
+
+	//クラス名からクラスIDを取得
+	public static int getClassID(String className){
+
+		int classID = 0;
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try{
+
+			Class.forName("com.mysql.jdbc.Driver");
+
+			con = DriverManager.getConnection(
+					"jdbc:mysql://localhost:3306/attendance_management?useSSL=false",
+					"attendance",
+					"attendance01");
+
+			String sql = "SELECT class_id FROM class WHERE class_name = ?";
+
+			pstmt = con.prepareStatement(sql);
+			String cName = className;
+			pstmt.setString(1, cName);
+
+			rs = pstmt.executeQuery();
+			rs.next();
+
+			classID = rs.getInt("class_id");
+
+
+		} catch (SQLException se){
+			se.printStackTrace();
+		} catch (Exception e){
+
+		} finally {
+			try {
+				if( rs != null){
+					rs.close();
+				}
+			} catch(SQLException e){
+				System.out.println("DB切断時にエラーが発生しました。");
+				e.printStackTrace();
+			}
+			try {
+				if( pstmt != null){
+					pstmt.close();
+				}
+			} catch(SQLException e){
+				System.out.println("DB切断時にエラーが発生しました。");
+				e.printStackTrace();
+			}
+
+			try {
+				if( con != null){
+					con.close();
+				}
+			} catch (SQLException e){
+				System.out.println("DB切断時にエラーが発生しました。");
+				e.printStackTrace();
+			}
+		}
+
+		return classID;
+
+	}
+
+
 	//学生登録
 	public static void addToStudent(int studentNo, String shimei, String gender, int classId, int courseId){
 		Connection con = null;
@@ -911,6 +1044,99 @@ public class AmsDAO {
 
 				attendanceInfoList.add(new AttendanceInfo(name, daTe, time, info, absence, late, 100, flag));
 			}
+
+		} catch (SQLException se){
+			se.printStackTrace();
+		} catch (Exception e){
+
+		} finally {
+			try {
+				if( rs != null){
+					rs.close();
+				}
+			} catch(SQLException e){
+				System.out.println("DB切断時にエラーが発生しました。");
+				e.printStackTrace();
+			}
+			try {
+				if( pstmt != null){
+					pstmt.close();
+				}
+			} catch(SQLException e){
+				System.out.println("DB切断時にエラーが発生しました。");
+				e.printStackTrace();
+			}
+
+			try {
+				if( con != null){
+					con.close();
+				}
+			} catch (SQLException e){
+				System.out.println("DB切断時にエラーが発生しました。");
+				e.printStackTrace();
+			}
+		}
+
+		return attendanceInfoList;
+
+	}
+
+	//絞込検索後の出席状況取得
+	public static ArrayList<AttendanceInfo> getUserAttendanceInformation(String date, String item, String condition){
+
+		ArrayList<AttendanceInfo> attendanceInfoList = new ArrayList<AttendanceInfo>();
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		//set用
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy'年'MM'月'dd'日'");
+		int cdtn = 0;
+
+		try{
+
+			Class.forName("com.mysql.jdbc.Driver");
+
+			con = DriverManager.getConnection(
+					"jdbc:mysql://localhost:3306/attendance_management?useSSL=false",
+					"attendance",
+					"attendance01");
+
+			String sql = "SELECT s.s_name, ai.date, ai.time, ai.info, s.absence, s.late, s.public_flag"
+					+ " FROM students s"
+					+ " LEFT JOIN attendance_information ai"
+					+ " ON s.s_number = ai.s_number"
+					+ " AND ai.date LIKE ?"
+					+ " WHERE " + item + " = ?";
+
+			//取得したitemがクラスの場合
+			if(item.equals("s.s_class_id")){
+				cdtn = getClassID(condition);
+
+			//取得したitemがコースの場合
+			} else if(item.equals("s.s_course_id")){
+				cdtn = getCourseID(condition);
+			}
+
+			pstmt = con.prepareStatement(sql);
+			String dt = date;
+			pstmt.setString(1, sdf.format(sdf.parse(dt)) + "%");
+			pstmt.setInt(2, cdtn);
+			rs = pstmt.executeQuery();
+
+			while(rs.next() == true){
+				String name = rs.getString("s.s_name");
+				String daTe = rs.getString("ai.date");
+				int time = rs.getInt("ai.time");
+				String info = rs.getString("ai.info");
+				int absence = rs.getInt("s.absence");
+				int late = rs.getInt("s.late");
+				int flag = rs.getInt("s.public_flag");
+
+				attendanceInfoList.add(new AttendanceInfo(name, daTe, time, info, absence, late, 100, flag));
+			}
+
 
 		} catch (SQLException se){
 			se.printStackTrace();
