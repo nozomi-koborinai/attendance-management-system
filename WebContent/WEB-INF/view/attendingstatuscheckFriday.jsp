@@ -191,8 +191,8 @@ cl.setTime(date);
 				<td>4</td>
 				<td>5</td>
 				<td>6</td>
-				<td>欠席数</td>
-				<td>遅刻数</td>
+				<td>欠席数日数(累計)</td>
+				<td>遅刻数(累計)</td>
 				<td>出席率</td>
 				<td>公欠申請</td>
 			</tr>
@@ -1434,8 +1434,8 @@ cl.setTime(date);
 				<%} %>
 				<%flag = 0; %>
 
-				<td>0</td>
-				<td>0</td>
+				<td><%=attendanceList.get(i).getAbsence() %></td>
+				<td><%=attendanceList.get(i).getLate() %></td>
 				<td>％</td>
 				<td>あり</td>
 
