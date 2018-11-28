@@ -22,11 +22,12 @@ table, th, td {
 	border-collapse: collapse;
 	border: 1px solid #black;
 	line-height: 1.5;
+	vertical-align: middle;
 }
 
 .th {
 	font-weight: bold;
-	vertical-align: top;
+	vertical-align: middle;
 	background: #3f3f3f;
 	color: #ffffff;
 }
@@ -53,18 +54,26 @@ table tbody tr td:nth-child(1) {
 
 /*カラムの幅（名前）とtableの左の枠線*/
 table tr td:nth-child(1) {
-  width: 170px;
+  width: 165px;
   border-left: 2px solid black;
-
 }
+
 /*カラムの幅（出欠の有無）*/
 table tr td:nth-child(n + 2):not(:nth-child(n + 32)) {
   width: 23px;
 }
 
 /*カラムの幅（数字データなど）*/
-table tr td:nth-child(n + 32):not(:nth-child(n + 36)) {
+table tr td:nth-child(32) {
+  width: 80px;
+}
+
+table tr td:nth-child(n + 33):not(:nth-child(n + 35)) {
   width: 65px;
+}
+
+table tr td:nth-child(35) {
+  width: 80px;
 }
 
 /*table2行目の枠線*/
@@ -83,7 +92,7 @@ table tr td:last-child {
 }
 
 table.table td {
-	vertical-align: top;
+	vertical-align: middle;
 }
 
 table tr:nth-child(even) {
