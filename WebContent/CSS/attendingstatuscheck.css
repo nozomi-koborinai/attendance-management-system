@@ -30,11 +30,56 @@ table, th, td {
 	background: #3f3f3f;
 	color: #ffffff;
 }
+
+/*tableの一つ目のセルの特定の枠線を消去*/
 .th1 {
 	border: 1px solid #ffffff;
 	border-bottom-style: none;
 	border-right-style: none;
 	background: #ffffff;
+
+}
+
+/*特定のテーブルのカラムだけ枠線を太くする*/
+table thead tr th:nth-child(6n+2),
+table tbody tr td:nth-child(6n+2) {
+    border-left: 2px solid black;
+}
+
+table thead tr th:nth-child(1),
+table tbody tr td:nth-child(1) {
+    border-left: 2px solid black;
+}
+
+/*カラムの幅（名前）とtableの左の枠線*/
+table tr td:nth-child(1) {
+  width: 170px;
+  border-left: 2px solid black;
+
+}
+/*カラムの幅（出欠の有無）*/
+table tr td:nth-child(n + 2):not(:nth-child(n + 32)) {
+  width: 23px;
+}
+
+/*カラムの幅（数字データなど）*/
+table tr td:nth-child(n + 32):not(:nth-child(n + 36)) {
+  width: 65px;
+}
+
+/*table2行目の枠線*/
+table tr:nth-child(3) {
+	border: 2px solid black;
+}
+
+/*table一番下の枠線*/
+table tr:nth-last-child(2) {
+	border-bottom: 2px solid black;
+}
+
+/*tableの右の枠線*/
+table tr td:last-child {
+  border-right: 2px solid black;
 }
 
 table.table td {
