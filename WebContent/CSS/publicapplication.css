@@ -7,9 +7,45 @@ header {
 	margin-bottom: 20px;
 }
 
-#pa form input[type="text"] {
+#a form input[type="text"] {
 	font-size: 1.0em;
 	width: 50%;
+	height: 30px;
+	margin-bottom: 30px;
+}
+
+#year {
+	margin-top: 30px;
+	font-size: 1.0em;
+	width: 5%;
+	height: 30px;
+	margin-bottom: 20px;
+}
+
+#month {
+	font-size: 1.0em;
+	width: 3%;
+	height: 30px;
+	margin-bottom: 20px;
+}
+
+#day {
+	font-size: 1.0em;
+	width: 3%;
+	height: 30px;
+	margin-bottom: 20px;
+}
+
+#hour {
+	font-size: 1.0em;
+	width: 3%;
+	height: 30px;
+	margin-bottom: 20px;
+}
+
+#minute {
+	font-size: 1.0em;
+	width: 3%;
 	height: 30px;
 	margin-bottom: 20px;
 }
@@ -28,11 +64,19 @@ header {
 	transition: background 0.3s ease-in-out;
 }
 
+#pulldown {
+	margin-right:6%;
+}
+
+#pulldown2 {
+	margin-right:2%;
+}
+
 #bottom1 form input[type="submit"]:hover {
 	background: #000000;
 }
 
-#bottom2 form input[type="submit"] {
+#a form input[type="submit"] {
 	position: absolute;
 	width: 10%;
 	top: 70%;
