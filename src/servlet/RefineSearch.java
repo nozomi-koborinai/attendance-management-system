@@ -36,6 +36,7 @@ public class RefineSearch extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		String item = request.getParameter("selectName1");
 		String condition = request.getParameter("selectName2");
+		String searchName = request.getParameter("selectName2");
 
 		//Calenderクラスのインスタンス生成
 		Calendar cl = Calendar.getInstance();
@@ -56,6 +57,7 @@ public class RefineSearch extends HttpServlet {
 		request.setAttribute("nowTime", sdf3.format(date));
 		request.setAttribute("classList", AmsDAO.getAllClassData());
 		request.setAttribute("courseList", AmsDAO.getAllCourseData());
+		request.setAttribute("searchName", searchName);
 
 		switch (cl.get(Calendar.DAY_OF_WEEK)) {
 		case Calendar.SUNDAY:     // Calendar.SUNDAY:1
