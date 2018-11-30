@@ -60,6 +60,7 @@ String nowTime = sdf2.format(date);
 int flag = 0;
 
 cl.setTime(date);
+String searchName = (String) request.getAttribute("searchName");
 %>
 
 <header>
@@ -128,6 +129,11 @@ cl.setTime(date);
 				<select name="selectName2"></select>
 			<input type="submit" value="検索！" style="WIDTH: 100px; HEIGHT: 30px;">
 		</form><br>
+
+		<%if(searchName != null){%>
+		<a><%=searchName %></a>
+		<%} %>
+
 		<table border="1" class="table">
 
 			<tr>
