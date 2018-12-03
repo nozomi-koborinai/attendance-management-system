@@ -7,7 +7,7 @@ header {
 	margin-bottom: 20px;
 }
 
-#bottom1 form input[type="submit"] {
+#bottom1 input[type="button"] {
 	position: absolute;
 	width: 10%;
 	top: 70%;
@@ -21,7 +21,7 @@ header {
 	transition: background 0.3s ease-in-out;
 }
 
-#bottom1 form input[type="submit"]:hover {
+#bottom1 input[type="button"]:hover {
 	background: #000000;
 }
 
