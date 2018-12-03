@@ -3,9 +3,30 @@
 header {
 	text-align: center;
 	font-size: 2.2em;
-	margin-top: 35px;
-	margin-bottom: 20px;
+	margin-top: 5%;
 }
+
+#a1{
+	position: absolute;
+	font-size: 1.5em;
+	top: 27%;
+	left: 22%;
+}
+
+#a2{
+	position: absolute;
+	font-size: 1.5em;
+	top: 37%;
+	left: 22%;
+}
+
+#a3{
+	position: absolute;
+	font-size: 1.5em;
+	top: 50%;
+	left: 22%;
+}
+
 
 #bottom1 input[type="button"] {
 	position: absolute;

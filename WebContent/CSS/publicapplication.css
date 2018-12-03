@@ -4,7 +4,15 @@ header {
 	text-align: center;
 	font-size: 2.2em;
 	margin-top: 35px;
-	margin-bottom: 20px;
+	margin-bottom: 3%;
+}
+
+#name {
+	font-size: 1.2em;
+	position: absolute;
+	top: 7%;
+	right: 10%;
+	color: #0000FF
 }
 
 #a form input[type="text"] {
@@ -51,11 +59,11 @@ header {
 }
 
 #pulldown {
-	margin-right:6%;
+	margin-right: 6%;
 }
 
 #pulldown2 {
-	margin-right:2%;
+	margin-right: 2%;
 }
 
 #bottom1 form input[type="submit"] {
