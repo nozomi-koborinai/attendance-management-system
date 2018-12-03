@@ -14,6 +14,7 @@ import dto.AttendanceInfo;
 import dto.ClassData;
 import dto.CourseData;
 import dto.LoginUser;
+import dto.PublicStatus;
 import dto.Student;
 import servlet.Login;
 import util.PasswordUtil;
@@ -1431,6 +1432,77 @@ public class AmsDAO {
 
 	}
 
+	//公欠申請状況取得
+	public static ArrayList<PublicStatus> getApplicationStatus(int barcodeData){
+
+		ArrayList<PublicStatus> publicList = new ArrayList<PublicStatus>();
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try{
+
+			Class.forName("com.mysql.jdbc.Driver");
+
+			con = DriverManager.getConnection(
+					"jdbc:mysql://localhost:3306/attendance_management?useSSL=false",
+					"attendance",
+					"attendance01");
+
+			String sql = "SELECT * FROM public WHERE s_number = ? AND auth_frag = 0";
+
+			pstmt = con.prepareStatement(sql);
+			int bData = barcodeData;
+			pstmt.setInt(1, bData);
+			rs = pstmt.executeQuery();
+
+			while(rs.next() == true){
+				int publicId = rs.getInt("public_id");
+				String appliDate = rs.getString("application_date");
+				String reason = rs.getString("reason");
+				String place = rs.getString("place");
+				String period = rs.getString("period");
+
+				publicList.add(new PublicStatus(publicId, appliDate, reason, place, period));
+			}
+
+		} catch (SQLException se){
+			se.printStackTrace();
+		} catch (Exception e){
+
+		} finally {
+			try {
+				if( rs != null){
+					rs.close();
+				}
+			} catch(SQLException e){
+				System.out.println("DB切断時にエラーが発生しました。");
+				e.printStackTrace();
+			}
+			try {
+				if( pstmt != null){
+					pstmt.close();
+				}
+			} catch(SQLException e){
+				System.out.println("DB切断時にエラーが発生しました。");
+				e.printStackTrace();
+			}
+
+			try {
+				if( con != null){
+					con.close();
+				}
+			} catch (SQLException e){
+				System.out.println("DB切断時にエラーが発生しました。");
+				e.printStackTrace();
+			}
+		}
+
+		return publicList;
+
+	}
+
 	//生徒取得(テスト段階)
 	public static ArrayList<Student> getStudentInfo(){
 
@@ -1496,6 +1568,59 @@ public class AmsDAO {
 		}
 
 		return StudentList;
+
+	}
+
+	//公欠申請削除
+	public static void deletePublic(int publicId) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try{
+
+			Class.forName("com.mysql.jdbc.Driver");
+
+			con = DriverManager.getConnection(
+					"jdbc:mysql://localhost:3306/attendance_management?useSSL=false",
+					"attendance",
+					"attendance01");
+
+			String sql = "DELETE FROM public WHERE public_id = ?";
+
+			pstmt = con.prepareStatement(sql);
+
+			int pi = publicId;
+
+			pstmt.setInt(1, pi);
+
+			pstmt.executeUpdate();
+
+		} catch(MySQLIntegrityConstraintViolationException e){
+			Login.error = 1;
+		} catch (SQLException e){
+			e.printStackTrace();
+		} catch (Exception e){
+			e.printStackTrace();
+		} finally {
+
+			try {
+				if( pstmt != null){
+					pstmt.close();
+				}
+			} catch(SQLException e){
+				System.out.println("DB切断時にエラーが発生しました。");
+				e.printStackTrace();
+			}
+
+			try {
+				if( con != null){
+					con.close();
+				}
+			} catch (SQLException e){
+				System.out.println("DB切断時にエラーが発生しました。");
+				e.printStackTrace();
+			}
+		}
 
 	}
 
