@@ -14,7 +14,9 @@ int barcodeDate = (Integer) request.getAttribute("bDate");
 String sName = (String) request.getAttribute("studentName");
 %>
 <header> 公欠申請ページ </header>
-<a><%=sName %></a>
+<div id="name">
+<%=sName %>　さん
+</div>
 <body>
 	<center>
 		<div id="a">
