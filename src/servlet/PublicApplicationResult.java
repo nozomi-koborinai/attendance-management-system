@@ -10,16 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class PublicApplicationConfirmation
+ * Servlet implementation class PublicApplicationResult
  */
-@WebServlet("/PublicApplicationConfirmation")
-public class PublicApplicationConfirmation extends HttpServlet {
+@WebServlet("/PublicApplicationResult")
+public class PublicApplicationResult extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PublicApplicationConfirmation() {
+    public PublicApplicationResult() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,7 +28,7 @@ public class PublicApplicationConfirmation extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String view = "/WEB-INF/view/publicapplicationconfirmation.jsp";
+		String view = "/WEB-INF/view/publicapplicationresult.jsp";
 		RequestDispatcher dispatcher = request.getRequestDispatcher(view);
 		dispatcher.forward(request, response);
 	}

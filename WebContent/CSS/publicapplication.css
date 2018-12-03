@@ -50,6 +50,14 @@ header {
 	margin-bottom: 20px;
 }
 
+#pulldown {
+	margin-right:6%;
+}
+
+#pulldown2 {
+	margin-right:2%;
+}
+
 #bottom1 form input[type="submit"] {
 	position: absolute;
 	width: 10%;
@@ -59,17 +67,9 @@ header {
 	border: 0;
 	border-radius: 3px;
 	color: white;
-	height: 40px;
+	height: 60px;
 	cursor: pointer;
 	transition: background 0.3s ease-in-out;
-}
-
-#pulldown {
-	margin-right:6%;
-}
-
-#pulldown2 {
-	margin-right:2%;
 }
 
 #bottom1 form input[type="submit"]:hover {
@@ -85,11 +85,11 @@ header {
 	border: 0;
 	border-radius: 3px;
 	color: white;
-	height: 40px;
+	height: 60px;
 	cursor: pointer;
 	transition: background 0.3s ease-in-out;
 }
 
-#bottom2 form input[type="submit"]:hover {
+#a form input[type="submit"]:hover {
 	background: #000000;
 }

@@ -13,9 +13,7 @@
 <body>
 	<center>
 		<div id="a">
-			<form
-				action="/Attendance_management_system/PublicApplicationConfirmation"
-				method="get">
+			<form action="/Attendance_management_system/PublicApplicationConfirmation" method="get">
 				【理由】<input type="text" placeholder="例：盛岡情報ビジネス専門学校の内定式にいくため。"
 					id="why" name="why"><br>【場所】<input type="text"
 					placeholder="例：岩手県盛岡市中央通３丁目２−１７" name="place"><br>

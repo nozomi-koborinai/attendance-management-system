@@ -1,10 +1,10 @@
 @charset "utf-8";
 
-header {
+.a {
 	text-align: center;
-	font-size: 2.2em;
-	margin-top: 35px;
-	margin-bottom: 20px;
+	font-size: 4.0em;
+	margin-top: 14%;
+
 }
 
 #bottom1 form input[type="submit"] {
