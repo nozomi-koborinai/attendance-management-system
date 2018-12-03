@@ -6,16 +6,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link
-	href="${pageContext.request.contextPath}/CSS/publicapplicationstatus.css"
-	rel="stylesheet" type="text/css">
+
 <title>public application status</title>
 </head>
 <%
-String studentName = (String) request.getAttribute("studentName");
-ArrayList<PublicStatus> publicList = (ArrayList<PublicStatus>) request.getAttribute("applicatinstatus");
+int deleteID = 0;
+ArrayList<PublicStatus> deletePublic = (ArrayList<PublicStatus>) request.getAttribute("deletePublic");
 %>
-<header> 公欠申請状況 </header>
+<header> こちらの情報を削除しますか？ </header>
 <body>
 	<center>
 		<table border="1" class="table">
@@ -24,10 +22,10 @@ ArrayList<PublicStatus> publicList = (ArrayList<PublicStatus>) request.getAttrib
 				<th class="th2">理由</th>
 				<th class="th3">場所</th>
 				<th class="th4">期間</th>
-				<th class="th5">削除</th>
 			</tr>
 				<%
-					for (PublicStatus ps : publicList) {
+					for (PublicStatus ps : deletePublic) {
+						deleteID = ps.getPublicId();
 				%>
 
 				<tr>
@@ -35,7 +33,6 @@ ArrayList<PublicStatus> publicList = (ArrayList<PublicStatus>) request.getAttrib
 					<th><%=ps.getReason()%></th>
 					<th><%=ps.getPlace()%></th>
 					<th><%=ps.getPeriod()%></th>
-					<th><form action="/Attendance_management_system/DeletePublic" method="get"><button type="submit" name="delete" value=<%=ps.getPublicId()%>>🗑️</button></form></th>
 
 				</tr>
 
@@ -49,6 +46,11 @@ ArrayList<PublicStatus> publicList = (ArrayList<PublicStatus>) request.getAttrib
 		<form action="/Attendance_management_system/Menu"
 			method="get" name='form-back'>
 			<input type="submit" value="メニューへ">
+		</form>
+		<form action="/Attendance_management_system/DeletePublic"
+			method="post">
+			<input type="hidden" name="deleteId" value=<%=deleteID %>>
+			<input type="submit" value="削除" >
 		</form>
 	</div>
 </footer>
