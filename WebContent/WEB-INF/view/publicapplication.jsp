@@ -9,7 +9,12 @@
 	rel="stylesheet" type="text/css">
 <title>public application</title>
 </head>
+<%
+int barcodeDate = (Integer) request.getAttribute("bDate");
+String sName = (String) request.getAttribute("studentName");
+%>
 <header> 公欠申請ページ </header>
+<a><%=sName %></a>
 <body>
 	<center>
 		<div id="a">
@@ -65,7 +70,7 @@
 
 				<div id="pulldown2">
 					<%--戻ってくる年月日 --%>
-					<select name="year2" id="year">
+					<select name="year2" id="year2">
 						<%
 							for (int i = 2018; i < 2025; i++) {
 						%>
@@ -107,6 +112,7 @@
 						%>
 					</select>分 まで
 				</div>
+				<input type="hidden" name="barcodeDate" value=<%=barcodeDate%>>
 				<input type="submit" value="確定">
 			</form>
 		</div>

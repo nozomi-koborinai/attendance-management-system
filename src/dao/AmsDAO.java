@@ -92,6 +92,67 @@ public class AmsDAO {
 		return result;
 	}
 
+	//学籍番号チェック
+	public static int numberCheck(int barcodeDate){
+		int result = 0;		//ユーザーが見つかっていない状態
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+
+			con = DriverManager.getConnection(
+					"jdbc:mysql://localhost:3306/attendance_management?useSSL=false",
+					"attendance",
+					"attendance01");
+
+			String sql = "SELECT * FROM students WHERE s_number = ?";
+
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, barcodeDate);
+
+			rs = pstmt.executeQuery();
+
+			if(rs.next()){
+				result = 1;
+			}
+
+		} catch (ClassNotFoundException e) {
+			System.out.println("JDBCドライバが見つかりません。");
+			e.printStackTrace();
+		} catch (SQLException e) {
+			System.out.println("DBアクセス時にエラーが発生しました。");
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+			} catch (SQLException e) {
+				System.out.println("DBアクセス時にエラーが発生しました。");
+				e.printStackTrace();
+			}
+			try {
+				if (pstmt != null) {
+					pstmt.close();
+				}
+			} catch (SQLException e) {
+				System.out.println("DBアクセス時にエラーが発生しました。");
+				e.printStackTrace();
+			}
+			try {
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException e) {
+				System.out.println("DBアクセス時にエラーが発生しました。");
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
+
 	//生徒氏名を取得
 	public static String getStudentName(int sNumber){
 
@@ -1103,6 +1164,68 @@ public class AmsDAO {
 			pstmt.setInt(1, bData);
 			pstmt.setString(2, sdf.format(sdf.parse(dt)) + "%");
 			pstmt.setInt(3, tm);
+
+			pstmt.executeUpdate();
+
+		} catch(MySQLIntegrityConstraintViolationException e){
+			Login.error = 1;
+		} catch (SQLException e){
+			e.printStackTrace();
+		} catch (Exception e){
+			e.printStackTrace();
+		} finally {
+
+			try {
+				if( pstmt != null){
+					pstmt.close();
+				}
+			} catch(SQLException e){
+				System.out.println("DB切断時にエラーが発生しました。");
+				e.printStackTrace();
+			}
+
+			try {
+				if( con != null){
+					con.close();
+				}
+			} catch (SQLException e){
+				System.out.println("DB切断時にエラーが発生しました。");
+				e.printStackTrace();
+			}
+		}
+
+	}
+
+	//公欠申請登録
+	public static void registerPublic(int studentNumber, String applicationDate, String reason, String place, String period) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try{
+
+			Class.forName("com.mysql.jdbc.Driver");
+
+			con = DriverManager.getConnection(
+					"jdbc:mysql://localhost:3306/attendance_management?useSSL=false",
+					"attendance",
+					"attendance01");
+
+			String sql = "INSERT INTO public(s_number, application_date, reason, place, period, auth_frag) values(?,?,?,?,?,0);";
+
+			pstmt = con.prepareStatement(sql);
+
+			int sNumber = studentNumber;
+			String apDate = applicationDate;
+			String rsn = reason;
+			String plc = place;
+			String prod = period;
+
+			pstmt.setInt(1, sNumber);
+			pstmt.setString(2, apDate);
+			pstmt.setString(3, rsn);
+			pstmt.setString(4, plc);
+			pstmt.setString(5, prod);
+
 
 			pstmt.executeUpdate();
 
