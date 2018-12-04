@@ -822,7 +822,12 @@ String searchName = (String) request.getAttribute("searchName");
 				<td><%=attendanceList.get(i).getAbsence() %></td>
 				<td><%=attendanceList.get(i).getLate() %></td>
 				<td>％</td>
-				<td>あり</td>
+
+				<%if(attendanceList.get(i).getPublicFlag() == 1){ %>
+				<td><form action="/Attendance_management_system/ApplicationStatusCheck" method="get"><button type="submit" name="check" value=<%=attendanceList.get(i).getSNumber()%>>公欠確認</button></form></td>
+				<%} else { %>
+				<td>　　</td>
+				<%} %>
 
 
 

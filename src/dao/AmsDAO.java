@@ -1229,6 +1229,7 @@ public class AmsDAO {
 
 
 			pstmt.executeUpdate();
+			publicFlagUP(studentNumber);
 
 		} catch(MySQLIntegrityConstraintViolationException e){
 			Login.error = 1;
@@ -1280,7 +1281,7 @@ public class AmsDAO {
 					"attendance",
 					"attendance01");
 
-			String sql = "SELECT s.s_name, ai.date, ai.time, ai.info, s.absence, s.late, s.public_flag"
+			String sql = "SELECT s.s_number, s.s_name, ai.date, ai.time, ai.info, s.absence, s.late, s.public_flag"
 					+ " FROM students s"
 					+ " LEFT JOIN attendance_information ai"
 					+ " ON s.s_number = ai.s_number"
@@ -1292,6 +1293,7 @@ public class AmsDAO {
 			rs = pstmt.executeQuery();
 
 			while(rs.next() == true){
+				int sNumber = rs.getInt("s.s_number");
 				String name = rs.getString("s.s_name");
 				String daTe = rs.getString("ai.date");
 				int time = rs.getInt("ai.time");
@@ -1300,7 +1302,7 @@ public class AmsDAO {
 				int late = rs.getInt("s.late");
 				int flag = rs.getInt("s.public_flag");
 
-				attendanceInfoList.add(new AttendanceInfo(name, daTe, time, info, absence, late, 100, flag));
+				attendanceInfoList.add(new AttendanceInfo(sNumber, name, daTe, time, info, absence, late, 100, flag));
 			}
 
 		} catch (SQLException se){
@@ -1361,7 +1363,7 @@ public class AmsDAO {
 					"attendance",
 					"attendance01");
 
-			String sql = "SELECT s.s_name, ai.date, ai.time, ai.info, s.absence, s.late, s.public_flag"
+			String sql = "SELECT s.s_number, s.s_name, ai.date, ai.time, ai.info, s.absence, s.late, s.public_flag"
 					+ " FROM students s"
 					+ " LEFT JOIN attendance_information ai"
 					+ " ON s.s_number = ai.s_number"
@@ -1384,6 +1386,7 @@ public class AmsDAO {
 			rs = pstmt.executeQuery();
 
 			while(rs.next() == true){
+				int sNumber = rs.getInt("s.s_number");
 				String name = rs.getString("s.s_name");
 				String daTe = rs.getString("ai.date");
 				int time = rs.getInt("ai.time");
@@ -1392,7 +1395,7 @@ public class AmsDAO {
 				int late = rs.getInt("s.late");
 				int flag = rs.getInt("s.public_flag");
 
-				attendanceInfoList.add(new AttendanceInfo(name, daTe, time, info, absence, late, 100, flag));
+				attendanceInfoList.add(new AttendanceInfo(sNumber, name, daTe, time, info, absence, late, 100, flag));
 			}
 
 
@@ -1665,6 +1668,237 @@ public class AmsDAO {
 			pstmt.setInt(1, pi);
 
 			pstmt.executeUpdate();
+
+		} catch(MySQLIntegrityConstraintViolationException e){
+			Login.error = 1;
+		} catch (SQLException e){
+			e.printStackTrace();
+		} catch (Exception e){
+			e.printStackTrace();
+		} finally {
+
+			try {
+				if( pstmt != null){
+					pstmt.close();
+				}
+			} catch(SQLException e){
+				System.out.println("DB切断時にエラーが発生しました。");
+				e.printStackTrace();
+			}
+
+			try {
+				if( con != null){
+					con.close();
+				}
+			} catch (SQLException e){
+				System.out.println("DB切断時にエラーが発生しました。");
+				e.printStackTrace();
+			}
+		}
+
+	}
+
+	//公欠フラグを立てる
+	public static void publicFlagUP(int studentNo) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try{
+
+			Class.forName("com.mysql.jdbc.Driver");
+
+			con = DriverManager.getConnection(
+					"jdbc:mysql://localhost:3306/attendance_management?useSSL=false",
+					"attendance",
+					"attendance01");
+
+			String sql = "UPDATE students SET public_flag = 1 where s_number = ?";
+
+			pstmt = con.prepareStatement(sql);
+
+			int sNo = studentNo;
+
+			pstmt.setInt(1, sNo);
+
+			pstmt.executeUpdate();
+
+		} catch(MySQLIntegrityConstraintViolationException e){
+			Login.error = 1;
+		} catch (SQLException e){
+			e.printStackTrace();
+		} catch (Exception e){
+			e.printStackTrace();
+		} finally {
+
+			try {
+				if( pstmt != null){
+					pstmt.close();
+				}
+			} catch(SQLException e){
+				System.out.println("DB切断時にエラーが発生しました。");
+				e.printStackTrace();
+			}
+
+			try {
+				if( con != null){
+					con.close();
+				}
+			} catch (SQLException e){
+				System.out.println("DB切断時にエラーが発生しました。");
+				e.printStackTrace();
+			}
+		}
+
+	}
+
+	//生徒に未確認の公欠申請情報があるか
+	public static boolean checkPublic(int studentNo){
+
+		boolean result = true;		//公欠申請情報が残っている状態
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try{
+
+			Class.forName("com.mysql.jdbc.Driver");
+
+			con = DriverManager.getConnection(
+					"jdbc:mysql://localhost:3306/attendance_management?useSSL=false",
+					"attendance",
+					"attendance01");
+
+			String sql = "SELECT * FROM public WHERE s_number = ? AND auth_frag = 0";
+
+			pstmt = con.prepareStatement(sql);
+			int sNo = studentNo;
+			pstmt.setInt(1, sNo);
+
+			rs = pstmt.executeQuery();
+
+			if(rs.next() != true){
+				result = false;		//その生徒の公欠申請情報がなくなった場合
+			}
+
+		} catch (SQLException se){
+			se.printStackTrace();
+		} catch (Exception e){
+
+		} finally {
+			try {
+				if( rs != null){
+					rs.close();
+				}
+			} catch(SQLException e){
+				System.out.println("DB切断時にエラーが発生しました。");
+				e.printStackTrace();
+			}
+			try {
+				if( pstmt != null){
+					pstmt.close();
+				}
+			} catch(SQLException e){
+				System.out.println("DB切断時にエラーが発生しました。");
+				e.printStackTrace();
+			}
+
+			try {
+				if( con != null){
+					con.close();
+				}
+			} catch (SQLException e){
+				System.out.println("DB切断時にエラーが発生しました。");
+				e.printStackTrace();
+			}
+		}
+
+		return result;
+
+	}
+
+	//生徒の公欠申請状況をすべて確認した際にその生徒のフラグを降ろす
+	public static void publicFlagDataDOWN(int studentNo) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try{
+
+			Class.forName("com.mysql.jdbc.Driver");
+
+			con = DriverManager.getConnection(
+					"jdbc:mysql://localhost:3306/attendance_management?useSSL=false",
+					"attendance",
+					"attendance01");
+
+			String sql = "UPDATE students SET public_flag = 0 WHERE s_number = ?";
+
+			pstmt = con.prepareStatement(sql);
+
+			int sNo = studentNo;
+
+			pstmt.setInt(1, sNo);
+
+			pstmt.executeUpdate();
+
+		} catch(MySQLIntegrityConstraintViolationException e){
+			Login.error = 1;
+		} catch (SQLException e){
+			e.printStackTrace();
+		} catch (Exception e){
+			e.printStackTrace();
+		} finally {
+
+			try {
+				if( pstmt != null){
+					pstmt.close();
+				}
+			} catch(SQLException e){
+				System.out.println("DB切断時にエラーが発生しました。");
+				e.printStackTrace();
+			}
+
+			try {
+				if( con != null){
+					con.close();
+				}
+			} catch (SQLException e){
+				System.out.println("DB切断時にエラーが発生しました。");
+				e.printStackTrace();
+			}
+		}
+
+	}
+
+	//生徒の公欠申請状況を確認したときにDBの情報を確認した状態にする
+	public static void publicFlagDataUP(int publicID, int studentNo) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try{
+
+			Class.forName("com.mysql.jdbc.Driver");
+
+			con = DriverManager.getConnection(
+					"jdbc:mysql://localhost:3306/attendance_management?useSSL=false",
+					"attendance",
+					"attendance01");
+
+			String sql = "UPDATE public SET auth_frag = 1 where public_id = ?";
+
+			pstmt = con.prepareStatement(sql);
+
+			int pId = publicID;
+
+			pstmt.setInt(1, pId);
+
+			pstmt.executeUpdate();
+
+			//公欠申請情報がまだ残っているか
+			//公欠申請情報がない場合は生徒テーブルのフラグを降ろす
+			if(!(checkPublic(studentNo))){
+				publicFlagDataDOWN(studentNo);
+			}
 
 		} catch(MySQLIntegrityConstraintViolationException e){
 			Login.error = 1;
