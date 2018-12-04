@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="dto.PublicStatus" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,9 +11,14 @@
 	rel="stylesheet" type="text/css">
 <title>application status check</title>
 </head>
+<%
+ArrayList<PublicStatus> publicList = (ArrayList<PublicStatus>) request.getAttribute("publicList");
+int studentNo = (Integer) request.getAttribute("studentNo");
+%>
 <header> 公欠申請状況 </header>
 <body>
 	<center>
+	<form action="/Attendance_management_system/ApplicationStatusCheck" method="post" name='form-permisson'>
 		<table border="1" class="table">
 			<tr>
 				<th class="th1">申請日</th>
@@ -20,27 +27,25 @@
 				<th class="th4">日時</th>
 				<th class="th5">チェック</th>
 			</tr>
+
+			<%for(PublicStatus ps : publicList){
+				int count = 1;
+			%>
 			<tr>
-				<td>2018/11/06</td>
-				<td>株式会社インフォコムの内定式があるため</td>
-				<td>株式会社インフォコム東日本 原宿事業所</td>
-				<td>2019/01/03～2019/01/03</td>
-				<td align="center"><p>
-						<input type="checkbox" name="riyu" value="1">
-					</p></td>
+				<td><%=ps.getPublicDate() %></td>
+				<td><%=ps.getReason() %></td>
+				<td><%=ps.getPlace() %></td>
+				<td><%=ps.getPeriod() %></td>
+				<td align="center">
+						<p><input type="checkbox" value=<%=ps.getPublicId() %> name="public"></p>
+					</td>
 			</tr>
-			<tr>
-				<td>2018/11/08</td>
-				<td>株式会社インフォコムの内定式があるため</td>
-				<td>株式会社インフォコム東日本 原宿事業所</td>
-				<td>2019/01/20～2019/01/20</td>
-				<td align="center"><p>
-						<input type="checkbox" name="riyu" value="1">
-					</p></td>
-			</tr>
-			<%-- ココから下の例 --%>
-			<%-- for(kouketu k : kouketuList){ --%>
+			<%} %>
+
 		</table>
+		<input type="hidden" name="sNo" value=<%=studentNo %>>
+		<input type="submit" value="許可">
+		</form>
 </body>
 <footer>
 	<div id="bottom-back">
@@ -49,9 +54,9 @@
 		</form>
 	</div>
 	<div id="bottom-p">
-		<form name='form-permisson'>
-			<input type="submit" value="許可">
-		</form>
+
+
+
 	</div>
 </footer>
 </html>
