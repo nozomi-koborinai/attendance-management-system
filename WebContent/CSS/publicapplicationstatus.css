@@ -7,13 +7,20 @@ header {
 	margin-bottom: 20px;
 }
 
+/*テーブルの大きさを固定*/
+table{
+	width: 80%;
+	table-layout: fixed;
+	overflow-wrap : break-word;
+}
+
 
 .th1 {
 	font-weight: bold;
 	vertical-align: top;
 	background: #3f3f3f;
 	color: #ffffff;
-	width: 80px;
+	width: 8%;
 }
 
 .th2 {
@@ -21,7 +28,7 @@ header {
 	vertical-align: top;
 	background: #3f3f3f;
 	color: #ffffff;
-	width: 450px;
+	width: 30%;
 }
 
 .th3 {
@@ -29,7 +36,7 @@ header {
 	vertical-align: top;
 	background: #3f3f3f;
 	color: #ffffff;
-	width: 275px;
+	width: 25%;
 }
 
 .th4 {
@@ -37,7 +44,7 @@ header {
 	vertical-align: top;
 	background: #3f3f3f;
 	color: #ffffff;
-	width: 200px;
+	width: 15%;
 }
 
 .th5 {
@@ -45,8 +52,9 @@ header {
 	vertical-align: top;
 	background: #3f3f3f;
 	color: #ffffff;
-	width: 50px;
+	width: 4%;
 }
+
 
 table tr:nth-child(2n+3) {
 	background: #d9d9d9;
