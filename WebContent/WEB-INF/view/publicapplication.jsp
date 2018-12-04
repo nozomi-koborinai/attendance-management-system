@@ -27,7 +27,7 @@ String sName = (String) request.getAttribute("studentName");
 
 				<div id="pulldown">
 					<%--行く年月日 --%>
-					【期間】 <select name="year" id="year">
+					【期間】　 <select name="year" id="year">
 						<%
 							for (int i = 2018; i < 2025; i++) {
 						%>
@@ -72,7 +72,7 @@ String sName = (String) request.getAttribute("studentName");
 
 				<div id="pulldown2">
 					<%--戻ってくる年月日 --%>
-					<select name="year2" id="year2">
+					<select name="year2" id="year">
 						<%
 							for (int i = 2018; i < 2025; i++) {
 						%>
