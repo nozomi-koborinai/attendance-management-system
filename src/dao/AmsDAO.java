@@ -1503,6 +1503,77 @@ public class AmsDAO {
 
 	}
 
+	//削除をする公欠申請状況表示
+	public static ArrayList<PublicStatus> getApplicationStatusDelete(int deleteData){
+
+		ArrayList<PublicStatus> publicList = new ArrayList<PublicStatus>();
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try{
+
+			Class.forName("com.mysql.jdbc.Driver");
+
+			con = DriverManager.getConnection(
+					"jdbc:mysql://localhost:3306/attendance_management?useSSL=false",
+					"attendance",
+					"attendance01");
+
+			String sql = "SELECT * FROM public WHERE public_id = ?";
+
+			pstmt = con.prepareStatement(sql);
+			int dData = deleteData;
+			pstmt.setInt(1, dData);
+			rs = pstmt.executeQuery();
+
+			while(rs.next() == true){
+				int publicId = rs.getInt("public_id");
+				String appliDate = rs.getString("application_date");
+				String reason = rs.getString("reason");
+				String place = rs.getString("place");
+				String period = rs.getString("period");
+
+				publicList.add(new PublicStatus(publicId, appliDate, reason, place, period));
+			}
+
+		} catch (SQLException se){
+			se.printStackTrace();
+		} catch (Exception e){
+
+		} finally {
+			try {
+				if( rs != null){
+					rs.close();
+				}
+			} catch(SQLException e){
+				System.out.println("DB切断時にエラーが発生しました。");
+				e.printStackTrace();
+			}
+			try {
+				if( pstmt != null){
+					pstmt.close();
+				}
+			} catch(SQLException e){
+				System.out.println("DB切断時にエラーが発生しました。");
+				e.printStackTrace();
+			}
+
+			try {
+				if( con != null){
+					con.close();
+				}
+			} catch (SQLException e){
+				System.out.println("DB切断時にエラーが発生しました。");
+				e.printStackTrace();
+			}
+		}
+
+		return publicList;
+
+	}
+
 	//生徒取得(テスト段階)
 	public static ArrayList<Student> getStudentInfo(){
 
