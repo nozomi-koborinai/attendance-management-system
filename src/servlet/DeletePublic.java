@@ -32,7 +32,7 @@ public class DeletePublic extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		int deletePublicID = Integer.parseInt(request.getParameter("delete"));
-		request.setAttribute("deletePublic", AmsDAO.getApplicationStatus(deletePublicID));
+		request.setAttribute("deletePublic", AmsDAO.getApplicationStatusDelete(deletePublicID));
 		String view = "/WEB-INF/view/publicapplicationdelete.jsp";
 		RequestDispatcher dispatcher = request.getRequestDispatcher(view);
 		dispatcher.forward(request, response);
@@ -45,7 +45,9 @@ public class DeletePublic extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		int deletePublicID = Integer.parseInt(request.getParameter("deleteId"));
 		AmsDAO.deletePublic(deletePublicID);
-		String view = "/WEB-INF/view/publicapplicationdelete.jsp";
+
+		//小成さん削除結果お願いします。
+		String view = "/WEB-INF/view/publicapplicationdeleteresult.jsp";
 		RequestDispatcher dispatcher = request.getRequestDispatcher(view);
 		dispatcher.forward(request, response);
 	}
