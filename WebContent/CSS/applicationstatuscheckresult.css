@@ -1,0 +1,25 @@
+@charset "utf-8";
+
+.a {
+	text-align: center;
+	font-size: 4.0em;
+	margin-top: 14%;
+}
+
+#bottom form input[type="submit"] {
+	position: relative;
+	width: 20%;
+	top: 45px;
+	background: #555555;
+	border: 0;
+	border-radius: 3px;
+	color: white;
+	height: 80px;
+	cursor: pointer;
+	transition: background 0.3s ease-in-out;
+	font-size: 1.5em;
+}
+
+#bottom form input[type="submit"]:hover {
+	background: #000000;
+}
