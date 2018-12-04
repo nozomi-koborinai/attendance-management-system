@@ -15,10 +15,26 @@ table{
 	overflow-wrap : break-word;
 }
 
+table, th, td {
+	border-collapse: collapse;
+	border: 1px solid #ccc;
+	height: 7%;
+	text-align: center;
+}
+
+table.table th {
+	font-weight: bold;
+	vertical-align: middle;
+	height: 40px;
+}
+
+table.table td {
+	vertical-align: middle;
+	height: 65px;
+}
 
 .th1 {
 	font-weight: bold;
-	vertical-align: top;
 	background: #3f3f3f;
 	color: #ffffff;
 	width: 8%;
@@ -26,7 +42,6 @@ table{
 
 .th2 {
 	font-weight: bold;
-	vertical-align: top;
 	background: #3f3f3f;
 	color: #ffffff;
 	width: 30%;
@@ -34,7 +49,6 @@ table{
 
 .th3 {
 	font-weight: bold;
-	vertical-align: top;
 	background: #3f3f3f;
 	color: #ffffff;
 	width: 25%;
@@ -42,7 +56,6 @@ table{
 
 .th4 {
 	font-weight: bold;
-	vertical-align: top;
 	background: #3f3f3f;
 	color: #ffffff;
 	width: 15%;
@@ -50,7 +63,6 @@ table{
 
 .th5 {
 	font-weight: bold;
-	vertical-align: top;
 	background: #3f3f3f;
 	color: #ffffff;
 	width: 4%;
@@ -71,7 +83,7 @@ table tr:nth-child(2n+3) {
 	color: white;
 	height: 60px;
 	cursor: pointer;
-	transition: background 0.3s ease-in-out;
+	transition: background 0.3s ease-in-out;s
 }
 
 #bottom form input[type="submit"]:hover {
