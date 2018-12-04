@@ -1,6 +1,7 @@
 package dto;
 
 public class AttendanceInfo {
+	private int sNumber;
 	private String name;
 	private String date;
 	private int time;
@@ -10,9 +11,10 @@ public class AttendanceInfo {
 	private int attendanceRate;
 	private int publicFlag;
 
-	public AttendanceInfo(String name, String date, int time, String info, int absence, int late, int attendanceRate,
+	public AttendanceInfo(int sNumber, String name, String date, int time, String info, int absence, int late, int attendanceRate,
 			int publicFlag) {
 		super();
+		this.sNumber = sNumber;
 		this.name = name;
 		this.date = date;
 		this.time = time;
@@ -21,6 +23,12 @@ public class AttendanceInfo {
 		this.late = late;
 		this.attendanceRate = attendanceRate;
 		this.publicFlag = publicFlag;
+	}
+	public int getSNumber() {
+		return sNumber;
+	}
+	public void setSNumber(int sNumber) {
+		this.sNumber = sNumber;
 	}
 	public String getName() {
 		return name;

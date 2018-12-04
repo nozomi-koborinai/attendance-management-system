@@ -1281,7 +1281,7 @@ public class AmsDAO {
 					"attendance",
 					"attendance01");
 
-			String sql = "SELECT s.s_name, ai.date, ai.time, ai.info, s.absence, s.late, s.public_flag"
+			String sql = "SELECT s.s_number, s.s_name, ai.date, ai.time, ai.info, s.absence, s.late, s.public_flag"
 					+ " FROM students s"
 					+ " LEFT JOIN attendance_information ai"
 					+ " ON s.s_number = ai.s_number"
@@ -1293,6 +1293,7 @@ public class AmsDAO {
 			rs = pstmt.executeQuery();
 
 			while(rs.next() == true){
+				int sNumber = rs.getInt("s.s_number");
 				String name = rs.getString("s.s_name");
 				String daTe = rs.getString("ai.date");
 				int time = rs.getInt("ai.time");
@@ -1301,7 +1302,7 @@ public class AmsDAO {
 				int late = rs.getInt("s.late");
 				int flag = rs.getInt("s.public_flag");
 
-				attendanceInfoList.add(new AttendanceInfo(name, daTe, time, info, absence, late, 100, flag));
+				attendanceInfoList.add(new AttendanceInfo(sNumber, name, daTe, time, info, absence, late, 100, flag));
 			}
 
 		} catch (SQLException se){
@@ -1362,7 +1363,7 @@ public class AmsDAO {
 					"attendance",
 					"attendance01");
 
-			String sql = "SELECT s.s_name, ai.date, ai.time, ai.info, s.absence, s.late, s.public_flag"
+			String sql = "SELECT s.s_number, s.s_name, ai.date, ai.time, ai.info, s.absence, s.late, s.public_flag"
 					+ " FROM students s"
 					+ " LEFT JOIN attendance_information ai"
 					+ " ON s.s_number = ai.s_number"
@@ -1385,6 +1386,7 @@ public class AmsDAO {
 			rs = pstmt.executeQuery();
 
 			while(rs.next() == true){
+				int sNumber = rs.getInt("s.s_number");
 				String name = rs.getString("s.s_name");
 				String daTe = rs.getString("ai.date");
 				int time = rs.getInt("ai.time");
@@ -1393,7 +1395,7 @@ public class AmsDAO {
 				int late = rs.getInt("s.late");
 				int flag = rs.getInt("s.public_flag");
 
-				attendanceInfoList.add(new AttendanceInfo(name, daTe, time, info, absence, late, 100, flag));
+				attendanceInfoList.add(new AttendanceInfo(sNumber, name, daTe, time, info, absence, late, 100, flag));
 			}
 
 
