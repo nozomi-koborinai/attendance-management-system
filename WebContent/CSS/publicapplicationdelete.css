@@ -7,14 +7,21 @@ header {
 	margin-bottom: 20px;
 }
 
-/*テーブルの大きさを固定*/
-/*かつセルの幅より多い文字列は改行させる*/
-table{
-	width: 80%;
-	table-layout: fixed;
-	overflow-wrap : break-word;
+#name {
+	font-size: 1.2em;
+	position: absolute;
+	top: 7%;
+	right: 10%;
+	color: #0000FF
 }
 
+/*テーブルの大きさを固定*/
+/*かつセルの幅より多い文字列は改行させる*/
+table {
+	width: 80%;
+	table-layout: fixed;
+	overflow-wrap: break-word;
+}
 
 .th1 {
 	font-weight: bold;
@@ -56,15 +63,15 @@ table{
 	width: 4%;
 }
 
-
 table tr:nth-child(2n+3) {
 	background: #d9d9d9;
 }
 
-#bottom form input[type="submit"] {
+#bottom1 form input[type="submit"] {
 	position: relative;
 	width: 10%;
 	top: 45px;
+	right: 30%;
 	background: #555555;
 	border: 0;
 	border-radius: 3px;
@@ -74,6 +81,26 @@ table tr:nth-child(2n+3) {
 	transition: background 0.3s ease-in-out;
 }
 
-#bottom form input[type="submit"]:hover {
+#bottom1 form input[type="submit"]:hover {
+	background: #000000;
+}
+
+/*bottomで高さの調整*/
+#bottom2 form input[type="submit"] {
+	position: relative;
+	width: 10%;
+	left: 30%;
+	bottom: 10px;
+	background : #555555;
+	border: 0;
+	border-radius: 3px;
+	color: white;
+	height: 60px;
+	cursor: pointer;
+	transition: background 0.3s ease-in-out;
+	background: #555555
+}
+
+#bottom2 form input[type="submit"]:hover {
 	background: #000000;
 }
