@@ -52,10 +52,10 @@ public class ApplicationStatusCheck extends HttpServlet {
 			AmsDAO.publicFlagDataUP(Integer.parseInt(s), sNo);
 		 }
 
-//ここからお願いします小成さん
-//		String view = "/WEB-INF/view/※※※※.jsp";
-//		RequestDispatcher dispatcher = request.getRequestDispatcher(view);
-//		dispatcher.forward(request, response);
+		 //ここからお願いします小成さん
+		 //		String view = "/WEB-INF/view/※※※※.jsp";
+		 //		RequestDispatcher dispatcher = request.getRequestDispatcher(view);
+		 //		dispatcher.forward(request, response);
 	}
 
 }
