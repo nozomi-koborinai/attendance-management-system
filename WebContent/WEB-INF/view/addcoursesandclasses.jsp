@@ -3,6 +3,7 @@
 <%@ page import="dto.LoginUser"%>
 <%@ page import="dto.ClassData"%>
 <%@ page import="java.util.ArrayList"%>
+<%@ page import="dto.CourseData" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,6 +15,8 @@
 </head>
 <%
 	LoginUser user = (LoginUser) session.getAttribute("user");
+	ArrayList<ClassData> classList = (ArrayList<ClassData>) request.getAttribute("classData");
+	ArrayList<CourseData> courseList = (ArrayList<CourseData>) request.getAttribute("courseData");
 %>
 <header>
 	<div id="container">
@@ -36,10 +39,6 @@
 		</form>
 	</div>
 </header>
-<%
-	request.setCharacterEncoding("UTF-8");
-	ArrayList<ClassData> classList = (ArrayList<ClassData>) request.getAttribute("classData");
-%>
 <body>
 	<center>
 		<div class="tab_wrap">
@@ -52,6 +51,16 @@
 			</div>
 			<div class="panel_area">
 				<div id="panel1" class="tab_panel">
+				<table>
+					<tr>
+						<th>登録クラス名</th>
+					</tr>
+					<%for(ClassData cd : classList){ %>
+					<tr>
+					<td><%=cd.getClass_name() %></td>
+					</tr>
+					<%} %>
+				</table>
 					<form action="/Attendance_management_system/AddCoursesAndClasses"
 						method="post">
 						追加クラス名：<input type="text" name="className"> <input
@@ -59,6 +68,16 @@
 					</form>
 				</div>
 				<div id="panel2" class="tab_panel">
+				<table>
+					<tr>
+						<th>登録コース名</th>
+					</tr>
+					<%for(CourseData cod : courseList){ %>
+					<tr>
+					<td><%=cod.getCourse_name() %></td>
+					</tr>
+					<%} %>
+				</table>
 					<form action="/Attendance_management_system/AddCourses"
 						method="get">
 						クラス名：<select name="classId">
