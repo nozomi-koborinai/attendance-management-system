@@ -7,6 +7,8 @@ header {
 	margin-bottom: 20px;
 }
 
+/*テーブルの大きさを固定*/
+/*かつセルの幅より多い文字列は改行させる*/
 table {
 	width: 80%;
 	table-layout: fixed;
@@ -51,6 +53,7 @@ table {
 table, th, td {
 	border-collapse: collapse;
 	border: 1px solid #ccc;
+	height: 7%;
 	text-align: center;
 }
 
@@ -62,7 +65,7 @@ table.table th {
 
 table.table td {
 	vertical-align: middle;
-	height: 55px;
+	height: 65px;
 }
 
 input[type=checkbox] {

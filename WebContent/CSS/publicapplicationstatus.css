@@ -7,30 +7,20 @@ header {
 	margin-bottom: 20px;
 }
 
+#name {
+	font-size: 1.2em;
+	position: absolute;
+	top: 7%;
+	right: 10%;
+	color: #0000FF
+}
+
 /*テーブルの大きさを固定*/
 /*かつセルの幅より多い文字列は改行させる*/
-table{
+table {
 	width: 80%;
 	table-layout: fixed;
-	overflow-wrap : break-word;
-}
-
-table, th, td {
-	border-collapse: collapse;
-	border: 1px solid #ccc;
-	height: 7%;
-	text-align: center;
-}
-
-table.table th {
-	font-weight: bold;
-	vertical-align: middle;
-	height: 40px;
-}
-
-table.table td {
-	vertical-align: middle;
-	height: 65px;
+	overflow-wrap: break-word;
 }
 
 .th1 {
@@ -65,9 +55,26 @@ table.table td {
 	font-weight: bold;
 	background: #3f3f3f;
 	color: #ffffff;
-	width: 4%;
+	width: 7%;
 }
 
+table, th, td {
+	border-collapse: collapse;
+	border: 1px solid #ccc;
+	height: 7%;
+	text-align: center;
+}
+
+table.table th {
+	font-weight: bold;
+	vertical-align: middle;
+	height: 40px;
+}
+
+table.table td {
+	vertical-align: middle;
+	height: 68px;
+}
 
 table tr:nth-child(2n+3) {
 	background: #d9d9d9;
@@ -83,7 +90,7 @@ table tr:nth-child(2n+3) {
 	color: white;
 	height: 60px;
 	cursor: pointer;
-	transition: background 0.3s ease-in-out;s
+	transition: background 0.3s ease-in-out;
 }
 
 #bottom form input[type="submit"]:hover {

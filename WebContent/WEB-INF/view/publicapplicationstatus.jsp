@@ -17,12 +17,9 @@ int barcodeData = (Integer) request.getAttribute("bDate");
 ArrayList<PublicStatus> publicList = (ArrayList<PublicStatus>) request.getAttribute("applicatinstatus");
 %>
 <header> 公欠申請状況 </header>
-<!-- 小成さんここから下よろしくお願いします。
-     前のように勝手にコピーしたのでdivとか間違っている可能性があるのでその場合修正願 -->
 <div id="name">
 <%=sName %>　さん
 </div>
-<!-- ここまで -->
 <body>
 	<center>
 		<table border="1" class="table">
@@ -38,11 +35,11 @@ ArrayList<PublicStatus> publicList = (ArrayList<PublicStatus>) request.getAttrib
 				%>
 
 				<tr>
-					<th><%=ps.getPublicDate()%></th>
-					<th><%=ps.getReason()%></th>
-					<th><%=ps.getPlace()%></th>
-					<th><%=ps.getPeriod()%></th>
-					<th><form action="/Attendance_management_system/DeletePublic" method="get"><input type="hidden" name="barcodeData" value=<%=barcodeData %>><button type="submit" name="delete" value=<%=ps.getPublicId()%>>🗑️</button></form></th>
+					<td><%=ps.getPublicDate()%></td>
+					<td><%=ps.getReason()%></td>
+					<td><%=ps.getPlace()%></td>
+					<td><%=ps.getPeriod()%></td>
+					<td><form action="/Attendance_management_system/DeletePublic" method="get"><input type="hidden" name="barcodeData" value=<%=barcodeData %>><button type="submit" name="delete" value=<%=ps.getPublicId()%>>🗑️</button></form></td>
 
 				</tr>
 
