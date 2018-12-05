@@ -56,7 +56,6 @@ int studentNo = (Integer) request.getAttribute("studentNo");
 	<div id="bottom-p">
 
 
-
 	</div>
 </footer>
 </html>
