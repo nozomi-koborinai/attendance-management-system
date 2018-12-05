@@ -32,10 +32,10 @@ int barcodeData = (Integer) request.getAttribute("barcodeData");
 				%>
 
 			<tr>
-				<th><%=ps.getPublicDate()%></th>
-				<th><%=ps.getReason()%></th>
-				<th><%=ps.getPlace()%></th>
-				<th><%=ps.getPeriod()%></th>
+				<td><%=ps.getPublicDate()%></td>
+				<td><%=ps.getReason()%></td>
+				<td><%=ps.getPlace()%></td>
+				<td><%=ps.getPeriod()%></td>
 
 			</tr>
 

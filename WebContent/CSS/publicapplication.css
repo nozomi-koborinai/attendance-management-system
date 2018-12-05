@@ -20,6 +20,7 @@ header {
 	width: 50%;
 	height: 30px;
 	margin-bottom: 30px;
+	-webkit-box-shadow: 0 0 0px 1000px white inset;
 }
 
 #year {

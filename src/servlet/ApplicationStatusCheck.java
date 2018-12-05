@@ -18,13 +18,13 @@ import dao.AmsDAO;
 public class ApplicationStatusCheck extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ApplicationStatusCheck() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public ApplicationStatusCheck() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -46,16 +46,15 @@ public class ApplicationStatusCheck extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		 String[] publicList = request.getParameterValues("public");
-		 int sNo = Integer.parseInt(request.getParameter("sNo"));
-		 for(String s : publicList){
+		String[] publicList = request.getParameterValues("public");
+		int sNo = Integer.parseInt(request.getParameter("sNo"));
+		for(String s : publicList){
 			AmsDAO.publicFlagDataUP(Integer.parseInt(s), sNo);
-		 }
+		}
 
-		 //ここからお願いします小成さん
-		 //		String view = "/WEB-INF/view/※※※※.jsp";
-		 //		RequestDispatcher dispatcher = request.getRequestDispatcher(view);
-		 //		dispatcher.forward(request, response);
+		String view = "/WEB-INF/view/applicationstatuscheckresult.jsp";
+		RequestDispatcher dispatcher = request.getRequestDispatcher(view);
+		dispatcher.forward(request, response);
 	}
 
 }
