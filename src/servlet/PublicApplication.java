@@ -59,8 +59,14 @@ public class PublicApplication extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		request.setCharacterEncoding("UTF-8");
+		int sNum = Integer.parseInt(request.getParameter("sNum"));
+		request.setAttribute("bDate", sNum);
+		request.setAttribute("studentName", AmsDAO.getStudentName(sNum));
+
+		String view = "/WEB-INF/view/publicapplication.jsp";
+		RequestDispatcher dispatcher = request.getRequestDispatcher(view);
+		dispatcher.forward(request, response);
 	}
 
 }

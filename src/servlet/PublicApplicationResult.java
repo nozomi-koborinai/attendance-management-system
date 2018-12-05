@@ -39,6 +39,8 @@ public class PublicApplicationResult extends HttpServlet {
 		String date2 = request.getParameter("date2");
 		String period = date1.concat("～").concat(date2);
 
+		request.setAttribute("sNum", studentNumber);
+
 		//公欠申請
 		AmsDAO.registerPublic(studentNumber, applicationDate, reason, place, period);
 
