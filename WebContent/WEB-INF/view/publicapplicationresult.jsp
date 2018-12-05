@@ -9,6 +9,9 @@
 	rel="stylesheet" type="text/css">
 <title>public application result</title>
 </head>
+<%
+int sNum = (Integer) request.getAttribute("sNum");
+%>
 <body>
 <center>
 	<div class="a">
@@ -23,8 +26,9 @@
 		</form>
 	</div>
 	<div id="bottom2">
-		<form action="/Attendance_management_system/PublicApplication" method="get"
+		<form action="/Attendance_management_system/PublicApplication" method="post"
 			name='back'>
+			<input type="hidden" name="sNum" value=<%=sNum %>>
 			<input type="submit" value="申請ページへ">
 		</form>
 	</div>

@@ -11,14 +11,11 @@
 	rel="stylesheet" type="text/css">
 <title>public application status</title>
 </head>
-<%-- ここらへんに名前を取ってくる処理 --%>
 <%
 int deleteID = 0;
 ArrayList<PublicStatus> deletePublic = (ArrayList<PublicStatus>) request.getAttribute("deletePublic");
+int barcodeData = (Integer) request.getAttribute("barcodeData");
 %>
-<div id="name">
-<%-- 名前 --%>　さん
-</div>
 <header> こちらの情報を削除しますか？ </header>
 <body>
 	<center>
@@ -29,7 +26,7 @@ ArrayList<PublicStatus> deletePublic = (ArrayList<PublicStatus>) request.getAttr
 				<th class="th3">場所</th>
 				<th class="th4">期間</th>
 			</tr>
-			<%
+				<%
 					for (PublicStatus ps : deletePublic) {
 						deleteID = ps.getPublicId();
 				%>
@@ -57,6 +54,7 @@ ArrayList<PublicStatus> deletePublic = (ArrayList<PublicStatus>) request.getAttr
 	<div id="bottom2">
 		<form action="/Attendance_management_system/DeletePublic"
 			method="post">
+			<input type="hidden" name="barcodeData" value=<%=barcodeData %>>
 			<input type="hidden" name="deleteId" value=<%=deleteID %>> <input
 				type="submit" value="削除">
 		</form>
