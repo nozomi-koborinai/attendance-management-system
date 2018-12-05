@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -47,14 +48,25 @@ public class ApplicationStatusCheck extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		String[] publicList = request.getParameterValues("public");
-		int sNo = Integer.parseInt(request.getParameter("sNo"));
-		for(String s : publicList){
-			AmsDAO.publicFlagDataUP(Integer.parseInt(s), sNo);
-		}
+		if(publicList == null){
+			//チェックボックスにチェックをしていない場合
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter printWriter = response.getWriter();
+			printWriter.println("<script>");
+			printWriter.println("alert('チェックボックスにチェックがされていません。');");
+			printWriter.println("history.go(-1)");					//前のページに戻る
+			printWriter.println("window.location.reload(true);");	//ページのリロード
+			printWriter.println("</script>");
+		} else {
+			int sNo = Integer.parseInt(request.getParameter("sNo"));
+			for(String s : publicList){
+				AmsDAO.publicFlagDataUP(Integer.parseInt(s), sNo);
+			}
 
-		String view = "/WEB-INF/view/applicationstatuscheckresult.jsp";
-		RequestDispatcher dispatcher = request.getRequestDispatcher(view);
-		dispatcher.forward(request, response);
+			String view = "/WEB-INF/view/applicationstatuscheckresult.jsp";
+			RequestDispatcher dispatcher = request.getRequestDispatcher(view);
+			dispatcher.forward(request, response);
+		}
 	}
 
 }
