@@ -9,6 +9,9 @@
 	rel="stylesheet" type="text/css">
 <title>public appliction delete result</title>
 </head>
+<%
+int barcodeData = (Integer) request.getAttribute("barcodeData");
+%>
 <body>
 <center>
 	<div class="a">
@@ -23,9 +26,10 @@
 		</form>
 	</div>
 	<div id="bottom2">
-		<form action="/Attendance_management_system/PublicApplication" method="get"
+		<form action="/Attendance_management_system/PublicApplicationStatus" method="get"
 			name='back'>
-			<input type="submit" value="申請ページへ">
+			<input type="hidden" name="barcodeData" value=<%=barcodeData%>>
+			<input type="submit" value="公欠申請確認へ">
 		</form>
 	</div>
 </footer>
