@@ -33,6 +33,8 @@ public class AddCoursesAndClasses extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//クラス情報を取得
 		request.setAttribute("classData", AmsDAO.getAllClassData());
+		//コース情報を取得
+		request.setAttribute("courseData", AmsDAO.getAllCourseData());
 
 		String view = "/WEB-INF/view/addcoursesandclasses.jsp";
 		RequestDispatcher dispatcher = request.getRequestDispatcher(view);
