@@ -1577,7 +1577,7 @@ public class AmsDAO {
 
 	}
 
-	//生徒取得(テスト段階)
+	//生徒取得
 	public static ArrayList<Student> getStudentInfo(){
 
 		ArrayList<Student> StudentList = new ArrayList<Student>();
