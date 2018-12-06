@@ -17,7 +17,7 @@
 </body>
 <footer>
 <div id="bottom">
-		<form action="/Attendance_management_system/AttendingStatuscheck" method="get"
+		<form action="/Attendance_management_system/AttendingStatusCheck2" method="get"
 			name='back'>
 			<input type="submit" value="出席状況一覧へ">
 		</form>
