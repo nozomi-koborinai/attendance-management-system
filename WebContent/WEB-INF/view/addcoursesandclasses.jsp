@@ -3,7 +3,7 @@
 <%@ page import="dto.LoginUser"%>
 <%@ page import="dto.ClassData"%>
 <%@ page import="java.util.ArrayList"%>
-<%@ page import="dto.CourseData" %>
+<%@ page import="dto.CourseData"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -51,33 +51,34 @@
 			</div>
 			<div class="panel_area">
 				<div id="panel1" class="tab_panel">
-				<table>
-					<tr>
-						<th>登録クラス名</th>
-					</tr>
-					<%for(ClassData cd : classList){ %>
-					<tr>
-					<td><%=cd.getClass_name() %></td>
-					</tr>
-					<%} %>
-				</table>
+
 					<form action="/Attendance_management_system/AddCoursesAndClasses"
 						method="post">
 						追加クラス名：<input type="text" name="className"> <input
-							type="submit" value="送信">
+							type="submit" value="確定">
 					</form>
+
+					<%-- 登録クラス一覧 --%>
+					<table class="table">
+						<tr>
+							<th>登録クラス名</th>
+						</tr>
+						<tbody class="scrollBody">
+							<%
+								for (ClassData cd : classList) {
+							%>
+							<tr>
+								<td><%=cd.getClass_name()%></td>
+							</tr>
+							<%
+								}
+							%>
+
+						</tbody>
+					</table>
 				</div>
+
 				<div id="panel2" class="tab_panel">
-				<table>
-					<tr>
-						<th>登録コース名</th>
-					</tr>
-					<%for(CourseData cod : courseList){ %>
-					<tr>
-					<td><%=cod.getCourse_name() %></td>
-					</tr>
-					<%} %>
-				</table>
 					<form action="/Attendance_management_system/AddCourses"
 						method="get">
 						クラス名：<select name="classId">
@@ -88,8 +89,30 @@
 							<%
 								}
 							%>
-						</select><br> 追加コース名：<input type="text" name="courseName"> <input
-							type="submit" value="送信">
+						</select><br>
+
+						 追加コース名：<input type="text" name="courseName"> <input
+							type="submit" value="確定">
+
+
+						<%-- 登録コース一覧 --%>
+						<table class="table">
+							<tr>
+								<th>登録コース名</th>
+							</tr>
+							<tbody class="scrollBody">
+								<%
+									for (CourseData cod : courseList) {
+								%>
+								<tr>
+									<td><%=cod.getCourse_name()%></td>
+								</tr>
+								<%
+									}
+								%>
+
+							</tbody>
+						</table>
 
 					</form>
 				</div>
