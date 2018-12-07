@@ -29,6 +29,7 @@ ArrayList<PublicStatus> publicList = (ArrayList<PublicStatus>) request.getAttrib
 				<th class="th3">場所</th>
 				<th class="th4">期間</th>
 				<th class="th5">削除</th>
+				<th class="th6">許可</th>
 			</tr>
 				<%
 					for (PublicStatus ps : publicList) {
@@ -40,7 +41,11 @@ ArrayList<PublicStatus> publicList = (ArrayList<PublicStatus>) request.getAttrib
 					<td><%=ps.getPlace()%></td>
 					<td><%=ps.getPeriod()%></td>
 					<td><form action="/Attendance_management_system/DeletePublic" method="get"><input type="hidden" name="barcodeData" value=<%=barcodeData %>><button type="submit" name="delete" value=<%=ps.getPublicId()%>>🗑️</button></form></td>
-
+					<%if(ps.getAuth() == 1){ %>
+					<td>✔</td>
+					<%} else { %>
+					<td>　</td>
+					<%} %>
 				</tr>
 
 				<%

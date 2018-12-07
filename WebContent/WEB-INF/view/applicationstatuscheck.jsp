@@ -34,6 +34,7 @@
 						for (PublicStatus ps : publicList) {
 							int count = 1;
 					%>
+					<%if(ps.getAuth() == 0){ %>
 					<tr>
 						<td><%=ps.getPublicDate()%></td>
 						<td><%=ps.getReason()%></td>
@@ -48,6 +49,7 @@
 					<%
 						}
 					%>
+					<%} %>
 
 				</table>
 				<input type="hidden" name="sNo" value=<%=studentNo%>> <input
