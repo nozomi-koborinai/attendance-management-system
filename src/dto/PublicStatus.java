@@ -6,18 +6,20 @@ public class PublicStatus {
 	String reason;			//公欠申請理由
 	String place;			//場所
 	String period;			//期間
+	int auth;				//許可フラグ
 
 	public PublicStatus(){
 
 	}
 
-	public PublicStatus(int publicId, String publicDate, String reason, String place, String period) {
+	public PublicStatus(int publicId, String publicDate, String reason, String place, String period, int auth) {
 		super();
 		this.publicId = publicId;
 		this.publicDate = publicDate;
 		this.reason = reason;
 		this.place = place;
 		this.period = period;
+		this.auth = auth;
 	}
 
 	public int getPublicId() {
@@ -60,5 +62,12 @@ public class PublicStatus {
 		this.period = period;
 	}
 
+	public int getAuth() {
+		return auth;
+	}
+
+	public void setAuth(int auth) {
+		this.auth = auth;
+	}
 
 }

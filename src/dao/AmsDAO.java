@@ -1453,7 +1453,7 @@ public class AmsDAO {
 					"attendance",
 					"attendance01");
 
-			String sql = "SELECT * FROM public WHERE s_number = ? AND auth_frag = 0";
+			String sql = "SELECT * FROM public WHERE s_number = ?";
 
 			pstmt = con.prepareStatement(sql);
 			int bData = barcodeData;
@@ -1466,8 +1466,9 @@ public class AmsDAO {
 				String reason = rs.getString("reason");
 				String place = rs.getString("place");
 				String period = rs.getString("period");
+				int auth = rs.getInt("auth_frag");
 
-				publicList.add(new PublicStatus(publicId, appliDate, reason, place, period));
+				publicList.add(new PublicStatus(publicId, appliDate, reason, place, period, auth));
 			}
 
 		} catch (SQLException se){
@@ -1537,8 +1538,9 @@ public class AmsDAO {
 				String reason = rs.getString("reason");
 				String place = rs.getString("place");
 				String period = rs.getString("period");
+				int auth = rs.getInt("auth_frag");
 
-				publicList.add(new PublicStatus(publicId, appliDate, reason, place, period));
+				publicList.add(new PublicStatus(publicId, appliDate, reason, place, period, auth));
 			}
 
 		} catch (SQLException se){
