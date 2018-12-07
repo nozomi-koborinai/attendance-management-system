@@ -58,6 +58,13 @@ table {
 	width: 7%;
 }
 
+.th6 {
+	font-weight: bold;
+	background: #3f3f3f;
+	color: #ffffff;
+	width: 4%;
+}
+
 table, th, td {
 	border-collapse: collapse;
 	border: 1px solid #ccc;
@@ -91,6 +98,7 @@ table tr:nth-child(2n+3) {
 	height: 60px;
 	cursor: pointer;
 	transition: background 0.3s ease-in-out;
+	margin-bottom: 30px;
 }
 
 #bottom form input[type="submit"]:hover {
