@@ -40,10 +40,13 @@ ArrayList<PublicStatus> publicList = (ArrayList<PublicStatus>) request.getAttrib
 					<td><%=ps.getReason()%></td>
 					<td><%=ps.getPlace()%></td>
 					<td><%=ps.getPeriod()%></td>
-					<td><form action="/Attendance_management_system/DeletePublic" method="get"><input type="hidden" name="barcodeData" value=<%=barcodeData %>><button type="submit" name="delete" value=<%=ps.getPublicId()%>>🗑️</button></form></td>
 					<%if(ps.getAuth() == 1){ %>
+					<form>
+					<td><input type="submit" value="×" disabled=disabled /></td>
+					</form>
 					<td>✔</td>
 					<%} else { %>
+					<td><form action="/Attendance_management_system/DeletePublic" method="get"><input type="hidden" name="barcodeData" value=<%=barcodeData %>><button type="submit" name="delete" value=<%=ps.getPublicId()%>>🗑️</button></form></td>
 					<td>　</td>
 					<%} %>
 				</tr>
