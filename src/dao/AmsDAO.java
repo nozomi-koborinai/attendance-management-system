@@ -1700,7 +1700,7 @@ public class AmsDAO {
 
 	}
 
-	//公欠フラグを立てる
+	//公欠フラグ立てる
 	public static void publicFlagUP(int studentNo) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
