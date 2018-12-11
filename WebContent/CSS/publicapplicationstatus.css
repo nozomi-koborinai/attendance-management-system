@@ -18,55 +18,102 @@ header {
 /*テーブルの大きさを固定*/
 /*かつセルの幅より多い文字列は改行させる*/
 table {
-	width: 80%;
 	table-layout: fixed;
-	overflow-wrap: break-word;
+	border-collapse: collapse;
+	border-spacing: 0;
 }
 
+/* thとtdの幅をそろえる */
 .th1 {
 	font-weight: bold;
 	background: #3f3f3f;
 	color: #ffffff;
-	width: 8%;
+	min-width: 8.5em;
+	max-width: 8.5em;
+}
+
+.td1 {
+	min-width: 8.5em;
+	max-width: 8.5em;
 }
 
 .th2 {
 	font-weight: bold;
 	background: #3f3f3f;
 	color: #ffffff;
-	width: 30%;
+	min-width: 24em;
+	max-width: 24em;
+}
+
+.td2 {
+	min-width: 24em;
+	max-width: 24em;
 }
 
 .th3 {
 	font-weight: bold;
 	background: #3f3f3f;
 	color: #ffffff;
-	width: 25%;
+	min-width: 22em;
+	max-width: 22em;
+}
+
+.td3 {
+	min-width: 22em;
+	max-width: 22em;
 }
 
 .th4 {
 	font-weight: bold;
 	background: #3f3f3f;
 	color: #ffffff;
-	width: 15%;
+	min-width: 12em;
+	max-width: 12em;
+}
+
+.td4 {
+	min-width: 12em;
+	max-width: 12em;
 }
 
 .th5 {
 	font-weight: bold;
 	background: #3f3f3f;
 	color: #ffffff;
-	width: 7%;
+	min-width: 3.3em;
+	max-width: 3.3em;
+}
+
+.td5 {
+	min-width: 3.3em;
+	max-width: 3.3em;
 }
 
 .th6 {
 	font-weight: bold;
 	background: #3f3f3f;
 	color: #ffffff;
-	width: 4%;
+	min-width: 3.3em;
+	max-width: 3.3em;
+}
+
+.td6 {
+	min-width: 3.3em;
+	max-width: 3.3em;
+}
+
+thead {
+	display: block;
+}
+
+/*heightはtableの高さ*/
+tbody {
+	height: 22em;
+	display: block;
+	overflow-y: scroll;
 }
 
 table, th, td {
-	border-collapse: collapse;
 	border: 1px solid #ccc;
 	height: 7%;
 	text-align: center;
@@ -83,7 +130,7 @@ table.table td {
 	height: 68px;
 }
 
-table tr:nth-child(2n+3) {
+table tr:nth-child(even) {
 	background: #d9d9d9;
 }
 
