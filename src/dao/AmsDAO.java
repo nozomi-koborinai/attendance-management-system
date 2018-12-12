@@ -842,7 +842,7 @@ public class AmsDAO {
 					"attendance",
 					"attendance01");
 
-			String sql = "INSERT INTO students values(?,?,?,?,?,?,?,?,?);";
+			String sql = "INSERT INTO students values(?,?,?,?,?,?,?,?,?,?,?);";
 
 			pstmt = con.prepareStatement(sql);
 
@@ -860,8 +860,10 @@ public class AmsDAO {
 				pstmt.setInt(5, 0);
 				pstmt.setInt(6, 0);
 				pstmt.setInt(7, 0);
-				pstmt.setInt(8, claId);
-				pstmt.setInt(9, couId);
+				pstmt.setInt(8, 0);
+				pstmt.setInt(9, 100);
+				pstmt.setInt(10, claId);
+				pstmt.setInt(11, couId);
 
 				pstmt.executeUpdate();
 			} else {
