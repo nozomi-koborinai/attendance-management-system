@@ -303,8 +303,8 @@ public class AmsDAO {
 					"attendance",
 					"attendance01");
 
-			String sql = "SELECT s.s_number, s.s_name, s.sex, s.year, s.absence, s.late,"
-					+ " s.public_flag, cla.class_name, cou.course_name"
+			String sql = "SELECT s.s_number, s.s_name, s.sex, s.year, s.absence, s.public, s.late,"
+					+ " s.public_flag, s.attendance_rate, cla.class_name, cou.course_name"
 					+ " FROM students s INNER JOIN class cla"
 					+ " ON s.s_class_id = cla.class_id"
 					+ " INNER JOIN course cou"
@@ -323,12 +323,14 @@ public class AmsDAO {
 			String gen = rs.getString("s.sex");
 			int year = rs.getInt("s.year");
 			int absence = rs.getInt("s.absence");
+			int pblc = rs.getInt("s.public");
 			int late = rs.getInt("s.late");
 			int flg = rs.getInt("s.public_flag");
+			int rate = rs.getInt("s.attendance_rate");
 			String className = rs.getString("cla.class_name");
 			String courseName = rs.getString("cou.course_name");
 
-			student = new Student(sNo, sName, gen, year, absence, late, flg, className, courseName);
+			student = new Student(sNo, sName, gen, year, absence, pblc, late, flg, rate, className, courseName);
 
 		} catch (SQLException se){
 			se.printStackTrace();
@@ -383,8 +385,8 @@ public class AmsDAO {
 					"attendance",
 					"attendance01");
 
-			String sql = "SELECT s.s_number, s.s_name, s.sex, s.year, s.absence, s.late,"
-					+ " s.public_flag, cla.class_name, cou.course_name"
+			String sql = "SELECT s.s_number, s.s_name, s.sex, s.year, s.absence, s.public, s.late,"
+					+ " s.public_flag, s.attendance_rate, cla.class_name, cou.course_name"
 					+ " FROM students s INNER JOIN class cla"
 					+ " ON s.s_class_id = cla.class_id"
 					+ " INNER JOIN course cou"
@@ -399,12 +401,14 @@ public class AmsDAO {
 				String gen = rs.getString("s.sex");
 				int year = rs.getInt("s.year");
 				int absence = rs.getInt("s.absence");
+				int pblc = rs.getInt("s.public");
 				int late = rs.getInt("s.late");
 				int flg = rs.getInt("s.public_flag");
+				int rate = rs.getInt("s.attendance_rate");
 				String className = rs.getString("cla.class_name");
 				String courseName = rs.getString("cou.course_name");
 
-				studentList.add(new Student(sNo, sName, gen, year, absence, late, flg, className, courseName));
+				studentList.add(new Student(sNo, sName, gen, year, absence, pblc, late, flg, rate, className, courseName));
 			}
 
 		} catch (SQLException se){
