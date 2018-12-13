@@ -11,6 +11,7 @@
 </head>
 
 <%
+	long publicCnt = (Long) request.getAttribute("publicCount");
 	int sNumber = (Integer) request.getAttribute("sNumber");
 	String sinseiDate = (String) request.getAttribute("applicationDate");
 	String reason = (String) request.getAttribute("reason");
@@ -38,13 +39,14 @@
 	<div id="bottom2">
 		<form action="/Attendance_management_system/PublicApplicationResult"
 			method="get" name='forward'>
-			<input type="hidden" name="sNumber" value=<%=sNumber%>> <input
-				type="hidden" name="applicationDate" value=<%=sinseiDate%>>
-			<input type="hidden" name="reason" value=<%=reason%>> <input
-				type="hidden" name="place" value=<%=place%>> <input
-				type="hidden" name="date1" value=<%=date1%>> <input
-				type="hidden" name="date2" value=<%=date2%>> <input
-				type="submit" value="申請">
+			<input type="hidden" name="publicCnt" value=<%=publicCnt %>>
+			<input type="hidden" name="sNumber" value=<%=sNumber%>>
+			<input type="hidden" name="applicationDate" value=<%=sinseiDate%>>
+			<input type="hidden" name="reason" value=<%=reason%>>
+			<input type="hidden" name="place" value=<%=place%>>
+			<input type="hidden" name="date1" value=<%=date1%>>
+			<input type="hidden" name="date2" value=<%=date2%>>
+			<input type="submit" value="申請">
 		</form>
 	</div>
 </footer>

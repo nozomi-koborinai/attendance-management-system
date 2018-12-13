@@ -44,13 +44,25 @@ public class PublicApplicationConfirmation extends HttpServlet {
 
 		String year1 = request.getParameter("year");
 		String month1 = request.getParameter("month");
+		if(month1.length() == 1){
+			month1 = "0".concat(month1);
+		}
 		String day1 = request.getParameter("day");
+		if(day1.length() == 1){
+			day1 = "0".concat(day1);
+		}
 		String hour1 = request.getParameter("hour");
 		String minute1 = request.getParameter("minute");
 
 		String year2 = request.getParameter("year2");
 		String month2 = request.getParameter("month2");
+		if(month2.length() == 1){
+			month2 = "0".concat(month2);
+		}
 		String day2 = request.getParameter("day2");
+		if(day2.length() == 1){
+			day2 = "0".concat(day2);
+		}
 		String hour2 = request.getParameter("hour2");
 		String minute2 = request.getParameter("minute2");
 

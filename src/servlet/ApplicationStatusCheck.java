@@ -48,6 +48,8 @@ public class ApplicationStatusCheck extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		String[] publicList = request.getParameterValues("public");
+		String[] publicLst = null;
+
 		if(publicList == null){
 			//チェックボックスにチェックをしていない場合
 			response.setContentType("text/html; charset=UTF-8");
@@ -58,9 +60,21 @@ public class ApplicationStatusCheck extends HttpServlet {
 			printWriter.println("window.location.reload(true);");	//ページのリロード
 			printWriter.println("</script>");
 		} else {
+
 			int sNo = Integer.parseInt(request.getParameter("sNo"));
+
 			for(String s : publicList){
-				AmsDAO.publicFlagDataUP(Integer.parseInt(s), sNo);
+				int i = 0;
+				publicLst = s.split(" ");
+				for(String st : publicLst){
+					if(i == 0){
+						AmsDAO.publicFlagDataUP(Integer.parseInt(st), sNo);;
+					} else if(i == 1){
+						AmsDAO.incrementPublic(sNo, Integer.parseInt(st));
+					}
+					i++;
+				}
+
 			}
 
 			String view = "/WEB-INF/view/applicationstatuscheckresult.jsp";

@@ -303,8 +303,8 @@ public class AmsDAO {
 					"attendance",
 					"attendance01");
 
-			String sql = "SELECT s.s_number, s.s_name, s.sex, s.year, s.absence, s.late,"
-					+ " s.public_flag, cla.class_name, cou.course_name"
+			String sql = "SELECT s.s_number, s.s_name, s.sex, s.year, s.absence, s.public, s.late,"
+					+ " s.public_flag, s.attendance_rate, cla.class_name, cou.course_name"
 					+ " FROM students s INNER JOIN class cla"
 					+ " ON s.s_class_id = cla.class_id"
 					+ " INNER JOIN course cou"
@@ -323,12 +323,14 @@ public class AmsDAO {
 			String gen = rs.getString("s.sex");
 			int year = rs.getInt("s.year");
 			int absence = rs.getInt("s.absence");
+			int pblc = rs.getInt("s.public");
 			int late = rs.getInt("s.late");
 			int flg = rs.getInt("s.public_flag");
+			int rate = rs.getInt("s.attendance_rate");
 			String className = rs.getString("cla.class_name");
 			String courseName = rs.getString("cou.course_name");
 
-			student = new Student(sNo, sName, gen, year, absence, late, flg, className, courseName);
+			student = new Student(sNo, sName, gen, year, absence, pblc, late, flg, rate, className, courseName);
 
 		} catch (SQLException se){
 			se.printStackTrace();
@@ -383,8 +385,8 @@ public class AmsDAO {
 					"attendance",
 					"attendance01");
 
-			String sql = "SELECT s.s_number, s.s_name, s.sex, s.year, s.absence, s.late,"
-					+ " s.public_flag, cla.class_name, cou.course_name"
+			String sql = "SELECT s.s_number, s.s_name, s.sex, s.year, s.absence, s.public, s.late,"
+					+ " s.public_flag, s.attendance_rate, cla.class_name, cou.course_name"
 					+ " FROM students s INNER JOIN class cla"
 					+ " ON s.s_class_id = cla.class_id"
 					+ " INNER JOIN course cou"
@@ -399,12 +401,14 @@ public class AmsDAO {
 				String gen = rs.getString("s.sex");
 				int year = rs.getInt("s.year");
 				int absence = rs.getInt("s.absence");
+				int pblc = rs.getInt("s.public");
 				int late = rs.getInt("s.late");
 				int flg = rs.getInt("s.public_flag");
+				int rate = rs.getInt("s.attendance_rate");
 				String className = rs.getString("cla.class_name");
 				String courseName = rs.getString("cou.course_name");
 
-				studentList.add(new Student(sNo, sName, gen, year, absence, late, flg, className, courseName));
+				studentList.add(new Student(sNo, sName, gen, year, absence, pblc, late, flg, rate, className, courseName));
 			}
 
 		} catch (SQLException se){
@@ -838,7 +842,7 @@ public class AmsDAO {
 					"attendance",
 					"attendance01");
 
-			String sql = "INSERT INTO students values(?,?,?,?,?,?,?,?,?);";
+			String sql = "INSERT INTO students values(?,?,?,?,?,?,?,?,?,?,?);";
 
 			pstmt = con.prepareStatement(sql);
 
@@ -856,8 +860,10 @@ public class AmsDAO {
 				pstmt.setInt(5, 0);
 				pstmt.setInt(6, 0);
 				pstmt.setInt(7, 0);
-				pstmt.setInt(8, claId);
-				pstmt.setInt(9, couId);
+				pstmt.setInt(8, 0);
+				pstmt.setInt(9, 100);
+				pstmt.setInt(10, claId);
+				pstmt.setInt(11, couId);
 
 				pstmt.executeUpdate();
 			} else {
@@ -1901,6 +1907,59 @@ public class AmsDAO {
 			if(!(checkPublic(studentNo))){
 				publicFlagDataDOWN(studentNo);
 			}
+
+		} catch(MySQLIntegrityConstraintViolationException e){
+			Login.error = 1;
+		} catch (SQLException e){
+			e.printStackTrace();
+		} catch (Exception e){
+			e.printStackTrace();
+		} finally {
+
+			try {
+				if( pstmt != null){
+					pstmt.close();
+				}
+			} catch(SQLException e){
+				System.out.println("DB切断時にエラーが発生しました。");
+				e.printStackTrace();
+			}
+
+			try {
+				if( con != null){
+					con.close();
+				}
+			} catch (SQLException e){
+				System.out.println("DB切断時にエラーが発生しました。");
+				e.printStackTrace();
+			}
+		}
+
+	}
+
+	//生徒の公欠日数を更新
+	public static void incrementPublic(int studentNo, long publicCnt) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try{
+
+			Class.forName("com.mysql.jdbc.Driver");
+
+			con = DriverManager.getConnection(
+					"jdbc:mysql://localhost:3306/attendance_management?useSSL=false",
+					"attendance",
+					"attendance01");
+
+			String sql = "UPDATE students SET public = public + " + publicCnt +  " where s_number = ?";
+
+			pstmt = con.prepareStatement(sql);
+
+			int sNo = studentNo;
+
+			pstmt.setInt(1, sNo);
+
+			pstmt.executeUpdate();
 
 		} catch(MySQLIntegrityConstraintViolationException e){
 			Login.error = 1;
