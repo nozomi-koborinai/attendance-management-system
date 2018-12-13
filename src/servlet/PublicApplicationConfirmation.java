@@ -1,7 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -45,20 +44,30 @@ public class PublicApplicationConfirmation extends HttpServlet {
 
 		String year1 = request.getParameter("year");
 		String month1 = request.getParameter("month");
+		if(month1.length() == 1){
+			month1 = "0".concat(month1);
+		}
 		String day1 = request.getParameter("day");
+		if(day1.length() == 1){
+			day1 = "0".concat(day1);
+		}
 		String hour1 = request.getParameter("hour");
 		String minute1 = request.getParameter("minute");
 
 		String year2 = request.getParameter("year2");
 		String month2 = request.getParameter("month2");
+		if(month2.length() == 1){
+			month2 = "0".concat(month2);
+		}
 		String day2 = request.getParameter("day2");
+		if(day2.length() == 1){
+			day2 = "0".concat(day2);
+		}
 		String hour2 = request.getParameter("hour2");
 		String minute2 = request.getParameter("minute2");
 
 		String date1 = year1.concat("年").concat(month1).concat("月").concat(day1).concat("日").concat(hour1).concat("時").concat(minute1).concat("分");	//結合
 		String date2 = year2.concat("年").concat(month2).concat("月").concat(day2).concat("日").concat(hour2).concat("時").concat(minute2).concat("分");	//結合
-
-		getPublicCount(date1, date2);
 
 		request.setAttribute("applicationDate", sdf.format(date));
 		request.setAttribute("sNumber", sNumber);
@@ -78,35 +87,6 @@ public class PublicApplicationConfirmation extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
-	}
-
-	//公欠日数の算出
-	public long getPublicCount(String startDate, String endDate){
-
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy'年'MM'月'dd'日'");
-		Date dateTo = null;
-		Date dateFrom = null;
-
-		//日付変換
-		try {
-			dateFrom = sdf.parse(startDate);
-			dateTo = sdf.parse(endDate);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-
-		//日付をlong値に変換
-		long dateTimeTo = dateTo.getTime();
-		long dateTimeFrom = dateFrom.getTime();
-
-		// 公欠の日数を算出
-		long dayDiff = ( dateTimeTo - dateTimeFrom  ) / (1000 * 60 * 60 * 24 ) + 1;
-
-		System.out.println( "公欠開始日(FROM) : " + sdf.format(dateFrom) );
-		System.out.println( "公欠終了日(TO) : " + sdf.format(dateTo) );
-		System.out.println( "公欠日数 : " + dayDiff );
-
-		return dayDiff;
 	}
 
 }
