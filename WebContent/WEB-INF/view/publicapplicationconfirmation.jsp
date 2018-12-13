@@ -11,7 +11,6 @@
 </head>
 
 <%
-	long publicCnt = (Long) request.getAttribute("publicCount");
 	int sNumber = (Integer) request.getAttribute("sNumber");
 	String sinseiDate = (String) request.getAttribute("applicationDate");
 	String reason = (String) request.getAttribute("reason");
@@ -39,7 +38,6 @@
 	<div id="bottom2">
 		<form action="/Attendance_management_system/PublicApplicationResult"
 			method="get" name='forward'>
-			<input type="hidden" name="publicCnt" value=<%=publicCnt %>>
 			<input type="hidden" name="sNumber" value=<%=sNumber%>>
 			<input type="hidden" name="applicationDate" value=<%=sinseiDate%>>
 			<input type="hidden" name="reason" value=<%=reason%>>
