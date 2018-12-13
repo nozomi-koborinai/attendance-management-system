@@ -31,7 +31,6 @@ public class PublicApplicationResult extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		long publicCnt = Long.parseLong(request.getParameter("publicCnt"));
 		int studentNumber = Integer.parseInt(request.getParameter("sNumber"));
 		String applicationDate = request.getParameter("applicationDate");
 		String reason = request.getParameter("reason");
@@ -44,8 +43,6 @@ public class PublicApplicationResult extends HttpServlet {
 
 		//公欠申請
 		AmsDAO.registerPublic(studentNumber, applicationDate, reason, place, period);
-		//公欠日数を生徒テーブルに反映
-		AmsDAO.incrementPublic(studentNumber,publicCnt);
 
 		String view = "/WEB-INF/view/publicapplicationresult.jsp";
 		RequestDispatcher dispatcher = request.getRequestDispatcher(view);
