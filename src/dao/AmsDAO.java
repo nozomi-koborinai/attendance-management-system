@@ -1344,7 +1344,7 @@ public class AmsDAO {
 					"attendance",
 					"attendance01");
 
-			String sql = "SELECT s.s_number, s.s_name, ai.date, ai.time, ai.info, s.absence, s.late, s.public_flag"
+			String sql = "SELECT s.s_number, s.s_name, ai.date, ai.time, ai.info, s.absence, s.late, s.public_flag, s.attendance_rate"
 					+ " FROM students s"
 					+ " LEFT JOIN attendance_information ai"
 					+ " ON s.s_number = ai.s_number"
@@ -1363,9 +1363,10 @@ public class AmsDAO {
 				String info = rs.getString("ai.info");
 				int absence = rs.getInt("s.absence");
 				int late = rs.getInt("s.late");
+				double al = rs.getDouble("s.attendance_rate");
 				int flag = rs.getInt("s.public_flag");
 
-				attendanceInfoList.add(new AttendanceInfo(sNumber, name, daTe, time, info, absence, late, 100, flag));
+				attendanceInfoList.add(new AttendanceInfo(sNumber, name, daTe, time, info, absence, late, al, flag));
 			}
 
 		} catch (SQLException se){
