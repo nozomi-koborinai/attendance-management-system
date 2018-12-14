@@ -2,6 +2,10 @@ package servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -47,6 +51,8 @@ public class ApplicationStatusCheck extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
+		Calendar calendar = Calendar.getInstance();
 		String[] publicList = request.getParameterValues("public");
 		String[] publicLst = null;
 
@@ -66,11 +72,34 @@ public class ApplicationStatusCheck extends HttpServlet {
 			for(String s : publicList){
 				int i = 0;
 				publicLst = s.split(" ");
+
 				for(String st : publicLst){
 					if(i == 0){
 						AmsDAO.publicFlagDataUP(Integer.parseInt(st), sNo);;
 					} else if(i == 1){
 						AmsDAO.incrementPublic(sNo, Integer.parseInt(st));
+					} else if(i == 2){		//公欠情報登録
+
+						try {
+							Date startDate = sdf.parse(st);
+							Date endDate = sdf.parse(publicLst[3]);
+							while(true){
+								if(startDate.compareTo(endDate) == -1 || startDate.compareTo(endDate) == 0){
+									for(int a = 1; a <= 6; a++){
+										AmsDAO.insertPublicData(sNo, sdf.format(startDate), a);
+									}
+									calendar.setTime(startDate);
+									calendar.add(Calendar.DAY_OF_MONTH, 1);
+									startDate = sdf.parse(sdf.format(calendar.getTime()));
+
+								} else {
+									break ;
+								}
+							}
+						}  catch (ParseException e) {
+							e.printStackTrace();
+						}
+
 					}
 					i++;
 				}

@@ -17,13 +17,15 @@
 <%
 	ArrayList<PublicStatus> publicList = (ArrayList<PublicStatus>) request.getAttribute("publicList");
 	ArrayList<Long> publicCntList = new ArrayList<Long>();
+	ArrayList<String> startDateList = new ArrayList<String>();
+	ArrayList<String> endDateList = new ArrayList<String>();
 	int studentNo = (Integer) request.getAttribute("studentNo");
+	String startDate = null;
+	String endDate = null;
 
 	for (PublicStatus ps : publicList){
 		if(ps.getAuth() == 0){
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
-		String startDate = null;
-		String endDate = null;
 		Date dateTo = null;
 		Date dateFrom = null;
 
@@ -31,6 +33,8 @@
 
 		startDate = period.substring(0, 11);
 		endDate = period.substring(16, 27);
+		startDateList.add(startDate);
+		endDateList.add(endDate);
 
 		//日付変換
 		try {
@@ -81,7 +85,7 @@
 						<td><%=ps.getPeriod()%></td>
 						<td align="center">
 							<p>
-								<input type="checkbox" value="<%=ps.getPublicId()%> <%=publicCntList.get(cnt) %> " name="public">
+								<input type="checkbox" value="<%=ps.getPublicId()%> <%=publicCntList.get(cnt) %> <%=startDateList.get(cnt) %> <%=endDateList.get(cnt) %> " name="public">
 							</p>
 						</td>
 					</tr>
