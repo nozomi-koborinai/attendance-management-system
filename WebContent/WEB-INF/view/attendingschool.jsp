@@ -23,7 +23,6 @@
 		}
 	</script>
 	<center>
-
 		<header>
 			<a><%=sdt.getS_number()%></a><br>
 			<a><%=sdt.getS_name()%></a>
