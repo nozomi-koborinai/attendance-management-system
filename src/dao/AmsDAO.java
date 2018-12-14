@@ -1087,6 +1087,63 @@ public class AmsDAO {
 
 	}
 
+	//公欠情報登録
+	public static void insertPublicData(int barcodeData, String date, int time) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try{
+
+			Class.forName("com.mysql.jdbc.Driver");
+
+			con = DriverManager.getConnection(
+					"jdbc:mysql://localhost:3306/attendance_management?useSSL=false",
+					"attendance",
+					"attendance01");
+
+			String sql = "INSERT INTO attendance_information(s_number, date, time, info) values(?,?,?,?);";
+
+			pstmt = con.prepareStatement(sql);
+
+			int bData = barcodeData;
+			int tm = time;
+
+			pstmt.setInt(1, bData);
+			pstmt.setString(2, date);
+			pstmt.setInt(3, tm);
+			pstmt.setString(4, "公");
+
+			pstmt.executeUpdate();
+
+		} catch(MySQLIntegrityConstraintViolationException e){
+			Login.error = 1;
+		} catch (SQLException e){
+			e.printStackTrace();
+		} catch (Exception e){
+			e.printStackTrace();
+		} finally {
+
+			try {
+				if( pstmt != null){
+					pstmt.close();
+				}
+			} catch(SQLException e){
+				System.out.println("DB切断時にエラーが発生しました。");
+				e.printStackTrace();
+			}
+
+			try {
+				if( con != null){
+					con.close();
+				}
+			} catch (SQLException e){
+				System.out.println("DB切断時にエラーが発生しました。");
+				e.printStackTrace();
+			}
+		}
+
+	}
+
 	//遅刻の場合の遅刻数インクリメント処理
 	public static void incrementLate(int studentNo) {
 		Connection con = null;
