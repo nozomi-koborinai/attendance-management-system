@@ -135,9 +135,6 @@ String searchName = (String) request.getAttribute("searchName");
 			<input type="submit" value="検索！" style="WIDTH: 100px; HEIGHT: 30px;">
 		</form><br>
 
-		<form action="/Attendance_management_system/ApplicationStatusCheck" method="get"><button type="submit" name="check">↩</button></form>
-		<form action="/Attendance_management_system/ApplicationStatusCheck" method="get"><button type="submit" name="check">↪</button></form>
-
 		<%if(searchName != null){%>
 		<a><%=searchName %></a>
 		<%} %>
