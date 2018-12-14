@@ -31,6 +31,7 @@
 
 		<div class="a">
 			<p>【登校を確認しました】</p>
+			<p>出席率：<%=sdt.getAttendanceLate()%>%</p>
 		</div>
 
 		<div class="b">

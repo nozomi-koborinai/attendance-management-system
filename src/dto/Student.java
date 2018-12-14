@@ -9,7 +9,7 @@ public class Student {
 	private int pblc;
 	private int late;
 	private int public_flag;
-	private int publicLate;
+	private double attendanceLate;
 	private String s_class_name;
 	private String s_course_name;
 
@@ -17,14 +17,15 @@ public class Student {
 
 	}
 
-	public Student(int s_number, String s_name){
+	public Student(int s_number, String s_name, double attendanceLate){
 		super();
 		this.s_number = s_number;
 		this.s_name = s_name;
+		this.attendanceLate = attendanceLate;
 	}
 
 	public Student(int s_number, String s_name, String sex, int year, int absence, int pblc, int late, int public_flag,
-			int publicLate, String s_class_name, String s_course_name) {
+			double attendanceLate, String s_class_name, String s_course_name) {
 		super();
 		this.s_number = s_number;
 		this.s_name = s_name;
@@ -34,7 +35,7 @@ public class Student {
 		this.pblc = pblc;
 		this.late = late;
 		this.public_flag = public_flag;
-		this.publicLate = publicLate;
+		this.attendanceLate = attendanceLate;
 		this.s_class_name = s_class_name;
 		this.s_course_name = s_course_name;
 	}
@@ -103,12 +104,12 @@ public class Student {
 		this.public_flag = public_flag;
 	}
 
-	public int getPublicLate() {
-		return publicLate;
+	public double getAttendanceLate() {
+		return attendanceLate;
 	}
 
-	public void setPublicLate(int publicLate) {
-		this.publicLate = publicLate;
+	public void setAttendanceLate(double attendanceLate) {
+		this.attendanceLate = attendanceLate;
 	}
 
 	public String getS_class_name() {
@@ -126,5 +127,6 @@ public class Student {
 	public void setS_course_name(String s_course_name) {
 		this.s_course_name = s_course_name;
 	}
+
 
 }
