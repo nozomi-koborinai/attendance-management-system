@@ -1660,7 +1660,7 @@ public class AmsDAO {
 					"attendance",
 					"attendance01");
 
-			String sql = "SELECT s_number, s_name FROM students";
+			String sql = "SELECT s_number, s_name, attendancerate FROM students";
 
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
@@ -1668,8 +1668,9 @@ public class AmsDAO {
 			while(rs.next() == true){
 				int number = rs.getInt("s_number");
 				String name = rs.getString("s_name");
+				double aLate = rs.getDouble("attendanceLate");
 
-				StudentList.add(new Student(number, name));
+				StudentList.add(new Student(number, name, aLate));
 			}
 
 		} catch(MySQLIntegrityConstraintViolationException e){
