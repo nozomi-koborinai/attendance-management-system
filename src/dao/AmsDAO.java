@@ -20,6 +20,7 @@ import servlet.Login;
 import util.PasswordUtil;
 
 public class AmsDAO {
+
 	//ログイン
 	public static int login(String name, String pw){
 		int result = 2;		//ユーザーが見つかっていない状態
@@ -92,6 +93,7 @@ public class AmsDAO {
 		}
 		return result;
 	}
+
 
 	//学籍番号チェック
 	public static int numberCheck(int barcodeDate){
@@ -961,6 +963,8 @@ public class AmsDAO {
 
 	//出席情報登録
 	public static void addToAttendance(int barcodeData, String date, int time, String info) {
+
+
 		Connection con = null;
 		PreparedStatement pstmt = null;
 
