@@ -65,21 +65,6 @@ public class AttendingSchool extends HttpServlet {
 
 		String nowTime = sdf.format(date);
 
-		String inpDateStr = "2018/12/19 14:00:00";
-
-		// 取り扱う日付の形にフォーマット設定あとからけす
-		SimpleDateFormat sdformat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
-
-		// Date型に変換( DateFromatクラスのperse() )あとからけす
-		try {
-			date = sdformat.parse(inpDateStr);
-		} catch (ParseException e) {
-			// TODO 自動生成された catch ブロックあとからけす
-			e.printStackTrace();
-		}
-
-		nowTime = sdf.format(date);
-
 		//出席確認
 		try {
 			if(nowTime.compareTo(sdf.format(sdf.parse(jikan.getStartTimeReading()))) < 0){
