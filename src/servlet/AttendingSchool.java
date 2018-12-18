@@ -47,6 +47,7 @@ public class AttendingSchool extends HttpServlet {
 
 		//バーコードから学籍番号を取得
 		int barcodeData = Integer.parseInt(request.getParameter("barcodeData"));
+		String sNum = request.getParameter("barcodeData");
 
 		//日付取得
 		SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy'年'MM'月'dd'日'E'曜日'k'時'mm'分'");
@@ -64,10 +65,20 @@ public class AttendingSchool extends HttpServlet {
 
 		String nowTime = sdf.format(date);
 
-		//String firstTime = session.getAttribute("firstTime");
+		String inpDateStr = "2018/12/19 14:00:00";
 
+		// 取り扱う日付の形にフォーマット設定あとからけす
+		SimpleDateFormat sdformat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
 
+		// Date型に変換( DateFromatクラスのperse() )あとからけす
+		try {
+			date = sdformat.parse(inpDateStr);
+		} catch (ParseException e) {
+			// TODO 自動生成された catch ブロックあとからけす
+			e.printStackTrace();
+		}
 
+		nowTime = sdf.format(date);
 
 		//出席確認
 		try {
@@ -87,90 +98,148 @@ public class AttendingSchool extends HttpServlet {
 
 			} else if(nowTime.compareTo(sdf.format(sdf.parse(jikan.getStartLateTime1()))) < 0){
 
-				if((String)session.getAttribute("firstTime") == null){
-					System.out.println(session.getAttribute("firstTime"));
+				if((String)session.getAttribute(sNum + "1") == null){
+					session.removeAttribute(sNum + "2");
 					System.out.println("1時間目から出席です。\n1時間目～3時間目を〇とします。");
 					//学籍番号を基に出席情報をデータベースへ追加
 					AmsDAO.addToAttendance(barcodeData, sdf2.format(date), 1, as.getAttendance());
 					AmsDAO.addToAttendance(barcodeData, sdf2.format(date), 2, as.getAttendance());
 					AmsDAO.addToAttendance(barcodeData, sdf2.format(date), 3, as.getAttendance());
-					session.setAttribute("firstTime", sdf2.format(date));
+					session.setAttribute(sNum + "1", sNum);
 					request.setAttribute("studentData", AmsDAO.getStudent(barcodeData));
 				} else {
-					String firstTime = (String) session.getAttribute("firstTime");
-					String secondTime = sdf2.format(date);
-					int result = util.BarcodeReadingErrorCheck.barcodeTimeErrorCheck(firstTime, secondTime);
-					if(result == 1){
-						System.out.println("ダブりエラー出力成功");
+					System.out.println("ダブりエラー出力成功");
 
-						response.setContentType("text/html; charset=UTF-8");
-						PrintWriter printWriter = response.getWriter();
-						printWriter.println("<script>");
-						printWriter.println("alert('午前の出席情報の登録は完了しています。');");
-						printWriter.println("history.go(-1)");					//前のページに戻る
-						printWriter.println("window.location.reload(true);");	//ページのリロード
-						printWriter.println("</script>");
+					response.setContentType("text/html; charset=UTF-8");
+					PrintWriter printWriter = response.getWriter();
+					printWriter.println("<script>");
+					printWriter.println("alert('午前の出席情報の登録は完了しています。');");
+					printWriter.println("history.go(-1)");					//前のページに戻る
+					printWriter.println("window.location.reload(true);");	//ページのリロード
+					printWriter.println("</script>");
 
-						//フラグにフォワードなしを設定
-						fFlag = 0;
-					}
+					//フラグにフォワードなしを設定
+					fFlag = 0;
 				}
 
 			} else if(nowTime.compareTo(sdf.format(sdf.parse(jikan.getEndTime1()))) < 0){
-				System.out.println("1時間目遅刻です。\n1時間目を遅、2時間目～3時間目を〇とします。");
-				//学籍番号を基に出席情報をデータベースへ追加
-				AmsDAO.addToAttendance(barcodeData, sdf2.format(date), 1, as.getLate());
-				AmsDAO.addToAttendance(barcodeData, sdf2.format(date), 2, as.getAttendance());
-				AmsDAO.addToAttendance(barcodeData, sdf2.format(date), 3, as.getAttendance());
-				request.setAttribute("studentData", AmsDAO.getStudent(barcodeData));
+				if((String)session.getAttribute(sNum + "1") == null){
+					session.removeAttribute(sNum + "2");
+					System.out.println("1時間目遅刻です。\n1時間目を遅、2時間目～3時間目を〇とします。");
+					//学籍番号を基に出席情報をデータベースへ追加
+					AmsDAO.addToAttendance(barcodeData, sdf2.format(date), 1, as.getLate());
+					AmsDAO.addToAttendance(barcodeData, sdf2.format(date), 2, as.getAttendance());
+					AmsDAO.addToAttendance(barcodeData, sdf2.format(date), 3, as.getAttendance());
+					session.setAttribute(sNum + "1", sNum);
+					request.setAttribute("studentData", AmsDAO.getStudent(barcodeData));
+				} else {
+					System.out.println("ダブりエラー出力成功");
+
+					response.setContentType("text/html; charset=UTF-8");
+					PrintWriter printWriter = response.getWriter();
+					printWriter.println("<script>");
+					printWriter.println("alert('午前の出席情報の登録は完了しています。');");
+					printWriter.println("history.go(-1)");					//前のページに戻る
+					printWriter.println("window.location.reload(true);");	//ページのリロード
+					printWriter.println("</script>");
+
+					//フラグにフォワードなしを設定
+					fFlag = 0;
+				}
 
 			} else if(nowTime.compareTo(sdf.format(sdf.parse(jikan.getStartLateTime2()))) < 0){
-				System.out.println("2時間目からの出席です。\n1時間目を欠、2時間目～3時間目を〇とします。");
-				//学籍番号を基に出席情報をデータベースへ追加
-				AmsDAO.addToAttendance(barcodeData, sdf2.format(date), 2, as.getAttendance());
-				AmsDAO.addToAttendance(barcodeData, sdf2.format(date), 3, as.getAttendance());
-				request.setAttribute("studentData", AmsDAO.getStudent(barcodeData));
+				if((String)session.getAttribute(sNum + "1") == null){
+					session.removeAttribute(sNum + "2");
+					System.out.println("2時間目からの出席です。\n1時間目を欠、2時間目～3時間目を〇とします。");
+					//学籍番号を基に出席情報をデータベースへ追加
+					AmsDAO.addToAttendance(barcodeData, sdf2.format(date), 2, as.getAttendance());
+					AmsDAO.addToAttendance(barcodeData, sdf2.format(date), 3, as.getAttendance());
+					session.setAttribute(sNum + "1", sNum);
+					request.setAttribute("studentData", AmsDAO.getStudent(barcodeData));
+				} else {
+					System.out.println("ダブりエラー出力成功");
+
+					response.setContentType("text/html; charset=UTF-8");
+					PrintWriter printWriter = response.getWriter();
+					printWriter.println("<script>");
+					printWriter.println("alert('午前の出席情報の登録は完了しています。');");
+					printWriter.println("history.go(-1)");					//前のページに戻る
+					printWriter.println("window.location.reload(true);");	//ページのリロード
+					printWriter.println("</script>");
+
+					//フラグにフォワードなしを設定
+					fFlag = 0;
+				}
 
 			} else if(nowTime.compareTo(sdf.format(sdf.parse(jikan.getEndTime2()))) < 0){
-				System.out.println("2時間目遅刻です。\n1時間目を欠、2時間目を遅、3時間目を〇とします。");
-				//学籍番号を基に出席情報をデータベースへ追加
-				AmsDAO.addToAttendance(barcodeData, sdf2.format(date), 2, as.getLate());
-				AmsDAO.addToAttendance(barcodeData, sdf2.format(date), 3, as.getAttendance());
-				request.setAttribute("studentData", AmsDAO.getStudent(barcodeData));
+				if((String)session.getAttribute(sNum + "1") == null){
+					session.removeAttribute(sNum + "2");
+					System.out.println("2時間目遅刻です。\n1時間目を欠、2時間目を遅、3時間目を〇とします。");
+					//学籍番号を基に出席情報をデータベースへ追加
+					AmsDAO.addToAttendance(barcodeData, sdf2.format(date), 2, as.getLate());
+					AmsDAO.addToAttendance(barcodeData, sdf2.format(date), 3, as.getAttendance());
+					session.setAttribute(sNum + "1", sNum);
+					request.setAttribute("studentData", AmsDAO.getStudent(barcodeData));
+				} else {
+					System.out.println("ダブりエラー出力成功");
+
+					response.setContentType("text/html; charset=UTF-8");
+					PrintWriter printWriter = response.getWriter();
+					printWriter.println("<script>");
+					printWriter.println("alert('午前の出席情報の登録は完了しています。');");
+					printWriter.println("history.go(-1)");					//前のページに戻る
+					printWriter.println("window.location.reload(true);");	//ページのリロード
+					printWriter.println("</script>");
+
+					//フラグにフォワードなしを設定
+					fFlag = 0;
+				}
 
 			} else if(nowTime.compareTo(sdf.format(sdf.parse(jikan.getStartLateTime3()))) < 0){
-				System.out.println("3時間目からの出席です。\n1時間目～2時間目を欠、3時間目を〇とします。");
-				//学籍番号を基に出席情報をデータベースへ追加
-				AmsDAO.addToAttendance(barcodeData, sdf2.format(date), 3, as.getAttendance());
-				request.setAttribute("studentData", AmsDAO.getStudent(barcodeData));
+				if((String)session.getAttribute(sNum + "1") == null){
+					session.removeAttribute(sNum + "2");
+					System.out.println("3時間目からの出席です。\n1時間目～2時間目を欠、3時間目を〇とします。");
+					//学籍番号を基に出席情報をデータベースへ追加
+					AmsDAO.addToAttendance(barcodeData, sdf2.format(date), 3, as.getAttendance());
+					session.setAttribute(sNum + "1", sNum);
+					request.setAttribute("studentData", AmsDAO.getStudent(barcodeData));
+				} else {
+					System.out.println("ダブりエラー出力成功");
+
+					response.setContentType("text/html; charset=UTF-8");
+					PrintWriter printWriter = response.getWriter();
+					printWriter.println("<script>");
+					printWriter.println("alert('午前の出席情報の登録は完了しています。');");
+					printWriter.println("history.go(-1)");					//前のページに戻る
+					printWriter.println("window.location.reload(true);");	//ページのリロード
+					printWriter.println("</script>");
+
+					//フラグにフォワードなしを設定
+					fFlag = 0;
+				}
 
 			} else if(nowTime.compareTo(sdf.format(sdf.parse(jikan.getEndTime3()))) < 0){
-				if((String)session.getAttribute("firstTime") == null){
+				if((String)session.getAttribute(sNum + "1") == null){
+					session.removeAttribute(sNum + "2");
 					System.out.println("3時間目遅刻です。\n1時間目～2時間目を欠、3時間目を遅とします。");
 					//学籍番号を基に出席情報をデータベースへ追加
 					AmsDAO.addToAttendance(barcodeData, sdf2.format(date), 3, as.getLate());
-					session.setAttribute("firstTime", sdf2.format(date));
+					session.setAttribute(sNum + "1", sNum);
 					request.setAttribute("studentData", AmsDAO.getStudent(barcodeData));
+
 				} else {
-					String firstTime = (String) session.getAttribute("firstTime");
-					System.out.println(firstTime);
-					String secondTime = sdf2.format(date);
-					int result = util.BarcodeReadingErrorCheck.barcodeTimeErrorCheck(firstTime, secondTime);
-					System.out.println(result);
-					if(result == 1){
-						System.out.println("ダブりエラー出力成功");
+					System.out.println("ダブりエラー出力成功");
 
-						response.setContentType("text/html; charset=UTF-8");
-						PrintWriter printWriter = response.getWriter();
-						printWriter.println("<script>");
-						printWriter.println("alert('午前の出席情報の登録は完了しています。');");
-						printWriter.println("history.go(-1)");					//前のページに戻る
-						printWriter.println("window.location.reload(true);");	//ページのリロード
-						printWriter.println("</script>");
+					response.setContentType("text/html; charset=UTF-8");
+					PrintWriter printWriter = response.getWriter();
+					printWriter.println("<script>");
+					printWriter.println("alert('午前の出席情報の登録は完了しています。');");
+					printWriter.println("history.go(-1)");					//前のページに戻る
+					printWriter.println("window.location.reload(true);");	//ページのリロード
+					printWriter.println("</script>");
 
-						//フラグにフォワードなしを設定
-						fFlag = 0;
-					}
+					//フラグにフォワードなしを設定
+					fFlag = 0;
 				}
 
 			} else if(nowTime.compareTo(sdf.format(sdf.parse(jikan.getStartTimeReading2()))) < 0){
@@ -188,112 +257,148 @@ public class AttendingSchool extends HttpServlet {
 				fFlag = 0;
 
 			} else if(nowTime.compareTo(sdf.format(sdf.parse(jikan.getStartLateTime4()))) < 0){
-				System.out.println("4時間目出席です。\n1時間目から3時間目を欠、4時間目～6時間目を〇にします。");
-				//学籍番号を基に出席情報をデータベースへ追加
-				AmsDAO.addToAttendance(barcodeData, sdf2.format(date), 4, as.getAttendance());
-				AmsDAO.addToAttendance(barcodeData, sdf2.format(date), 5, as.getAttendance());
-				AmsDAO.addToAttendance(barcodeData, sdf2.format(date), 6, as.getAttendance());
-				request.setAttribute("studentData", AmsDAO.getStudent(barcodeData));
+				if((String)session.getAttribute(sNum + "2") == null){
+					session.removeAttribute(sNum + "1");
+					System.out.println("4時間目出席です。\n1時間目から3時間目を欠、4時間目～6時間目を〇にします。");
+					//学籍番号を基に出席情報をデータベースへ追加
+					AmsDAO.addToAttendance(barcodeData, sdf2.format(date), 4, as.getAttendance());
+					AmsDAO.addToAttendance(barcodeData, sdf2.format(date), 5, as.getAttendance());
+					AmsDAO.addToAttendance(barcodeData, sdf2.format(date), 6, as.getAttendance());
+					session.setAttribute(sNum + "2", sNum);
+					request.setAttribute("studentData", AmsDAO.getStudent(barcodeData));
+				} else {
+					System.out.println("ダブりエラー出力成功");
+
+					response.setContentType("text/html; charset=UTF-8");
+					PrintWriter printWriter = response.getWriter();
+					printWriter.println("<script>");
+					printWriter.println("alert('午後の出席情報の登録は完了しています。');");
+					printWriter.println("history.go(-1)");					//前のページに戻る
+					printWriter.println("window.location.reload(true);");	//ページのリロード
+					printWriter.println("</script>");
+
+					//フラグにフォワードなしを設定
+					fFlag = 0;
+				}
 
 			} else if(nowTime.compareTo(sdf.format(sdf.parse(jikan.getEndTime4()))) < 0){
-				if((String)session.getAttribute("firstTime2") == null){
+				if((String)session.getAttribute(sNum + "2") == null){
+					session.removeAttribute(sNum + "1");
 					System.out.println("4時間目遅刻です。。\n1時間目から3時間目を欠、4時間目を遅、5時間目～6時間目を〇とします。");
 					//学籍番号を基に出席情報をデータベースへ追加
 					AmsDAO.addToAttendance(barcodeData, sdf2.format(date), 4, as.getLate());
 					AmsDAO.addToAttendance(barcodeData, sdf2.format(date), 5, as.getAttendance());
 					AmsDAO.addToAttendance(barcodeData, sdf2.format(date), 6, as.getAttendance());
-					session.setAttribute("firstTime2", sdf2.format(date));
+					session.setAttribute(sNum + "2", sNum);
 					request.setAttribute("studentData", AmsDAO.getStudent(barcodeData));
 				} else {
-					String firstTime2 = (String) session.getAttribute("firstTime2");
-					String secondTime = sdf2.format(date);
-					int result = util.BarcodeReadingErrorCheck.barcodeTimeErrorCheck(firstTime2, secondTime);
-					System.out.println(result);
-					if(result == 1){
-						System.out.println("ダブりエラー出力成功");
+					System.out.println("ダブりエラー出力成功");
 
-						response.setContentType("text/html; charset=UTF-8");
-						PrintWriter printWriter = response.getWriter();
-						printWriter.println("<script>");
-						printWriter.println("alert('午後の出席情報の登録は完了しています。');");
-						printWriter.println("history.go(-1)");					//前のページに戻る
-						printWriter.println("window.location.reload(true);");	//ページのリロード
-						printWriter.println("</script>");
+					response.setContentType("text/html; charset=UTF-8");
+					PrintWriter printWriter = response.getWriter();
+					printWriter.println("<script>");
+					printWriter.println("alert('午後の出席情報の登録は完了しています。');");
+					printWriter.println("history.go(-1)");					//前のページに戻る
+					printWriter.println("window.location.reload(true);");	//ページのリロード
+					printWriter.println("</script>");
 
-						//フラグにフォワードなしを設定
-						fFlag = 0;
-					}
+					//フラグにフォワードなしを設定
+					fFlag = 0;
 				}
 
 			} else if(nowTime.compareTo(sdf.format(sdf.parse(jikan.getStartLateTime5()))) < 0){
-				System.out.println("5時間目からの出席です。\n1時間目から3時間目を欠、4時間目を欠、5時間目～6時間目を〇とします。");
-				//学籍番号を基に出席情報をデータベースへ追加
-				AmsDAO.addToAttendance(barcodeData, sdf2.format(date), 5, as.getAttendance());
-				AmsDAO.addToAttendance(barcodeData, sdf2.format(date), 6, as.getAttendance());
-				request.setAttribute("studentData", AmsDAO.getStudent(barcodeData));
+				if((String)session.getAttribute(sNum + "2") == null){
+					session.removeAttribute(sNum + "1");
+					System.out.println("5時間目からの出席です。\n1時間目から3時間目を欠、4時間目を欠、5時間目～6時間目を〇とします。");
+					//学籍番号を基に出席情報をデータベースへ追加
+					AmsDAO.addToAttendance(barcodeData, sdf2.format(date), 5, as.getAttendance());
+					AmsDAO.addToAttendance(barcodeData, sdf2.format(date), 6, as.getAttendance());
+					session.setAttribute(sNum + "2", sNum);
+					request.setAttribute("studentData", AmsDAO.getStudent(barcodeData));
+				} else {
+					System.out.println("ダブりエラー出力成功");
+
+					response.setContentType("text/html; charset=UTF-8");
+					PrintWriter printWriter = response.getWriter();
+					printWriter.println("<script>");
+					printWriter.println("alert('午後の出席情報の登録は完了しています。');");
+					printWriter.println("history.go(-1)");					//前のページに戻る
+					printWriter.println("window.location.reload(true);");	//ページのリロード
+					printWriter.println("</script>");
+
+					//フラグにフォワードなしを設定
+					fFlag = 0;
+				}
 
 			} else if(nowTime.compareTo(sdf.format(sdf.parse(jikan.getEndTime5()))) < 0){
-				if((String)session.getAttribute("firstTime2") == null){
+				if((String)session.getAttribute(sNum + "2") == null){
+					session.removeAttribute(sNum + "1");
 					System.out.println("5時間目遅刻です。。\n1時間目から3時間目を欠、4時間目を欠、5時間目を遅、6時間目を〇とします。");
 					//学籍番号を基に出席情報をデータベースへ追加
 					AmsDAO.addToAttendance(barcodeData, sdf2.format(date), 5, as.getLate());
 					AmsDAO.addToAttendance(barcodeData, sdf2.format(date), 6, as.getAttendance());
-					session.setAttribute("firstTime2", sdf2.format(date));
+					session.setAttribute(sNum + "2", sNum);
 					request.setAttribute("studentData", AmsDAO.getStudent(barcodeData));
 				} else {
-					String firstTime2 = (String) session.getAttribute("firstTime2");
-					String secondTime = sdf2.format(date);
-					int result = util.BarcodeReadingErrorCheck.barcodeTimeErrorCheck(firstTime2, secondTime);
-					System.out.println(result);
-					if(result == 1){
-						System.out.println("ダブりエラー出力成功");
+					System.out.println("ダブりエラー出力成功");
 
-						response.setContentType("text/html; charset=UTF-8");
-						PrintWriter printWriter = response.getWriter();
-						printWriter.println("<script>");
-						printWriter.println("alert('午後の出席情報の登録は完了しています。');");
-						printWriter.println("history.go(-1)");					//前のページに戻る
-						printWriter.println("window.location.reload(true);");	//ページのリロード
-						printWriter.println("</script>");
+					response.setContentType("text/html; charset=UTF-8");
+					PrintWriter printWriter = response.getWriter();
+					printWriter.println("<script>");
+					printWriter.println("alert('午後の出席情報の登録は完了しています。');");
+					printWriter.println("history.go(-1)");					//前のページに戻る
+					printWriter.println("window.location.reload(true);");	//ページのリロード
+					printWriter.println("</script>");
 
-						//フラグにフォワードなしを設定
-						fFlag = 0;
-					}
+					//フラグにフォワードなしを設定
+					fFlag = 0;
 				}
 
 			} else if(nowTime.compareTo(sdf.format(sdf.parse(jikan.getStartLateTime6()))) < 0){
-				System.out.println("6時間目から出席です。\n1時間目～5時間目を欠、6時間目を〇とします。");
-				//学籍番号を基に出席情報をデータベースへ追加
-				AmsDAO.addToAttendance(barcodeData, sdf2.format(date), 6, as.getAttendance());
-				request.setAttribute("studentData", AmsDAO.getStudent(barcodeData));
+				if((String)session.getAttribute(sNum + "2") == null){
+					session.removeAttribute(sNum + "1");
+					System.out.println("6時間目から出席です。\n1時間目～5時間目を欠、6時間目を〇とします。");
+					//学籍番号を基に出席情報をデータベースへ追加
+					AmsDAO.addToAttendance(barcodeData, sdf2.format(date), 6, as.getAttendance());
+					session.setAttribute(sNum + "2", sNum);
+					request.setAttribute("studentData", AmsDAO.getStudent(barcodeData));
+				} else {
+					System.out.println("ダブりエラー出力成功");
+
+					response.setContentType("text/html; charset=UTF-8");
+					PrintWriter printWriter = response.getWriter();
+					printWriter.println("<script>");
+					printWriter.println("alert('午後の出席情報の登録は完了しています。');");
+					printWriter.println("history.go(-1)");					//前のページに戻る
+					printWriter.println("window.location.reload(true);");	//ページのリロード
+					printWriter.println("</script>");
+
+					//フラグにフォワードなしを設定
+					fFlag = 0;
+				}
 
 			} else if(nowTime.compareTo(sdf.format(sdf.parse(jikan.getEndTime6()))) < 0){
-				if((String)session.getAttribute("firstTime2") == null){
+				if((String)session.getAttribute(sNum + "2") == null){
+					session.removeAttribute(sNum + "1");
 					System.out.println("6時間目からの出席です。\n1時間目～5時間目を欠、6時間目を遅とします。");
 					//学籍番号を基に出席情報をデータベースへ追加
 					AmsDAO.addToAttendance(barcodeData, sdf2.format(date), 6, as.getLate());
-					session.setAttribute("firstTime2", sdf2.format(date));
+					session.setAttribute(sNum + "2", sNum);
 					request.setAttribute("studentData", AmsDAO.getStudent(barcodeData));
 
 				} else {
-					String firstTime2 = (String) session.getAttribute("firstTime2");
-					String secondTime = sdf2.format(date);
-					int result = util.BarcodeReadingErrorCheck.barcodeTimeErrorCheck(firstTime2, secondTime);
-					System.out.println(result);
-					if(result == 1){
-						System.out.println("ダブりエラー出力成功");
+					System.out.println("ダブりエラー出力成功");
 
-						response.setContentType("text/html; charset=UTF-8");
-						PrintWriter printWriter = response.getWriter();
-						printWriter.println("<script>");
-						printWriter.println("alert('午後の出席情報の登録は完了しています。');");
-						printWriter.println("history.go(-1)");					//前のページに戻る
-						printWriter.println("window.location.reload(true);");	//ページのリロード
-						printWriter.println("</script>");
+					response.setContentType("text/html; charset=UTF-8");
+					PrintWriter printWriter = response.getWriter();
+					printWriter.println("<script>");
+					printWriter.println("alert('午後の出席情報の登録は完了しています。');");
+					printWriter.println("history.go(-1)");					//前のページに戻る
+					printWriter.println("window.location.reload(true);");	//ページのリロード
+					printWriter.println("</script>");
 
-						//フラグにフォワードなしを設定
-						fFlag = 0;
-					}
+					//フラグにフォワードなしを設定
+					fFlag = 0;
 				}
 			} else {
 				System.out.println("読取時間外");
