@@ -50,6 +50,10 @@ public class DeletePublic extends HttpServlet {
 		request.setAttribute("barcodeData", barcodeData);
 		AmsDAO.deletePublic(deletePublicID);
 
+		if(!(AmsDAO.checkPublic(barcodeData))){
+			AmsDAO.publicFlagDataDOWN(barcodeData);
+		}
+
 		String view = "/WEB-INF/view/publicapplicationdeleteresult.jsp";
 		RequestDispatcher dispatcher = request.getRequestDispatcher(view);
 		dispatcher.forward(request, response);
