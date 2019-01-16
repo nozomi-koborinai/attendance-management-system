@@ -52,7 +52,13 @@ public class PublicApplicationConfirmation extends HttpServlet {
 			day1 = "0".concat(day1);
 		}
 		String hour1 = request.getParameter("hour");
+		if(hour1.length() == 1){
+			hour1 = "0".concat(hour1);
+		}
 		String minute1 = request.getParameter("minute");
+		if(minute1.length() == 1){
+			minute1 = "0".concat(minute1);
+		}
 
 		String year2 = request.getParameter("year2");
 		String month2 = request.getParameter("month2");
@@ -64,7 +70,13 @@ public class PublicApplicationConfirmation extends HttpServlet {
 			day2 = "0".concat(day2);
 		}
 		String hour2 = request.getParameter("hour2");
+		if(hour2.length() == 1){
+			hour2 = "0".concat(hour2);
+		}
 		String minute2 = request.getParameter("minute2");
+		if(minute2.length() == 1){
+			minute2 = "0".concat(minute2);
+		}
 
 		String date1 = year1.concat("年").concat(month1).concat("月").concat(day1).concat("日").concat(hour1).concat("時").concat(minute1).concat("分");	//結合
 		String date2 = year2.concat("年").concat(month2).concat("月").concat(day2).concat("日").concat(hour2).concat("時").concat(minute2).concat("分");	//結合

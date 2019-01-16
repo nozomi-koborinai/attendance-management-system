@@ -32,7 +32,7 @@
 		String period = ps.getPeriod();
 
 		startDate = period.substring(0, 11);
-		endDate = period.substring(16, 27);
+		endDate = period.substring(18, 29);
 		startDateList.add(startDate);
 		endDateList.add(endDate);
 
