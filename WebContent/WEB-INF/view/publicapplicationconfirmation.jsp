@@ -7,7 +7,13 @@
 <link
 	href="${pageContext.request.contextPath}/CSS/publicapplicationconfirmation.css"
 	rel="stylesheet" type="text/css">
+	<%
+	String sName = (String) request.getAttribute("studentName");
+	%>
 <title>public application confirmation</title>
+<div id="name">
+<%=sName %>　さん
+</div>
 </head>
 
 <%

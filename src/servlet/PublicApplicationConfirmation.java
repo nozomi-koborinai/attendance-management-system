@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.AmsDAO;
+
 /**
  * Servlet implementation class PublicApplicationConfirmation
  */
@@ -87,6 +89,8 @@ public class PublicApplicationConfirmation extends HttpServlet {
 		request.setAttribute("place", place);
 		request.setAttribute("date1", date1);
 		request.setAttribute("date2", date2);
+
+		request.setAttribute("studentName", AmsDAO.getStudentName(sNumber));
 
 		String view = "/WEB-INF/view/publicapplicationconfirmation.jsp";
 		RequestDispatcher dispatcher = request.getRequestDispatcher(view);

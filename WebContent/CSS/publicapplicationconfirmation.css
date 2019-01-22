@@ -27,6 +27,14 @@ header {
 	left: 22%;
 }
 
+#name {
+	font-size: 1.2em;
+	position: absolute;
+	top: 7%;
+	right: 10%;
+	color: #0000FF
+}
+
 
 #bottom1 input[type="button"] {
 	position: absolute;
