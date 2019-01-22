@@ -25,6 +25,14 @@
 	background: #000000;
 }
 
+#name {
+	font-size: 1.2em;
+	position: absolute;
+	top: 7%;
+	right: 10%;
+	color: #0000FF
+}
+
 #bottom2 form input[type="submit"] {
 	position: absolute;
 	width: 10%;

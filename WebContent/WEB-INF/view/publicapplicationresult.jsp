@@ -8,6 +8,12 @@
 	href="${pageContext.request.contextPath}/CSS/publicapplicationresult.css"
 	rel="stylesheet" type="text/css">
 <title>public application result</title>
+	<%
+	String sName = (String) request.getAttribute("studentName");
+	%>
+<div id="name">
+<%=sName %>　さん
+</div>
 </head>
 <%
 int sNum = (Integer) request.getAttribute("sNum");
