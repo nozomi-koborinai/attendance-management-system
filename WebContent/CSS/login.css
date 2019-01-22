@@ -13,6 +13,14 @@ body {
 	margin: 0;
 }
 
+header {
+
+	margin-left: 33.5%;
+	margin-top: 7%;
+	font-size: 3.5em;
+
+}
+
 input {
 	border: none;
 	font-family: 'Open Sans', Arial, sans-serif;

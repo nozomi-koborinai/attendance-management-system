@@ -8,6 +8,7 @@
 <title>login</title>
 </head>
 <body>
+<header> 教員・管理者ログイン </header>
 	<div id="login">
 		<form name='form-login' action="/Attendance_management_system/AttendingStatusCheck" method="post">
 			<span class="fontawesome-user"></span>
