@@ -9,7 +9,13 @@
 <link
 	href="${pageContext.request.contextPath}/CSS/publicapplicationdelete.css"
 	rel="stylesheet" type="text/css">
+<%
+String sName = (String) request.getAttribute("studentName");
+%>
 <title>public application status</title>
+<div id="name">
+<%=sName %>　さん
+</div>
 </head>
 <%
 int deleteID = 0;
