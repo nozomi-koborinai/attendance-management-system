@@ -76,6 +76,11 @@ public class BarcodeReading extends HttpServlet {
 
 		//バーコードから学籍番号を取得
 		int barcodeData = Integer.parseInt(request.getParameter("barcodeData"));
+		if(AmsDAO.numberCheck(barcodeData) == 0){
+			String view = "/WEB-INF/view/noBarcodeExits.jsp";
+			RequestDispatcher dispatcher = request.getRequestDispatcher(view);
+			dispatcher.forward(request, response);
+		}
 
 		//日付取得
 		Date date = new Date();

@@ -1,7 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -59,13 +58,9 @@ public class PublicApplicationStatus extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher(view);
 			dispatcher.forward(request, response);
 		} else {
-			response.setContentType("text/html; charset=UTF-8");
-			PrintWriter printWriter = response.getWriter();
-			printWriter.println("<script>");
-			printWriter.println("alert('不正なバーコード');");
-			printWriter.println("history.go(-1)");					//前のページに戻る
-			printWriter.println("window.location.reload(true);");	//ページのリロード
-			printWriter.println("</script>");
+			String view = "/WEB-INF/view/noBarcodeExits.jsp";
+			RequestDispatcher dispatcher = request.getRequestDispatcher(view);
+			dispatcher.forward(request, response);
 		}
 	}
 
