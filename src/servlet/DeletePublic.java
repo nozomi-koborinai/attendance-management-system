@@ -35,6 +35,7 @@ public class DeletePublic extends HttpServlet {
 		int deletePublicID = Integer.parseInt(request.getParameter("delete"));
 		request.setAttribute("deletePublic", AmsDAO.getApplicationStatusDelete(deletePublicID));
 		request.setAttribute("barcodeData", barcodeData);
+		request.setAttribute("studentName", AmsDAO.getStudentName(barcodeData));
 		String view = "/WEB-INF/view/publicapplicationdelete.jsp";
 		RequestDispatcher dispatcher = request.getRequestDispatcher(view);
 		dispatcher.forward(request, response);
@@ -48,6 +49,7 @@ public class DeletePublic extends HttpServlet {
 		int barcodeData = Integer.parseInt(request.getParameter("barcodeData"));
 		int deletePublicID = Integer.parseInt(request.getParameter("deleteId"));
 		request.setAttribute("barcodeData", barcodeData);
+		request.setAttribute("studentName", AmsDAO.getStudentName(barcodeData));
 		AmsDAO.deletePublic(deletePublicID);
 
 		if(!(AmsDAO.checkPublic(barcodeData))){

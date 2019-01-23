@@ -7,7 +7,13 @@
 <link
 	href="${pageContext.request.contextPath}/CSS/publicapplicationresult.css"
 	rel="stylesheet" type="text/css">
+<%
+String sName = (String) request.getAttribute("studentName");
+%>
 <title>public appliction delete result</title>
+<div id="name">
+<%=sName %>　さん
+</div>
 </head>
 <%
 int barcodeData = (Integer) request.getAttribute("barcodeData");
