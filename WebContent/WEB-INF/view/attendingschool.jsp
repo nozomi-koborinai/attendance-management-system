@@ -19,7 +19,7 @@
 		function timeOut() {
 			setTimeout(function() {
 				window.location.href = '/Attendance_management_system/Menu';
-			}, 3 * 1000);
+			}, 10 * 1000);
 		}
 	</script>
 	<center>
