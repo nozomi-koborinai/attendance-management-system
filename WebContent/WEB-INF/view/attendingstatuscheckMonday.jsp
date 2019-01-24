@@ -181,7 +181,7 @@ String searchName = (String) request.getAttribute("searchName");
 				<td>4</td>
 				<td>5</td>
 				<td>6</td>
-				<td>欠席数日数(累計)</td>
+				<td>欠席日数(累計)</td>
 				<td>遅刻数(累計)</td>
 				<td>出席率</td>
 				<td>公欠申請</td>
