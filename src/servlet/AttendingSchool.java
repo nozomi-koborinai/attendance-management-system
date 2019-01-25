@@ -40,6 +40,7 @@ public class AttendingSchool extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		//HttpSessionインスタンスの取得(ダブりエラーの際の比較用)
 		HttpSession session = request.getSession(false);
+		
 
 		int fFlag = 1;
 
