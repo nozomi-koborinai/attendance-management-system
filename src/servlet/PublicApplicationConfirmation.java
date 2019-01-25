@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -34,6 +35,9 @@ public class PublicApplicationConfirmation extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 
+		//未入力判定
+		boolean judge = true;		//正常 falseの場合は未入力
+
 		//日付取得
 		Date date = new Date();
 
@@ -43,6 +47,11 @@ public class PublicApplicationConfirmation extends HttpServlet {
 		int sNumber = Integer.parseInt(request.getParameter("barcodeDate"));
 		String why = request.getParameter("why");
 		String place = request.getParameter("place");
+
+		//未入力✔
+		if(why.isEmpty() || place.isEmpty()){
+			judge = false;
+		}
 
 		String year1 = request.getParameter("year");
 		String month1 = request.getParameter("month");
@@ -83,18 +92,28 @@ public class PublicApplicationConfirmation extends HttpServlet {
 		String date1 = year1.concat("年").concat(month1).concat("月").concat(day1).concat("日").concat(hour1).concat("時").concat(minute1).concat("分");	//結合
 		String date2 = year2.concat("年").concat(month2).concat("月").concat(day2).concat("日").concat(hour2).concat("時").concat(minute2).concat("分");	//結合
 
-		request.setAttribute("applicationDate", sdf.format(date));
-		request.setAttribute("sNumber", sNumber);
-		request.setAttribute("reason", why);
-		request.setAttribute("place", place);
-		request.setAttribute("date1", date1);
-		request.setAttribute("date2", date2);
+		if(judge){
+			request.setAttribute("applicationDate", sdf.format(date));
+			request.setAttribute("sNumber", sNumber);
+			request.setAttribute("reason", why);
+			request.setAttribute("place", place);
+			request.setAttribute("date1", date1);
+			request.setAttribute("date2", date2);
 
-		request.setAttribute("studentName", AmsDAO.getStudentName(sNumber));
+			request.setAttribute("studentName", AmsDAO.getStudentName(sNumber));
 
-		String view = "/WEB-INF/view/publicapplicationconfirmation.jsp";
-		RequestDispatcher dispatcher = request.getRequestDispatcher(view);
-		dispatcher.forward(request, response);
+			String view = "/WEB-INF/view/publicapplicationconfirmation.jsp";
+			RequestDispatcher dispatcher = request.getRequestDispatcher(view);
+			dispatcher.forward(request, response);
+		} else {
+			//エラーアラートの表示
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter printWriter = response.getWriter();
+			printWriter.println("<script>");
+			printWriter.println("alert('未入力項目があります。');");		//アラート表示
+			printWriter.println("history.go(-1)");											//前のページに戻るスクリプト
+			printWriter.println("</script>");
+		}
 	}
 
 	/**
