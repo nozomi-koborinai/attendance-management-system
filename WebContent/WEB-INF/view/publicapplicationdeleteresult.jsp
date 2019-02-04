@@ -35,7 +35,7 @@ int barcodeData = (Integer) request.getAttribute("barcodeData");
 		<form action="/Attendance_management_system/PublicApplicationStatus" method="get"
 			name='back'>
 			<input type="hidden" name="barcodeData" value=<%=barcodeData%>>
-			<input type="submit" value="公欠申請確認へ">
+			<input type="submit" value="申請状況へ">
 		</form>
 	</div>
 </footer>
