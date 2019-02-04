@@ -52,9 +52,10 @@ int barcodeData = (Integer) request.getAttribute("barcodeData");
 </body>
 <footer>
 	<div id="bottom1">
-		<form action="/Attendance_management_system/Menu" method="get"
+		<form action="/Attendance_management_system/PublicApplicationStatus" method="get"
 			name='form-back'>
-			<input type="submit" value="メニューへ">
+			<input type="hidden" name="barcodeData" value=<%=barcodeData %>>
+			<input type="submit" value="申請状況へ">
 		</form>
 	</div>
 	<div id="bottom2">
