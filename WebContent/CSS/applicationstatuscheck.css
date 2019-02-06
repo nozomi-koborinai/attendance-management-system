@@ -6,6 +6,16 @@ header {
 	margin-top: 35px;
 	margin-bottom: 20px;
 }
+.login {
+	position: absolute;
+	top: 30px;
+	right: 9%;
+	text-align: center;
+}
+
+a {
+	color: #337693;
+}
 
 /*テーブルの大きさを固定*/
 /*かつセルの幅より多い文字列は改行させる*/

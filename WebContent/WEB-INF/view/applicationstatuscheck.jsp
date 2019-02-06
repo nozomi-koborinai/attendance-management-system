@@ -5,6 +5,7 @@
 <%@ page import="java.util.Date" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="java.text.ParseException" %>
+<%@ page import="dto.LoginUser" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,6 +20,7 @@
 	ArrayList<Long> publicCntList = new ArrayList<Long>();
 	ArrayList<String> startDateList = new ArrayList<String>();
 	ArrayList<String> endDateList = new ArrayList<String>();
+	LoginUser user = (LoginUser) session.getAttribute("user");
 	int studentNo = (Integer) request.getAttribute("studentNo");
 	String startDate = null;
 	String endDate = null;
@@ -57,6 +59,13 @@
 	}
 %>
 <header> 公欠申請状況 </header>
+<div class="login">
+<a><%=user.getUser_name()%>さん</a>
+		<form>
+			<button type="button"
+				onClick="location.href='/Attendance_management_system/LogOut'">ログアウト</button>
+		</form>
+		</div>
 <body>
 	<center>
 		<div id="bottom-p">
