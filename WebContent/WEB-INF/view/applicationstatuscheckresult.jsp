@@ -12,7 +12,7 @@
 <body>
 <center>
 	<div class="a">
-		<p>【出欠情報を更新しました】</p>
+		<p>【出席情報を更新しました】</p>
 	</div>
 </body>
 <footer>
