@@ -65,7 +65,7 @@ String searchName = (String) request.getAttribute("searchName");
 
 <header>
 <div class ="header">
-生徒の出席状況
+学生の出席状況
 </div>
 <div class="login">
 <a><%=user.getUser_name()%>さん</a>
